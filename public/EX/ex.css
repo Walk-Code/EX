@@ -1,0 +1,61 @@
+.votes{
+    display: inline-block;
+}
+.node{
+    display: inline;
+}
+a:link{
+    word-break: break-all;
+}
+a:hover{
+    color: #778087;
+    text-decoration: underline;
+}
+/*a{
+    text-decoration: none;
+}*/
+a.node:hover{
+    text-decoration: none;
+    background-color: #e2e2e2;
+    color: #777;
+}
+a.node:link{
+    background-color: #f5f5f5;
+}
+a.count_ex:hover{
+    line-height: 12px;
+    font-weight: bold;
+    color: white;
+    background-color: #969cb1;
+}
+a.count_ex{
+    background-color: #aab0c6;
+    color: white;
+    font-weight: bold;
+    line-height: 12px;
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+.cell{
+    padding: 10px;
+    font-size: 12px;
+    line-height: 120%;
+    border-bottom: 1px solid #e2e2e2;
+}
+.no_padding{
+    padding: 0;
+}
+.bigger{
+    font-size: 16px;
+}
+div{
+    display: block;
+}
+.inner{
+    padding: 10px;
+}
+.assets{
+    padding: 5px 10px;
+    background-color: #e6e6e6;
+    border-radius: 12px;
+}
