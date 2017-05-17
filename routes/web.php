@@ -18,6 +18,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
+//Route::get('/', 'HomeController@index');
 
-Route::resource('pages','PagesController');
+Route::get('/','PagesController@index');
+Route::get('t/{id}','PagesController@show');

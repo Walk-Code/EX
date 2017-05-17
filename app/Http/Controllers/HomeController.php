@@ -24,13 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        User::create([
-            'name' => 'name',
-            'email' => 'email',
-            'password' => bcrypt('password'),
-            'uuid' => 123
-        ]);
-        //return $this->getUUid();
         return view('home');
     }
 

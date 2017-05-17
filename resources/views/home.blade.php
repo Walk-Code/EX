@@ -22,20 +22,21 @@
                 <!-- tags -->
                 <div class="panel-heading">Dashboard</div>
 
-                <div class="panel-body">
-                    <div>
-                        <table>
+                <div class="panel-body no_padding">
+                    @foreach($pages as $page)
+                    <div class="cell">
+                        <table style="width:100%;">
                             <tbody>
                                 <tr>
                                     <td width="48" valign="top" align="center">
                                         <a href="#">
-                                            <img src="//v2ex.assets.uxengine.net/avatar/2e1b/24a6/102617_normal.png?m=1444979047" class="avatar" border="0" align="default">
+                                            <img src="{{$page->image}}" class="avatar" border="0" align="default">
                                         </a>
                                     </td>
                                     <td width="10"></td>
                                     <td width="auto" valign="middle">
                                         <span class="item_title">
-                                            <a href="/t/360617#reply11">安卓手机装了框架后的“黑域”和现在国产 ROM 自带的限制自启动的功能是否相同？</a>
+                                            <a href="{{url('t',$page->id)}}">{{$page->title}}</a>
                                         </span>
                                         <div class="sep5"></div>
                                         <span class="small">
@@ -43,23 +44,27 @@
                                             <a class="node" href="#">android</a>
                                             &nbsp;·&nbsp;
                                             <strong>
-                                                <a href="#">cyberdaemon</a>
+                                                <a href="#">{{$page->author}}</a>
                                             </strong>
                                             &nbsp;·&nbsp;刚刚&nbsp;·&nbsp;最后回复来之
                                             <strong>
-                                                <a href="#">TakaLv</a>
+                                                <a href="#">{{$page->author}}</a>
                                             </strong>
                                         </span>
                                     </td>
                                     <td width="120"></td>
-                                    <td width="70" align="right" valign="middle">
+                                    <td width="auto" align="right" valign="middle">
                                         <a href="#" class="count_ex" style="text-decoration: none;">63</a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    @endforeach
                 </div>
+                <!-- 分页-->
+                {{$pages}}
+
             </div>
         </div>
 
@@ -81,7 +86,7 @@
                         </tbody>
                     </table>
                     <div class="sep10"></div>
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-top: 5px">
                         <tbody>
                             <tr>
                                 <td width="33%" align="center">

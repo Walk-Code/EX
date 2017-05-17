@@ -59,3 +59,13 @@ div{
     background-color: #e6e6e6;
     border-radius: 12px;
 }
+.pagination_{
+    margin: 0px;
+    float: right;
+}
+.item_title{
+    font-size: 15px;
+}
+.sep5{
+    height: 5px;
+}
