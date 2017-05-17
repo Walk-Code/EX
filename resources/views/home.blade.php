@@ -19,6 +19,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-9">
             <div class="panel panel-default">
+                <!-- tags -->
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
@@ -132,7 +133,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- 金币 -->
+                <!-- 金币模块 -->
                 <div class="inner">
                     <a href="#">0条未读消息</a>
                    {{-- <div style="float: right">
