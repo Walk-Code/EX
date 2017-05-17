@@ -74,7 +74,7 @@
                             <td width="10" valign="top"></td>
                             <td width="auto" align="left">
                                 <span class="bigger">
-                                    <a href="#">Kylinsun</a>
+                                    <a href="#">walk_code</a>
                                 </span>
                             </td>
                         </tbody>
@@ -135,13 +135,13 @@
                 <!-- 金币 -->
                 <div class="inner">
                     <a href="#">0条未读消息</a>
-                    <div style="float: right">
+                   {{-- <div style="float: right">
                         <a href="#" class="assets">
                             2<img src="//v2ex.assets.uxengine.net/static/img/gold.png" alt="G" align="absmiddle" border="0" style="padding-bottom: 2px;">
                             2<img src="//v2ex.assets.uxengine.net/static/img/silver.png" alt="S" align="absmiddle" border="0" style="padding-bottom: 2px;">
                             2<img src="//v2ex.assets.uxengine.net/static/img/bronze.png" alt="B" align="absmiddle" border="0">
                         </a>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </div>
