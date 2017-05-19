@@ -140,7 +140,7 @@
                 </div>
                 <!-- 金币模块 -->
                 <div class="inner">
-                    <a href="#">0条未读消息</a>
+                    <a href="#" class="message">0条未读消息</a>
                    {{-- <div style="float: right">
                         <a href="#" class="assets">
                             2<img src="https://ooo.0o0.ooo/2017/05/17/591bfa8220346.png" alt="G" align="absmiddle" border="0" style="padding-bottom: 2px;">
