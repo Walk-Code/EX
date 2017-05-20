@@ -66,7 +66,44 @@
                         </span>
                     </div>
                     <!-- comments -->
-                    <div></div>
+                    <div class="cell">
+                        <table cellpadding="0" cellspacing="0" width="100%" border="0">
+                            <tbody>
+                                <tr>
+                                    <td width="48" valign="top" align="center">
+                                        <img src="http://lorempixel.com/52/52/?99772" border="0" align="default">
+                                    </td>
+                                    <td width="10"></td>
+                                    <td width="auto" valign="top" align="left">
+                                        <div class="float-right">
+                                            <!-- thanks -->
+                                            <div class="thanks-area">
+                                                <a href="">隐藏</a>&nbsp;&nbsp;
+                                                <a href="">感谢回复</a>
+                                            </div>&nbsp;&nbsp;
+
+                                            <a href="#" onclick="reply('test');">
+                                                <img src="{{asset('EX\images\reply.png')}}">
+                                            </a>&nbsp;&nbsp;
+                                            <span class="no">1</span>
+                                        </div>
+                                        <div class="sep3"></div>
+                                        <strong>
+                                           <a href="#">test user</a>
+                                        </strong>
+                                        &nbsp;&nbsp;
+                                        <span>刚刚</span>
+                                        <div class="sep5"></div>
+                                        <!-- 回复内容-->
+                                        <div class="reply-content">
+                                            测试回复内容1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                                            111111111111111112333333333333333333
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- sidebar-->
@@ -158,4 +195,12 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        function reply(user) {
+            
+        }
+
+
+        
+    </script>
 @endsection
