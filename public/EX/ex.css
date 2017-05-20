@@ -122,3 +122,25 @@ a.ex-topic-order:hover{
     background-color: #fff;
     text-align: right;
 }
+.float-right{
+    float: right;
+}
+.no{
+    font-size: 13px;
+    padding: 2px 10px;
+    border: 1px solid #e5e5e5;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+}
+.thanks-area{
+    display: inline-block;
+}
+.thanks-area a{
+    color: #a1a0a0;
+}
+.thanks-area a:hover{
+    color: #5f5e5e;
+}
+.reply-content{
+
+}
