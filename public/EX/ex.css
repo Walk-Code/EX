@@ -53,6 +53,7 @@ div{
 }
 .inner{
     padding: 10px;
+    height: 38px;
 }
 .assets{
     padding: 5px 10px;
@@ -143,4 +144,14 @@ a.ex-topic-order:hover{
 }
 .reply-content{
 
+}
+.back-ex:hover{
+    text-decoration: underline;
+}
+.no-comment-layout{
+    background-color: #f5f8fa;
+    text-align: center;
+    border: 1px dashed;
+    margin-top: 20px;
+    padding: 15px;
 }
