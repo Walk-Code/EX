@@ -65,7 +65,7 @@
                             XX回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;2017-05-20 10:02:25 +08:00
                         </span>
                     </div>
-                    <!-- comments -->
+                    <!-- comments layout-->
                     <div class="cell">
                         <table cellpadding="0" cellspacing="0" width="100%" border="0">
                             <tbody>
@@ -103,6 +103,36 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+                <!-- not comments layout -->
+                <div class="no-comment-layout">
+                    暂未有人评论
+                </div>
+                <!-- reply layout-->
+                <div class="sep20"></div>
+                <div class="box">
+                    <div class="cell">
+                        <div class="float-right">
+                            <a href="#">
+                                <strong>↑</strong>
+                                回到顶部
+                            </a>
+                        </div>
+                        添加一条新回复
+                    </div>
+                    <div class="cell">
+                        <textarea style="height: 110px;width: 100%">
+
+                        </textarea>
+                        <button>回复</button>
+                    </div>
+                    <div class="inner">
+                        <div class="float-right">
+                            <a href="#" class="back-ex">
+                                ←&nbsp;EX
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
