@@ -15,6 +15,7 @@
             word-break: keep-all;
         }
     </style>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-9">
@@ -132,7 +133,7 @@
                                 </td>
                                 <td width="10"></td>
                                 <td width="auto" valign="middle" align="left">
-                                    <a href="#">创建新主题</a>
+                                    <a href="{{url('new')}}">创建新主题</a>
                                 </td>
                             </tr>
                         </tbody>
