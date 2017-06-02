@@ -155,3 +155,39 @@ a.ex-topic-order:hover{
     margin-top: 20px;
     padding: 15px;
 }
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: nowrap;
+    width: auto;
+}
+.sep20-flex-width{
+    width: 20px;
+    background-color: #f5f8fa;
+}
+.sep20-flex-height{
+    height: 20px;
+    background-color: #f5f8fa;
+}
+.left-bar{
+    width: 750px;
+    background: #FFFFFF;
+}
+.box-flex-tipic{
+    padding: 4px;
+    display: flex;
+    border-bottom: 1px solid #e2e2e2;
+}
+.title{
+    width: 100%;
+    padding: 4px;
+}
+.topic-content{
+    padding: 4px;
+}
+.right-bar {
+    width: 350px;
+    background: #FFFFFF;
+}
