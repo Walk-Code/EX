@@ -175,11 +175,13 @@ a.ex-topic-order:hover{
     width: 750px;
     background: #FFFFFF;
 }
-.box-flex-tipic{
+.box-flex{
     padding: 4px;
     display: flex;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid #d3e0e9;
 }
+
+
 .title{
     width: 100%;
     padding: 4px;
@@ -190,4 +192,15 @@ a.ex-topic-order:hover{
 .right-bar {
     width: 350px;
     background: #FFFFFF;
+}
+.title-textarea{
+    border: none;
+    width: 100%;
+    resize: none;
+    /* height: 80px; */
+    line-height: 20px;
+    /* margin: 0; */
+    display: flex;
+    font-size: 14px;
+    outline: none;
 }

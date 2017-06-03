@@ -11,15 +11,19 @@
     <title>{{ config('app.name', 'EX') }}</title>
 
     <!-- Styles -->
+    <link href="{{ asset('EX/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <script src="{{asset('/EX/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('EX/ex.css') }}" rel="stylesheet">
 
+    <script src="{{asset('/EX/bootstrap/js/bootstrap.min.js')}}"></script>
+    <link href="{{ asset("/EX/plugins/summernote/summernote.css")}}" rel="stylesheet" type="text/css" />
     <!-- Scripts -->
 
     <script>
-        window.Laravel = {!! json_encode([
+        window.Laravel = '{!! json_encode([
             'csrfToken' => csrf_token(),
-        ]) !!};
+        ]) !!}';
     </script>
 </head>
 <body>
@@ -56,7 +60,7 @@
                             <li><a href="{{ route('register') }}">注册</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" id="menu" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -85,5 +89,11 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $("#menu").on("click",function () {
+            $(this).parent().addClass("open");
+            $(this).prop("aria-expanded",true);
+        });
+    </script>
 </body>
 </html>
