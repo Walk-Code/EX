@@ -16,6 +16,9 @@
     <script src="{{ asset('/EX/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
     <script src="{{ asset('/EX/bootstrap/js/bootstrap.min.js') }}"></script>
 
+    <link rel="stylesheet" href="{{asset('/EX/plugins/nprogress/nprogress.css')}}"/>
+    <script src="{{ asset('/EX/plugins/nprogress/nprogress.js') }}"></script>
+
     <link href="{{ asset("/EX/plugins/summernote/summernote.css") }}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
@@ -91,13 +94,29 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('/EX/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/app.js') }}"></script>
+    <!-- progress bar-->
+
+    <script src="{{asset('/EX/plugins/pjax/jquery.pjax.js')}}"></script>
     <script>
         $("#menu").on("click",function () {
             $(this).parent().addClass("open");
             $(this).prop("aria-expanded",true);
         });
+
+        $(document).ready(function() {
+            $(document).pjax('a', 'body');
+
+            $(document).on('pjax:start', function() {
+                NProgress.start();
+            });
+
+            $(document).on('pjax:end', function() {
+                NProgress.done();
+                self.siteBootUp();
+            });
+
+        });
     </script>
+    @extends('layouts.footer')
 </body>
 </html>

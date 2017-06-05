@@ -45,7 +45,7 @@
 </div>
 
 
-<script src="{{ asset('/EX/plugins/summernote/summernote.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/EX/plugins/summernote/summernote.min.js') }}"></script>
 
 
 <script type="text/javascript">
@@ -77,6 +77,9 @@
                 }
             }
         });
+
+        $('.dropdown-toggle').dropdown();
+
         summernote.summernote("code","编辑器有问题");
         $('#dropping').summernote({
             dialogsInBody: true
