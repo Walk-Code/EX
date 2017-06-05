@@ -10,14 +10,17 @@
 
     <title>{{ config('app.name', 'EX') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ asset('EX/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <script src="{{asset('/EX/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('EX/ex.css') }}" rel="stylesheet">
+    <link href="{{ asset('/EX/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <script src="{{asset('/EX/bootstrap/js/bootstrap.min.js')}}"></script>
-    <link href="{{ asset("/EX/plugins/summernote/summernote.css")}}" rel="stylesheet" type="text/css" />
+    <script src="{{ asset('/EX/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+    <script src="{{ asset('/EX/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
+    <script src="{{ asset('/EX/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <link href="{{ asset("/EX/plugins/summernote/summernote.css") }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('/EX/ex.css') }}" rel="stylesheet">
+
     <!-- Scripts -->
 
     <script>
@@ -88,7 +91,8 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('/EX/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
     <script>
         $("#menu").on("click",function () {
             $(this).parent().addClass("open");
