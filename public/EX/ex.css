@@ -208,3 +208,7 @@ a.ex-topic-order:hover{
     font-size: 14px;
     outline: none;
 }
+.fb{
+    float: left;
+    font-weight: 600;
+}

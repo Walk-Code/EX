@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Pages;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
-class PagesController extends Controller
+class PagesController extends BaseController
 {
 
     public function index()
@@ -45,5 +46,23 @@ class PagesController extends Controller
     {
         return view('topic');
     }
+
+
+    //summernote upload img
+    public function ajaxImageUpload(Request $request)
+    {
+        Log::info("get all data");
+        if($request->hasFile("file")){
+            $image = $request->file("file");
+            Log::info($image);
+            $files['smfile'] = "@".$image;
+            $output = $this->httpPost("https://sm.ms/api/upload",$files);
+            return $output;
+
+        }else{
+            return 123;
+        }
+    }
+
 
 }
