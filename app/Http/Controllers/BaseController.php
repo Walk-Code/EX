@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -21,20 +22,15 @@ class BaseController extends Controller
      * @param $type 1：file 2:order
      * @return mixed
      */
-    public static function httpPost($url, $params, $type = 1)
+    public static function httpPost($url, $params)
     {
         $postData = "";
 
-        if($type == 1){
-           $postData = $params;
-            Log::info($postData);
-        }else if($type == 2){
-            foreach($params as $k=>$param){
-                $postData .= $k."=".$param."&";
-            }
-
-            $postData = rtrim($postData,"&");
+        foreach($params as $k=>$param){
+            $postData .= $k."=".$param."&";
         }
+
+        $postData = rtrim($postData,"&");
 
         $ch = curl_init();
         curl_setopt($ch,CURLOPT_URL,$url);
@@ -54,4 +50,21 @@ class BaseController extends Controller
 
     }
 
+    public function GzHttpPost($file)
+    {
+        $client = new Client();
+        Log::info($file);
+        $response = $client->request("post","https://sm.ms/api/upload",[
+            'multipart' =>[
+                [
+                    'name' => 'smfile',
+                    'contents' => fopen($file,'rb')
+                ],
+
+            ]
+        ]);
+
+        Log::info($response->getBody());
+    }
+    
 }
