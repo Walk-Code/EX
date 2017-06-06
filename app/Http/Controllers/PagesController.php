@@ -51,12 +51,11 @@ class PagesController extends BaseController
     //summernote upload img
     public function ajaxImageUpload(Request $request)
     {
-        Log::info("get all data");
+        Log::info($request->all());
         if($request->hasFile("file")){
             $image = $request->file("file");
-            Log::info($image);
-            $files['smfile'] = "@".$image;
-            $output = $this->httpPost("https://sm.ms/api/upload",$files);
+
+            $output = $this->GzHttpPost($image);
             return $output;
 
         }else{

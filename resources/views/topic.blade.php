@@ -85,11 +85,6 @@
     function sendFile(file) {
         var data = new FormData();
         data.append("file",file);
-        console.log(data);
-        /*var request = new XMLHttpRequest();
-        request.open("post","{{url('sm/upload')}}");
-        request.send(data);
-        return;*/
         data.append("_token",$("#token").val());
 
         $.ajaxSetup({
@@ -108,7 +103,6 @@
             processData: false,
             timeout:30000,
             success:function (url) {
-                console.log(url);
                 summernote.summernote("insertImage",url,"filename");
             },
             error:function (result) {
