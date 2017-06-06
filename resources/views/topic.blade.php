@@ -7,7 +7,7 @@
     <!-- left-bar-->
     <div class="left-bar">
         <div class="cell" style="height: 33px;font-size: 13px">
-            <span style="float: left;">EX&nbsp;&nbsp;>&nbsp;&nbsp;创建新话题</span>
+            <span class="fb">EX&nbsp;&nbsp;>&nbsp;&nbsp;创建新话题</span>
         </div>
         <!-- title-->
         <div class="cell">
@@ -41,7 +41,7 @@
     <div class="right-bar">
         注意事项版块
     </div>
-
+    <input id="token" type="hidden" name="_token" value="{{ csrf_token() }}">
 </div>
 
 
@@ -50,44 +50,74 @@
 
 <script type="text/javascript">
 
-    //$(document).ready(function() {
+    var summernote = $('#editor').summernote({
+        height: 500,                 // set editor height
+        width: "100%",                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,
+        focus: true,
+        lang:'zh-CN',
+        toolbar:[
+            ['misc',['undo','redo','codeview']],
+            ['style', ['style','bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['fontsize', ['fontsize']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['link', ['linkDialogShow', 'unlink']],
+            ['insert',['picture','hr','table']]
+        ],
+        callbacks: {
+            onImageUpload: function (file) {
+                sendFile(file[0]);
+            }
+        }
+    });
 
-        var summernote = $('#editor').summernote({
-            height: 500,                 // set editor height
-            width: "100%",                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,
-            focus: true,
-            lang:'zh-CN',
-            toolbar:[
-                ['misc',['undo','redo','codeview']],
-                ['style', ['style','bold', 'italic', 'underline', 'clear']],
-                ['font', ['strikethrough', 'superscript', 'subscript']],
-                ['fontsize', ['fontsize']],
-                ['fontname', ['fontname']],
-                ['color', ['color']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['height', ['height']],
-                ['link', ['linkDialogShow', 'unlink']],
-                ['insert',['picture','hr','table']]
-            ],
-            callbacks: {
-                onImageUpload: function (file) {
-                    sendFile(file[0]);
-                }
+    $('.dropdown-toggle').dropdown();
+
+    summernote.summernote("code","不能上传图片");
+    $('#dropping').summernote({
+        dialogsInBody: true
+    });
+    function sendFile(file) {
+        var data = new FormData();
+        data.append("file",file);
+        console.log(data);
+        /*var request = new XMLHttpRequest();
+        request.open("post","{{url('sm/upload')}}");
+        request.send(data);
+        return;*/
+        data.append("_token",$("#token").val());
+
+        $.ajaxSetup({
+            header:{
+                "X-CSRF-TOKEN":$("meta[name='csrf-token']").attr("content")
             }
         });
 
-        $('.dropdown-toggle').dropdown();
-
-        summernote.summernote("code","编辑器有问题");
-        $('#dropping').summernote({
-            dialogsInBody: true
+        $.ajax({
+            data:data,
+            type:"post",
+            url:"{{url('/sm/upload')}}",
+            async:false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout:30000,
+            success:function (url) {
+                console.log(url);
+                summernote.summernote("insertImage",url,"filename");
+            },
+            error:function (result) {
+                console.log("上传失败");
+            }
         });
-        function sendFile(file) {
 
-        }
-    //});
+    }
+
 
 </script>
 @endsection
