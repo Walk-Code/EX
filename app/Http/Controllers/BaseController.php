@@ -50,21 +50,25 @@ class BaseController extends Controller
 
     }
 
-    public function GzHttpPost($file)
+    public function GzHttpPost($fileName,$fileMime,$filePath)
     {
         $client = new Client();
-        Log::info($file);
+
         $response = $client->request("post","https://sm.ms/api/upload",[
             'multipart' =>[
                 [
                     'name' => 'smfile',
-                    'contents' => fopen($file,'rb')
+                    'filename' => $fileName,
+                    'Mime-Type' => $fileMime,
+                    'contents' => fopen($filePath,'r'),
                 ],
 
             ]
         ]);
 
-        Log::info($response->getBody());
+        $data = $response->getBody();
+        return json_decode($data,true)['data']['url'];
+
     }
     
 }
