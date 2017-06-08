@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -26,9 +27,16 @@ class PagesController extends BaseController
 
 
 
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        return view('page',['page' => Pages::find($id)]);
+        $comments = Pages::find($id)->comments;
+
+        foreach($comments as $comment){
+            $comment->name = $comment->user->name;
+            unset($comment->user);
+        }
+        
+        return view('page',['page' => Pages::find($id),'comments'=>$comments,'path'=>$request->getPathInfo()]);
     }
 
     public function edit(Pages $pages)

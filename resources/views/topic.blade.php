@@ -82,6 +82,7 @@
     $('#dropping').summernote({
         dialogsInBody: true
     });
+
     function sendFile(file) {
         var data = new FormData();
         data.append("file",file);
