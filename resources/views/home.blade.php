@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <style type="text/css" rel="stylesheet">
        a.count_ex:link, a.count_ex:active {
@@ -68,8 +67,8 @@
 
             </div>
         </div>
-
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar" style="background-color: #fff;">
+        @include('layouts.right')
+        {{--<div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar" style="background-color: #fff;">
             <div class="box">
                 <!-- 个人信息 -->
                 <div class="cell">
@@ -151,7 +150,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
     </div>
 </div>
 @endsection

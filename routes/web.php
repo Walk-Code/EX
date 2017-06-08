@@ -19,7 +19,7 @@ Route::get('/', function () {
 Auth::routes();
 
 //Route::get('/', 'HomeController@index');
-
+//Route::post('login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show');
 Route::get('new','PagesController@create');

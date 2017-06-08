@@ -81,7 +81,8 @@ div{
 .box{
     background-color: #FFFFFF;
     border-radius: 4px 0;
-    mar
+    display: flex;
+    flex-direction: column;
 }
 h1{
     font-size: 25px;
@@ -154,7 +155,6 @@ a.ex-topic-order:hover{
     background-color: #f5f8fa;
     text-align: center;
     border: 1px dashed;
-    margin-top: 20px;
     padding: 15px;
 }
 .main{

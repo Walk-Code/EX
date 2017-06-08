@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderShipped;
 use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\User;
@@ -35,7 +36,7 @@ class PagesController extends BaseController
             $comment->name = $comment->user->name;
             unset($comment->user);
         }
-        
+
         return view('page',['page' => Pages::find($id),'comments'=>$comments,'path'=>$request->getPathInfo()]);
     }
 
@@ -52,6 +53,8 @@ class PagesController extends BaseController
 
     public function create()
     {
+        //触发事件
+        event(new OrderShipped(User::find(5)));
         return view('topic');
     }
 
