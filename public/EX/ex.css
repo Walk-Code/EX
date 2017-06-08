@@ -80,6 +80,8 @@ div{
 
 .box{
     background-color: #FFFFFF;
+    border-radius: 4px 0;
+    mar
 }
 h1{
     font-size: 25px;
@@ -182,8 +184,6 @@ a.ex-topic-order:hover{
     display: flex;
     border-bottom: 1px solid #d3e0e9;
 }
-
-
 .title{
     width: 100%;
     padding: 4px;
@@ -211,4 +211,27 @@ a.ex-topic-order:hover{
 .fb{
     float: left;
     font-weight: 600;
+}
+.no-login-model{
+    border-bottom: 1px solid #e2e2e2;
+    padding: 60px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+}
+.reply-button{
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 5px;
+}
+.reply-comment{
+    width: 100%;
+    resize: none;
+    color: #000;
+    font-size: 14px;
+    outline: none;
 }

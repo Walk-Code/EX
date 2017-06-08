@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
     <link type="text/css" href="{{asset('EX/iconfont/iconfont.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
     <div class="container">
 
         <!-- main -->
@@ -66,6 +68,8 @@
                         </span>
                     </div>
                     <!-- comments layout-->
+                    @if(isset($comments[0]))
+                    @foreach($comments as $k=>$comment)
                     <div class="cell">
                         <table cellpadding="0" cellspacing="0" width="100%" border="0">
                             <tbody>
@@ -82,7 +86,7 @@
                                                 <a href="">感谢回复</a>
                                             </div>&nbsp;&nbsp;
 
-                                            <a href="#" onclick="reply('test');">
+                                            <a href="#comment" onclick="reply('{{$comment->name}}');">
                                                 <img src="{{asset('EX\images\reply.png')}}">
                                             </a>&nbsp;&nbsp;
                                             <span class="no">1</span>
@@ -105,13 +109,16 @@
                         </table>
                     </div>
                 </div>
+                @endforeach
+                @else
                 <!-- not comments layout -->
                 <div class="no-comment-layout">
                     暂未有人评论
                 </div>
+                @endif
                 <!-- reply layout-->
                 <div class="sep20"></div>
-                <div class="box">
+                <div class="box" style="margin-bottom: 50px">
                     <div class="cell">
                         <div class="float-right">
                             <a href="#">
@@ -121,15 +128,38 @@
                         </div>
                         添加一条新回复
                     </div>
-                    <div class="cell">
-                        <textarea style="height: 110px;width: 100%">
+                    @if(!Auth::check())
+                        <div class="no-login-model">
+                            <form action="{{url('login')}}" method="get">
+                                <input type="hidden" name="path" value="{{rawurlencode($path)}}"/>
+                                <button>
+                                    <i class="iconfont icon-suotou"></i>
+                                    登录
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <div id="comment" class="cell" data-id="md">
+                            <div id="editor">
+                                <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">
 
-                        </textarea>
-                        <button>回复</button>
-                    </div>
+                                </textarea>
+                            </div>
+                            <button class="reply-button">回复</button>
+                            <button id="btn-mess" class="reply-button" style="float: right" onclick="change(this);">
+                                <i class="iconfont icon-qiehuan"></i>
+                                富文本编辑
+                            </button>
+                        </div>
+
+                        <div id="comment" style="display: none" data-id="rich">
+
+                        </div>
+
+                    @endif
                     <div class="inner">
                         <div class="float-right">
-                            <a href="#" class="back-ex">
+                            <a href="{{url('/')}}" class="back-ex">
                                 ←&nbsp;EX
                             </a>
                         </div>
@@ -225,12 +255,96 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="{{ asset('/EX/plugins/summernote/summernote.min.js') }}"></script>
     <script type="text/javascript">
-        function reply(user) {
-            
+
+        var summernote;
+
+
+        function reply(name) {
+            document.getElementById("reply").innerHTML = "@"+name+" ";
+        }
+        //切换回复框格式
+        function change(obj) {
+            //console.log($(obj).parent().attr("data-id"));
+            $id = $(obj).parent();
+
+            if($id.attr("data-id") == "md"){
+                $("#editor").empty();
+                initSummernote(0);
+                $id.attr("data-id","rich");
+                $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
+
+            }else if($id.attr("data-id") == "rich"){
+                summernote.summernote("destroy");
+                $("#editor").empty();
+                $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">'+
+                        '</textarea>');
+                $id.attr("data-id","md");
+                $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
+
+            }
+
+
+        }
+        
+        function initSummernote(type) {
+                summernote = $('#editor').summernote({
+                height: 500,                 // set editor height
+                width: "100%",                 // set editor height
+                minHeight: null,             // set minimum height of editor
+                maxHeight: null,
+                focus: true,
+                lang:'zh-CN',
+                toolbar:[
+                    ['misc',['undo','redo','codeview']],
+                    ['style', ['style','bold', 'italic', 'underline', 'clear']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['fontsize', ['fontsize']],
+                    ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']],
+                    ['link', ['linkDialogShow', 'unlink']],
+                    ['insert',['picture','hr','table']]
+                ],
+                callbacks: {
+                    onImageUpload: function (file) {
+                        sendFile(file[0]);
+                    }
+                }
+            });
+
         }
 
+        function sendFile(file) {
+            var data = new FormData();
+            data.append("file", file);
+            data.append("_token", $("#token").val());
 
+            $.ajaxSetup({
+                header: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                }
+            });
+
+            $.ajax({
+                data: data,
+                type: "post",
+                url: "{{url('/sm/upload')}}",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                timeout: 30000,
+                success: function (url) {
+                    summernote.summernote("insertImage", url, "filename");
+                },
+                error: function (result) {
+                    console.log("上传失败");
+                }
+            });
+        }
         
     </script>
 @endsection
