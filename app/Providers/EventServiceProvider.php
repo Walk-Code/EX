@@ -20,7 +20,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\LoginEvent' => [
             'App\Listeners\LoginListener',
-        ]
+        ],
+        'Illuminate\Auth\Events\Logout' => [
+            'App\Listeners\LogSuccessfulLogout',
+        ],
     ];
     //为订阅者注册监听器
     protected $subscribe = [

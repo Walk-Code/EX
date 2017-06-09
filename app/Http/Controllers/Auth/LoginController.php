@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\LoginEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -43,28 +46,36 @@ class LoginController extends Controller
         }
     }
 
-   /* public function postLogin(Request $request)
+    public function postLogin(Request $request)
     {
-        $this->validate($request,[
-            "email" => "required|email",
-            "password" => "required"
+        $this->validateLogin($request);
+
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            //login success
+            event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+        
+        return redirect("login")->withInput($request->only("name", "remember"))->withErrors([
+            "failed" => "用户名或密码不正确",
         ]);
 
-        if (Auth::validate(["email" => $request->email, "password" => $request->password, "status" => 0])) {
-            return redirect("login")->withInput($request->only("email", "remember"))->withErrors("您的帐户是无效或未验证");
-        }
 
-        $credentials = array("email" => $request,"password" => $request->password);
-
-        if (Auth::attempt($credentials, $request->has("remember"))){
-            return redirect()->intended($this->redirectPath());
-        }
-
-        return redirect("login")->withInput($request->only("email", "remember"))->withErrors([
-                    "email" => "电子邮件地址或密码不正确",
-            ]);
-
-    }*/
+    }
    /* //从请求获取所需的授权凭据
     protected function credentials(Request $request)
     {
@@ -75,5 +86,10 @@ class LoginController extends Controller
             "password" => $request->password,
         ];
     }*/
+
+    public function username()
+    {
+        return 'name';
+    }
 
 }
