@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\LoginEvent;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -26,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = "/";
 
     /**
      * Create a new controller instance.
@@ -35,11 +40,66 @@ class LoginController extends Controller
      */
     public function __construct(Request $request)
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware("guest")->except("logout");
+    }
 
-        if($request){
-            $this->redirectTo = '/t/121';
+    public function showLoginForm(Request $request)
+    {
+        return view('auth.login',['path'=>$request->path]);
+    }
+
+    public function postLogin(Request $request)
+    {
+        $this->validateLogin($request);
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            return $this->sendLockoutResponse($request);
         }
+
+        if ($this->attemptLogin($request)) {
+            //login success
+            event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
+
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+        
+        return redirect("login")->withInput($request->only("name", "remember"))->withErrors([
+            "failed" => "用户名或密码不正确",
+        ]);
+
+
+    }
+   /* //从请求获取所需的授权凭据
+    protected function credentials(Request $request)
+    {
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? "email" : "username";
+
+        return [
+            $field => $request->get($this->username()),
+            "password" => $request->password,
+        ];
+    }*/
+
+    public function username()
+    {
+        return 'name';
+    }
+
+    protected function sendLoginResponse(Request $request){
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+       
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended(empty($request->path) ? $this->redirectTo : rawurldecode($request->path));
     }
 
 }

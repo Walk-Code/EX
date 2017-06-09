@@ -178,6 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //PJAX
         //Turbo\Provider\Laravel\TurboServiceProvider::class,
+        //Jenssegers
+        Jenssegers\Agent\AgentServiceProvider::class,//获取用户的os
 
     ],
 
@@ -227,6 +229,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Ip'  => 'Zhuzhichao\IpLocationZh\Ip',//根据IP adress 查找location
 
     ],
 

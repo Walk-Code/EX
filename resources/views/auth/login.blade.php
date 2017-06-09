@@ -10,20 +10,20 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('failed') ? ' has-error' : '' }}">
+                            <label for="failed" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="failed" type="failed" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('failed'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('failed') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
-
+                        <input type="hidden" value="{{$path}}" name="path">
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
