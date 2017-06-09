@@ -53,9 +53,12 @@ class PagesController extends BaseController
 
     public function create()
     {
-        //触发事件
-        event(new OrderShipped(User::find(5)));
         return view('topic');
+    }
+
+    public function replyOne(Request $request)
+    {
+        $
     }
 
 

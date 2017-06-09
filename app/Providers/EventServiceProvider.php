@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\LogSuccessfulLogout',
         ],
+        'App\Events\UserNotificationEvent' => [
+            'App\Listeners\UserNotificationListener'
+        ]
     ];
     //为订阅者注册监听器
     protected $subscribe = [

@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function findUserByName($name)
+    {
+        $user = User::where('name',$name)->first();
+
+        if($user){
+            return $user;
+        }else{
+            return 0;
+        }
+    }
+    
 }

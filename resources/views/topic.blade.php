@@ -2,6 +2,7 @@
 @section('content')
 
 <link href="{{asset('/EX/font/send/iconfont.css')}}" type="text/css" rel="stylesheet">
+<link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
 
 <div class="main">
     <!-- left-bar-->
@@ -24,10 +25,15 @@
             <span style="display: flex">正文</span>
         </div>
         <div class="cell" style="text-align: left">
-            <div id="editor">123</div>
+            <div id="editor">
+            </div>
         </div>
         <div class="cell" style="text-align: right">
-            <button type="button">
+            {{--<button id="btn-mess" class="reply-button" style="float: left" onclick="change(this);">
+                <i class="iconfont icon-qiehuan"></i>
+                富文本编辑
+            </button>--}}
+            <button type="button" class="reply-button">
                 <i class="iconfont icon-fasong"></i>
                 &nbsp;&nbsp;
                 发送
@@ -50,7 +56,7 @@
 
 <script type="text/javascript">
 
-    var summernote = $('#editor').summernote({
+     var summernote = $('#editor').summernote({
         height: 500,                 // set editor height
         width: "100%",                 // set editor height
         minHeight: null,             // set minimum height of editor
@@ -78,7 +84,7 @@
 
     $('.dropdown-toggle').dropdown();
 
-    summernote.summernote("code","不能上传图片");
+    summernote.summernote("code","不支持md格式");
     $('#dropping').summernote({
         dialogsInBody: true
     });
@@ -112,6 +118,90 @@
         });
 
     }
+
+    //切换回复框格式
+    /*function change(obj) {
+        //console.log($(obj).parent().attr("data-id"));
+        $id = $(obj).parent();
+
+        if($id.attr("data-id") == "md"){
+            $("#editor").empty();
+            initSummernote(0);
+            $id.attr("data-id","rich");
+            $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
+            $("#editor_type").val(2);
+
+        }else if($id.attr("data-id") == "rich"){
+            summernote.summernote("destroy");
+            $("#editor").empty();
+            $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">'+
+                    '</textarea>');
+            $id.attr("data-id","md");
+            $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
+            $("#editor_type").val(1);
+
+        }
+
+
+    }
+
+    function initSummernote(type) {
+        summernote = $('#editor').summernote({
+            height: 500,                 // set editor height
+            width: "100%",                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,
+            focus: true,
+            lang:'zh-CN',
+            toolbar:[
+                ['misc',['undo','redo','codeview']],
+                ['style', ['style','bold', 'italic', 'underline', 'clear']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['fontsize', ['fontsize']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['link', ['linkDialogShow', 'unlink']],
+                ['insert',['picture','hr','table']]
+            ],
+            callbacks: {
+                onImageUpload: function (file) {
+                    sendFile(file[0]);
+                }
+            }
+        });
+
+    }
+
+    function sendFile(file) {
+        var data = new FormData();
+        data.append("file", file);
+        data.append("_token", $("#token").val());
+
+        $.ajaxSetup({
+            header: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            }
+        });
+
+        $.ajax({
+            data: data,
+            type: "post",
+            url: "{{url('/sm/upload')}}",
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            timeout: 30000,
+            success: function (url) {
+                summernote.summernote("insertImage", url, "filename");
+            },
+            error: function (result) {
+                console.log("上传失败");
+            }
+        });
+    }*/
 
 
 </script>

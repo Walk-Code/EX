@@ -56,9 +56,10 @@ div{
     height: 38px;
 }
 .assets{
-    padding: 5px 10px;
+    padding: 0px 10px;
     background-color: #e6e6e6;
     border-radius: 12px;
+    display: flow-root;
 }
 .pagination_{
     margin: 0px;

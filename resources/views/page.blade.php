@@ -3,6 +3,7 @@
     <link type="text/css" href="{{asset('EX/iconfont/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{asset('EX/font/reply/iconfont.css')}}" rel="stylesheet"/>
     <div class="container">
 
         <!-- main -->
@@ -72,7 +73,7 @@
                     <!-- comments layout-->
 
                     @foreach($comments as $k=>$comment)
-                    <div class="cell">
+                    <div class="cell" id="{{$comment->id}}">
                         <table cellpadding="0" cellspacing="0" width="100%" border="0">
                             <tbody>
                                 <tr>
@@ -88,8 +89,9 @@
                                                 <a href="">感谢回复</a>
                                             </div>&nbsp;&nbsp;
 
-                                            <a href="#comment" onclick="reply('{{$comment->name}}');">
-                                                <img src="{{asset('EX\images\reply.png')}}">
+                                            <a href="#comment" onclick="replyOne('{{$comment->name}}');">
+                                                {{--<img src="{{asset('EX\images\reply.png')}}">--}}
+                                                <i class="iconfont icon-reply"></i>
                                             </a>&nbsp;&nbsp;
                                             <span class="no">1</span>
                                         </div>
@@ -142,16 +144,17 @@
                         </div>
                     @else
                         <div id="comment" class="cell" data-id="md">
-                            <div id="editor">
-                                <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">
-
-                                </textarea>
-                            </div>
-                            <button class="reply-button">回复</button>
-                            <button id="btn-mess" class="reply-button" style="float: right" onclick="change(this);">
+                            <form action="{{url("reply")}}" method="post" enctype="multipart/form-data">
+                                <div id="editor">
+                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%"></textarea>
+                                </div>
+                                <input  name="post_id" type="hidden" value="{{$page->id}}">
+                                <button class="reply-button">回复</button>
+                            </form>
+                            {{--<button id="btn-mess" class="reply-button" style="float: right" onclick="change(this);">
                                 <i class="iconfont icon-qiehuan"></i>
                                 富文本编辑
-                            </button>
+                            </button>--}}
                         </div>
 
                         <div id="comment" style="display: none" data-id="rich">
@@ -178,10 +181,43 @@
 
         var summernote;
 
+        function replyOne(name) {
+            var replyContent = $("#reply");
+            var oldContent = replyContent.val();
+            var prefix = "@"+name+" ";
+            var newContent = "";
 
-        function reply(name) {
-            document.getElementById("reply").innerHTML = "@"+name+" ";
+            if(oldContent.length > 0){
+                if(oldContent != prefix){
+                    newContent = oldContent+"\n"+prefix;
+                }
+
+            }else{
+                newContent = prefix;
+            }
+
+            replyContent.focus();
+            replyContent.val(newContent);
+            moveEnd(replyContent);
         }
+        
+        function moveEnd(obj) {
+            obj.focus();
+            var len = obj.value === undefined ? 0 : obj.value.length;
+
+            if(document.selection){
+                var sel = obj.createTextRange();
+                sel.moveStart("character",len);
+                sel.collapse();
+                sel.select();
+
+            }else if(typeof obj.selectionStart == "number" && typeof obj.selectionEnd == "number"){
+                obj.selectionStart = obj.selectionEnd = len;
+            }
+
+
+        }
+        
         //切换回复框格式
         function change(obj) {
             //console.log($(obj).parent().attr("data-id"));
@@ -192,6 +228,7 @@
                 initSummernote(0);
                 $id.attr("data-id","rich");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
+                $("#editor_type").val(2);
 
             }else if($id.attr("data-id") == "rich"){
                 summernote.summernote("destroy");
@@ -200,6 +237,7 @@
                         '</textarea>');
                 $id.attr("data-id","md");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
+                $("#editor_type").val(1);
 
             }
 
