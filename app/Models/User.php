@@ -37,5 +37,10 @@ class User extends Authenticatable
             return 0;
         }
     }
-    
+
+    public function hasManyNotification()
+    {
+        return $this->hasMany('App\Models\UserNotification','user_id','id');
+    }
+
 }

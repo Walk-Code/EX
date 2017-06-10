@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BaseController extends Controller
@@ -70,5 +71,18 @@ class BaseController extends Controller
         return json_decode($data,true)['data']['url'];
 
     }
+    
+    /**
+     * 
+     * User model
+     */
+    public function userNotify()
+    {
+      /*  if($user = Auth::user()){
+            return view("layouts.right",['']);
+        }*/
+    }
+    
+    
     
 }

@@ -1,5 +1,6 @@
-<div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar" style="background-color: #fff;">
+<div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar">
     <div class="box">
+        @if(Auth::user())
         <!-- 个人信息 -->
         <div class="cell">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -70,7 +71,7 @@
         </div>
         <!-- 金币模块 -->
         <div class="inner">
-            <a href="#" class="message">0条未读消息</a>
+            <a href="#" class="message">{{count(Auth::user()->hasManyNotification)}}条未读消息</a>
             <div style="float: right">
                 <a href="#" class="assets">
                     2&nbsp;<img src="https://ooo.0o0.ooo/2017/05/17/591bfa8220346.png" alt="G" align="absmiddle" border="0" style="padding-bottom: 2px;">
@@ -79,5 +80,26 @@
                 </a>
             </div>
         </div>
+        @else
+            <div class="register-title"></div>
+            <div class="cell">
+                <div class="ex-inner">
+                    <a href="{{url('register')}}">
+                        <button class="register-button">
+                            现在注册
+                        </button>
+                    </a>
+                    <div class="sep20"></div>
+                    <span>已注册用户请&nbsp;&nbsp;
+                        <a href="{{url('login')}}">登录</a>
+                    </span>
+                </div>
+            </div>
+        @endif
+    </div>
+    <div class="sep20"></div>
+
+    <div class="box">
+        <div class="cell"></div>
     </div>
 </div>

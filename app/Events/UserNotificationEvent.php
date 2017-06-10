@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Support\Facades\Log;
 
 class UserNotificationEvent
 {
@@ -40,9 +41,10 @@ class UserNotificationEvent
      */
     public function __construct($user,$post_id,$comment_id,$location)
     {
+        Log::info("触发用户提醒");
         $this->user = $user;
         $this->post_id = $post_id;
-        $this->$comment_id = $comment_id;
+        $this->comment_id = $comment_id;
         $this->location = $location;
     }
 
