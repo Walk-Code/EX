@@ -88,12 +88,11 @@
                                                 <a href="">隐藏</a>&nbsp;&nbsp;
                                                 <a href="">感谢回复</a>
                                             </div>&nbsp;&nbsp;
-
-                                            <a href="#comment" onclick="replyOne('{{$comment->name}}');">
+                                            <a href="#comment" onclick="replyOne(this,'{{$comment->name}}');">
                                                 {{--<img src="{{asset('EX\images\reply.png')}}">--}}
                                                 <i class="iconfont icon-reply"></i>
                                             </a>&nbsp;&nbsp;
-                                            <span class="no">1</span>
+                                            <span class="no">{{$k + 1}}</span>
                                         </div>
                                         <div class="sep3"></div>
                                         <strong>
@@ -144,17 +143,20 @@
                         </div>
                     @else
                         <div id="comment" class="cell" data-id="md">
-                            <form action="{{url("reply")}}" method="post" enctype="multipart/form-data">
+                            <form action="{{url("reply")}}" id="reply_form" method="post" enctype="multipart/form-data">
+                                {{csrf_field()}}
                                 <div id="editor">
-                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%"></textarea>
+                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">功能尚未完善</textarea>
                                 </div>
-                                <input  name="post_id" type="hidden" value="{{$page->id}}">
-                                <button class="reply-button">回复</button>
+                                <input name="post_id" type="hidden" value="{{$page->id}}">
+                                <input name="editor_type" type="hidden" id="editor_type" value="1">
+                                <input name="location" type="hidden" id="location">
                             </form>
-                            {{--<button id="btn-mess" class="reply-button" style="float: right" onclick="change(this);">
-                                <i class="iconfont icon-qiehuan"></i>
-                                富文本编辑
-                            </button>--}}
+                                <button class="reply-button" onclick="submit();">回复</button>
+                                <button id="btn-mess" class="reply-button" style="float: right;" onclick="change(this);">
+                                    <i class="iconfont icon-qiehuan"></i>
+                                    富文本编辑
+                                </button>
                         </div>
 
                         <div id="comment" style="display: none" data-id="rich">
@@ -174,6 +176,7 @@
             <!-- sidebar-->
             @include('layouts.right')
         </div>
+        <input id="token" type="hidden" value="{{csrf_token()}}">
     </div>
 
     <script type="text/javascript" src="{{ asset('/EX/plugins/summernote/summernote.min.js') }}"></script>
@@ -181,9 +184,10 @@
 
         var summernote;
 
-        function replyOne(name) {
-            var replyContent = $("#reply");
-            var oldContent = replyContent.val();
+        function replyOne(obj,name) {
+            $comment_id = $("#comment");
+            var replyContent = $comment_id.attr("data-id") == "md" ? $("#reply") : summernote;
+            var oldContent = $comment_id.attr("data-id") == "md" ? replyContent.val() : summernote.summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
             var prefix = "@"+name+" ";
             var newContent = "";
 
@@ -196,8 +200,9 @@
                 newContent = prefix;
             }
 
+            $("#location").val($(obj).closest(".cell").attr("id"));
             replyContent.focus();
-            replyContent.val(newContent);
+            $comment_id.attr("data-id") == "md" ? replyContent.val(newContent) : summernote.summernote("code",newContent+"&nbsp");
             moveEnd(replyContent);
         }
         
@@ -221,21 +226,24 @@
         //切换回复框格式
         function change(obj) {
             //console.log($(obj).parent().attr("data-id"));
-            $id = $(obj).parent();
+            var id = $(obj).parent();
 
-            if($id.attr("data-id") == "md"){
+            if(id.attr("data-id") == "md"){
+                console.log(1);
                 $("#editor").empty();
-                initSummernote(0);
-                $id.attr("data-id","rich");
+                initSummernote();
+                id.attr("data-id","rich");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
                 $("#editor_type").val(2);
+                $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%;display: none">'+
+                        '</textarea>');
 
-            }else if($id.attr("data-id") == "rich"){
+            }else if(id.attr("data-id") == "rich"){
                 summernote.summernote("destroy");
                 $("#editor").empty();
                 $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">'+
-                        '</textarea>');
-                $id.attr("data-id","md");
+                        '功能尚未完善</textarea>');
+                id.attr("data-id","md");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
                 $("#editor_type").val(1);
 
@@ -245,32 +253,20 @@
         }
         
         function initSummernote(type) {
-                summernote = $('#editor').summernote({
-                height: 500,                 // set editor height
-                width: "100%",                 // set editor height
-                minHeight: null,             // set minimum height of editor
-                maxHeight: null,
-                focus: true,
-                lang:'zh-CN',
-                toolbar:[
-                    ['misc',['undo','redo','codeview']],
-                    ['style', ['style','bold', 'italic', 'underline', 'clear']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['fontsize', ['fontsize']],
-                    ['fontname', ['fontname']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['height', ['height']],
-                    ['link', ['linkDialogShow', 'unlink']],
-                    ['insert',['picture','hr','table']]
-                ],
+            summernote = $('#editor').summernote({
+                height: 300,
+                codemirror: {
+                    mode: 'text/html',
+                    htmlMode: true,
+                    lineNumbers: true,
+                    theme: 'monokai'
+                },
                 callbacks: {
                     onImageUpload: function (file) {
                         sendFile(file[0]);
                     }
                 }
             });
-
         }
 
         function sendFile(file) {
@@ -301,6 +297,17 @@
                 }
             });
         }
-        
+        //commit reply
+        function submit() {
+            if(summernote !== undefined){
+                var markupStr = summernote.summernote('code');
+                if (markupStr.length > 0 ) {
+                    $("#reply").val(markupStr);
+                }
+            }
+
+            $("#reply_form").submit();
+        }
+
     </script>
 @endsection

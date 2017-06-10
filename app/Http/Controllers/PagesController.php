@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\OrderShipped;
+use App\Events\UserNotificationEvent;
 use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class PagesController extends BaseController
@@ -58,7 +60,22 @@ class PagesController extends BaseController
 
     public function replyOne(Request $request)
     {
-        $
+        //dd($request);
+        $post_id = $request->post_id;
+        $editor_type = $request->editor_type;
+        $replyContent = $request->reply;
+        $location = $request->location;
+
+
+        $comment = new Comments();
+        if($comment->addComment($replyContent,$post_id,Auth::user()->uuid,$location,new User())){
+            return redirect("/t/".$post_id)->with("评论失败");
+
+        }else{
+            return redirect("/t/".$post_id)->withErrors("评论失败");
+        }
+
+
     }
 
 
