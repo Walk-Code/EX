@@ -25,3 +25,4 @@ Route::get('t/{id}','PagesController@show');
 Route::get('new','PagesController@create');
 Route::post('sm/upload','PagesController@ajaxImageUpload');//ajax upload img
 Route::post('reply','PagesController@replyOne');
+Route::get('notification','UserNotificationController@index');

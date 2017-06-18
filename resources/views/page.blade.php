@@ -96,15 +96,14 @@
                                         </div>
                                         <div class="sep3"></div>
                                         <strong>
-                                           <a href="#">test user</a>
+                                           <a href="#">{{$comment->name}}</a>
                                         </strong>
                                         &nbsp;&nbsp;
                                         <span>刚刚</span>
                                         <div class="sep5"></div>
                                         <!-- 回复内容-->
                                         <div class="reply-content">
-                                            测试回复内容1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-                                            111111111111111112333333333333333333
+                                            {!! $comment->comment !!}
                                         </div>
                                     </td>
                                 </tr>
@@ -188,7 +187,7 @@
             $comment_id = $("#comment");
             var replyContent = $comment_id.attr("data-id") == "md" ? $("#reply") : summernote;
             var oldContent = $comment_id.attr("data-id") == "md" ? replyContent.val() : summernote.summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
-            var prefix = "@"+name+" ";
+            var prefix = $comment_id.attr("data-id") == "md" ? "@"+name+" " : '<a herf="{{url("")}}">'+"@"+name+'</a>'+" ";
             var newContent = "";
 
             if(oldContent.length > 0){

@@ -10,7 +10,7 @@ class UserNotificationController extends BaseController
 {
     public function index()
     {
-        $userNotifications = Auth::user()->hasManyNotification;
-        return view('notifications',['userNotifications',$userNotifications]);
+        $userNotifications = Auth::user()->hasManyNotification()->paginate(30);
+        return view('notifications',['userNotifications'=>$userNotifications]);
     }
 }

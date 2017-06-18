@@ -42,6 +42,11 @@ a.count_ex{
     line-height: 120%;
     border-bottom: 1px solid #e2e2e2;
 }
+.cell-itme{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap
+}
 .no_padding{
     padding: 0;
 }
@@ -165,6 +170,7 @@ a.ex-topic-order:hover{
     text-align: center;
     flex-wrap: nowrap;
     width: auto;
+    margin-bottom: 25px;
 }
 .sep20-flex-width{
     width: 20px;
@@ -183,6 +189,7 @@ a.ex-topic-order:hover{
 .box-flex{
     padding: 4px;
     display: flex;
+    flex-direction: column;
     border-bottom: 1px solid #d3e0e9;
 }
 .title{
@@ -225,7 +232,7 @@ a.ex-topic-order:hover{
 }
 .reply-button{
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     margin-top: 5px;
 }
@@ -251,4 +258,26 @@ a.ex-topic-order:hover{
     margin-left: auto;
     padding: 4px;
     font-weight: 600;
+}
+.star{
+    width: 15px;
+    margin-top: -3px;
+}
+.notification-payload{
+    text-align: left;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #e2e2e2;
+}
+.ex-footer{
+    border-top: 1px solid #e2e2e2;
+    background-color: #fff;
+    text-align: center;
+    color: #8A8A8A;
+    padding: 0px 10px;
+    height: 200px;
+    width: 100%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }

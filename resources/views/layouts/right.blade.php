@@ -1,3 +1,4 @@
+<link type="text/css" href="{{asset("EX/font/star/iconfont.css")}}" rel="stylesheet"/>
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar">
     <div class="box">
         @if(Auth::user())
@@ -71,7 +72,12 @@
         </div>
         <!-- 金币模块 -->
         <div class="inner">
-            <a href="#" class="message">{{count(Auth::user()->hasManyNotification)}}条未读消息</a>
+            <a href="{{url('notification')}}" class="message">
+                @if(count(Auth::user()->hasManyNotification) > 0)
+                    <img src="{{asset('EX/images/start.png')}}" class="star">
+                @endif
+                {{count(Auth::user()->hasManyNotification)}}&nbsp;条未读消息
+            </a>
             <div style="float: right">
                 <a href="#" class="assets">
                     2&nbsp;<img src="https://ooo.0o0.ooo/2017/05/17/591bfa8220346.png" alt="G" align="absmiddle" border="0" style="padding-bottom: 2px;">

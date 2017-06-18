@@ -8,7 +8,7 @@
     <!-- left-bar-->
     <div class="left-bar">
         <div class="cell" style="height: 33px;font-size: 13px">
-            <span class="fb">EX&nbsp;&nbsp;>&nbsp;&nbsp;创建新话题</span>
+            <span class="fb"><a href="/">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;创建新话题</span>
         </div>
         <!-- title-->
         <div class="cell">
