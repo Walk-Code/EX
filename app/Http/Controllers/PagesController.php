@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderShipped;
 use App\Events\UserNotificationEvent;
 use App\Models\Comments;
 use App\Models\Pages;

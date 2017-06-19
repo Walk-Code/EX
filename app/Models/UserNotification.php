@@ -23,11 +23,19 @@ class UserNotification extends Model
         return $this->belongsTo('App\Models\Comments',"comment_id","id");
     }
 
-    public function addUserNotification($user_id,$post_id,$location,$comment_id)
+    /** 添加回复通知
+     * @param $user_id
+     * @param $post_id
+     * @param $location
+     * @param $comment_id
+     * @return UserNotification
+     */
+    public function addUserNotification($user_id, $post_id, $location, $comment_id)
     {
         Log::info("插入数据");
         $userNotification = UserNotification::where("user_id",$user_id)->where("post_id",$post_id)
                                             ->where("location",$location)->where("comment_id",$comment_id)
+                                            ->where("type",0)
                                             ->first();
 
         if(!$userNotification){
@@ -39,6 +47,7 @@ class UserNotification extends Model
         $userNotification->post_id = $post_id;
         $userNotification->location = $location;
         $userNotification->comment_id = $comment_id;
+        $userNotification->type = 0;
         $userNotification->save();
 
         return $userNotification;
@@ -58,5 +67,30 @@ class UserNotification extends Model
         }
     }
 
+    /** 保存话题通知
+     * @param $user_id
+     * @param $post_id
+     */
+    public function addStroeNotification($user_id, $post_id)
+    {
+        $userNotification = UserNotification::where("user_id",$user_id)->where("post_id",$post_id)
+                                            ->where("type",1)
+                                            ->first();
+
+        if(!$userNotification){
+            $userNotification = new UserNotification();
+        }
+
+        $userNotification->user_id = $user_id;
+        $userNotification->post_id = $post_id;
+        $userNotification->type= 1;
+
+        if($userNotification->save()){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
 
 }
