@@ -26,7 +26,11 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserNotificationEvent' => [
             'App\Listeners\UserNotificationListener'
+        ],
+        'App\Events\StoreNotificationEvent' => [
+            'App\Listeners\StoreNotificationListener'
         ]
+
     ];
     //为订阅者注册监听器
     protected $subscribe = [
