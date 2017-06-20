@@ -23,6 +23,11 @@ Route::post('login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show');
 Route::get('new','PagesController@create');
+Route::post('new','PagesController@newT');
+
 Route::post('sm/upload','PagesController@ajaxImageUpload');//ajax upload img
 Route::post('reply','PagesController@replyOne');
 Route::get('notification','UserNotificationController@index');
+
+Route::get('s/{id}','PagesController@store');
+Route::get('us/{id}','PagesController@unstore');

@@ -281,3 +281,7 @@ a.ex-topic-order:hover{
     bottom: 0px;
     left: 0px;
 }
+.avatar{
+    width: 45px;
+    height: 45px;
+}

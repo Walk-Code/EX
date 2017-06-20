@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Pages extends Model
 {
@@ -17,5 +19,42 @@ class Pages extends Model
     {
         return $this->hasMany('App\Models\Comments','post_id','id');
     }
+
+    public function store()
+    {
+        return $this->hasMany('App\Models\Stroe',"post_id",'id');
+    }
+    
+    
+    
+    public function create(array $data)
+    {
+        $post = Pages::where("title",$data['title'])->first();
+
+        if(!$post){
+            $post = new Pages();
+        }
+
+        $post->title = $data['title'];
+
+        if(isset($data['reply'])){
+            //md
+            $post->content = Markdown::convertToHtml($data['reply']);
+        }else{
+            $post->content = $data['content'];
+        }
+
+        $post->uuid = Auth::user()->uuid;
+
+        if($post->save()){
+            return $post;
+        }else{
+            return 0;
+        }
+
+    }
+
+
+
 
 }

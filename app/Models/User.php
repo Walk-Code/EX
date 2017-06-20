@@ -43,4 +43,20 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserNotification','user_id','id');
     }
 
+    public function store()
+    {
+        return $this->hasMany('App\Models\Stroe',"user_id","id")->where("type",0);
+    }
+
+    public function isStore($user_id,$post_id)
+    {
+        $store = Stroe::where("user_id",$user_id)->where("post_id",$post_id)->first();
+
+        if($store){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
 }
