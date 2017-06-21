@@ -73,7 +73,7 @@
                             <a class="ex-topic-order" href="#">test tags</a>
                         </div>
                         <span style="font-size: 13px">
-                            {{$comments[count($comments) - 1]->user->name}}回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;{{date("Y-m-d H:i P",strtotime($comments[count($comments) - 1]->created_at))}}
+                            {{$comments[count($comments) - 1]->user->name}}回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;{{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
                         </span>
                     </div>
                     <!-- comments layout-->

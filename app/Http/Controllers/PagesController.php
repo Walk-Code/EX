@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserNotificationEvent;
 use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\Stroe;
 use App\Models\User;
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class PagesController extends BaseController
 {
@@ -57,7 +54,6 @@ class PagesController extends BaseController
     public function newT(Request $request)
     {
         $post = new Pages();
-
         if($post->create($request->all())){
             return redirect()->to("/")->with("success","创建成功");
         }else{
