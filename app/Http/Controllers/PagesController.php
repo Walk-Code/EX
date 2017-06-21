@@ -2,22 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\UserNotificationEvent;
 use App\Models\Comments;
 use App\Models\Pages;
+use App\Models\Stroe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class PagesController extends BaseController
 {
 
     public function index()
     {
-
         $pages = Pages::orderBy('updated_at','desc')->paginate(15);
-        
         foreach($pages as $k=>$page){
             $pages[$k]['author'] = $page->user->name;
             $pages[$k]['image'] = $page->user->head_img;
@@ -32,12 +29,6 @@ class PagesController extends BaseController
     public function show(Request $request,$id)
     {
         $comments = Pages::find($id)->comments;
-
-        foreach($comments as $comment){
-            $comment->name = $comment->user->name;
-            unset($comment->user);
-        }
-
         return view('page',['page' => Pages::find($id),'comments'=>$comments,'path'=>$request->getPathInfo()]);
     }
 
@@ -57,6 +48,24 @@ class PagesController extends BaseController
         return view('topic');
     }
 
+    /**创建话题
+     * @param Request $request
+     */
+    public function newT(Request $request)
+    {
+        $post = new Pages();
+        if($post->create($request->all())){
+            return redirect()->to("/")->with("success","创建成功");
+        }else{
+            return redirect()->to("/")->with("success","创建失败");
+        }
+
+    }
+    
+    /**回复某人
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function replyOne(Request $request)
     {
         //dd($request);
@@ -91,5 +100,39 @@ class PagesController extends BaseController
         }
     }
 
+    /**收藏话题
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store($id, Request $request)
+    {
+        $stroe = new Stroe();
+        $data = array("user_id"=>Auth::user()->id,"post_id"=>$id,"ip_address"=>$request->getClientIp());
 
+        if($stroe->store($data)){
+            return redirect()->back()->with("success","收藏成功");
+        }else{
+            return redirect()->back()->with("fail","操作失败");
+        }
+    }
+
+    /**取消收藏
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function unstore($id, Request $request)
+    {
+        $stroe = new Stroe();
+        $data = array("user_id"=>Auth::user()->id,"post_id"=>$id,"id_address"=>$request->getClientIp());
+
+        if($stroe->unstore($data)){
+            return redirect()->back()->with("success","取消收藏成功");
+        }else{
+            return redirect()->back()->with("success","操作失败");
+        }
+        
+    }
+    
 }

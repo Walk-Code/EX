@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <link type="text/css" href="{{asset('EX/iconfont/iconfont.css')}}" rel="stylesheet"/>
+
     <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/reply/iconfont.css')}}" rel="stylesheet"/>
@@ -15,14 +15,14 @@
                     <div class="header">
                         <div class="img-position">
                             <a href="#">
-                                <img src="http://lorempixel.com/72/72/?99772" class="avatar" border="0" align="default">
+                                <img src="{{$page->user->head_img}}" class="avatar" border="0" align="default">
                             </a>
                         </div>
                         <a href="#">EX</a>
                         <span>&nbsp;>&nbsp;</span>
                         <a href="#">test</a>
                         <div class="sep10"></div>
-                        <h1>测试条目</h1>
+                        <h1>{{$page->title}}</h1>
                         <!-- 顶过或降 -->
                         <div>
                             <a href="javascript:" onclick="upVoteTopic();">
@@ -43,18 +43,24 @@
                     <div class="cell">
                         <div class="topic_content">
                             <div class="mark_body">
-                                testtesttesttest
+                                {!! $page->content !!}}
                             </div>
                         </div>
                     </div>
                     <!-- order-->
+                    @if(Auth::user())
                     <div class="box-footer">
-                        <span>X人收藏</span>&nbsp;&nbsp;
-                        <a class="ex-topic-order">加入收藏</a>&nbsp;
+                        <span>{{count($page->store)}}人收藏</span>&nbsp;&nbsp;
+                        @if(Auth::user()->isStore(Auth::user()->id,$page->id))
+                        <a class="ex-topic-order" href="{{url('us')."/".$page->id}}">取消收藏</a>&nbsp;
+                        @else
+                        <a class="ex-topic-order" href="{{url('s')."/".$page->id}}">加入收藏</a>&nbsp;
+                        @endif
                         <a class="ex-topic-order">Weibo</a>&nbsp;
                         <a class="ex-topic-order">忽略主题</a>&nbsp;
                         <a class="ex-topic-order">感谢</a>
                     </div>
+                    @endif
                 </div>
                 <div class="sep20"></div>
 
@@ -67,7 +73,7 @@
                             <a class="ex-topic-order" href="#">test tags</a>
                         </div>
                         <span style="font-size: 13px">
-                            XX回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;2017-05-20 10:02:25 +08:00
+                            {{$comments[count($comments) - 1]->user->name}}回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;{{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
                         </span>
                     </div>
                     <!-- comments layout-->
@@ -88,7 +94,7 @@
                                                 <a href="">隐藏</a>&nbsp;&nbsp;
                                                 <a href="">感谢回复</a>
                                             </div>&nbsp;&nbsp;
-                                            <a href="#comment" onclick="replyOne(this,'{{$comment->name}}');">
+                                            <a href="#comment" onclick="replyOne(this,'{{$comment->user->name}}');">
                                                 {{--<img src="{{asset('EX\images\reply.png')}}">--}}
                                                 <i class="iconfont icon-reply"></i>
                                             </a>&nbsp;&nbsp;
@@ -96,7 +102,7 @@
                                         </div>
                                         <div class="sep3"></div>
                                         <strong>
-                                           <a href="#">{{$comment->name}}</a>
+                                           <a href="#">{{$comment->user->name}}</a>
                                         </strong>
                                         &nbsp;&nbsp;
                                         <span>刚刚</span>
@@ -128,7 +134,9 @@
                                 回到顶部
                             </a>
                         </div>
-                        添加一条新回复
+                        @if(!Auth::user())
+                            <a href="{{url("login")}}">添加一条新回复</a>
+                        @endif
                     </div>
                     @if(!Auth::check())
                         <div class="no-login-model">
@@ -145,7 +153,7 @@
                             <form action="{{url("reply")}}" id="reply_form" method="post" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div id="editor">
-                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">功能尚未完善</textarea>
+                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%"></textarea>
                                 </div>
                                 <input name="post_id" type="hidden" value="{{$page->id}}">
                                 <input name="editor_type" type="hidden" id="editor_type" value="1">
@@ -241,7 +249,7 @@
                 summernote.summernote("destroy");
                 $("#editor").empty();
                 $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">'+
-                        '功能尚未完善</textarea>');
+                        '</textarea>');
                 id.attr("data-id","md");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
                 $("#editor_type").val(1);

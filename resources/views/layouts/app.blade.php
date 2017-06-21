@@ -98,7 +98,7 @@
 
     <script src="{{asset('/EX/plugins/pjax/jquery.pjax.js')}}"></script>
     <script>
-        $("#menu").on("click",function () {
+        /*$("#menu").on("click",function () {
             $(this).parent().addClass("open");
             $(this).prop("aria-expanded",true);
         });
@@ -115,7 +115,7 @@
                 //self.siteBootUp(); TODO BUG
             });
 
-        });
+        });*/
     </script>
     @extends('layouts.footer')
 </body>

@@ -180,6 +180,8 @@ return [
         //Turbo\Provider\Laravel\TurboServiceProvider::class,
         //Jenssegers
         Jenssegers\Agent\AgentServiceProvider::class,//获取用户的os
+        //Markdown
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class
 
     ],
 
@@ -231,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Ip'  => 'Zhuzhichao\IpLocationZh\Ip',//根据IP adress 查找location
+        'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown'
 
     ],
 

@@ -46,16 +46,20 @@
                                             <strong>
                                                 <a href="#">{{$page->author}}</a>
                                             </strong>
+                                            @if(!empty($page->comments->last()))
                                             &nbsp;·&nbsp;刚刚&nbsp;·&nbsp;最后回复来之
                                             <strong>
-                                                <a href="#">{{$page->author}}</a>
+                                                <a href="#">{{$page->comments->last()->user->name}}</a>
                                             </strong>
+                                            @endif
                                         </span>
                                     </td>
                                     <td width="120"></td>
+                                    @if(count($page->comments))
                                     <td width="auto" align="right" valign="middle">
-                                        <a href="#" class="count_ex" style="text-decoration: none;">63</a>
+                                        <a href="#" class="count_ex" style="text-decoration: none;">{{count($page->comments)}}</a>
                                     </td>
+                                    @endif
                                 </tr>
                             </tbody>
                         </table>

@@ -1,4 +1,4 @@
-<link type="text/css" href="{{asset("EX/font/star/iconfont.css")}}" rel="stylesheet"/>
+
 <div class="col-xs-6 col-sm-3 sidebar-offcanvas no_padding" id="sidebar">
     <div class="box">
         @if(Auth::user())

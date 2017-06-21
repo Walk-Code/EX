@@ -64,7 +64,6 @@ div{
     padding: 0px 10px;
     background-color: #e6e6e6;
     border-radius: 12px;
-    display: flow-root;
 }
 .pagination_{
     margin: 0px;
@@ -280,4 +279,12 @@ a.ex-topic-order:hover{
     right: 0px;
     bottom: 0px;
     left: 0px;
+}
+.avatar{
+    width: 45px;
+    height: 45px;
+}
+.mark_body img{
+    width: 500px;
+    height: auto;
 }

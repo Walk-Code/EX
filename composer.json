@@ -11,7 +11,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "spatie/laravel-pjax": "^1.3",
-        "zhuzhichao/ip-location-zh": "^2.2"
+        "zhuzhichao/ip-location-zh": "^2.2",
+        "graham-campbell/markdown": "^7.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
