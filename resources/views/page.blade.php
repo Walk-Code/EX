@@ -34,7 +34,22 @@
                             </a>
                             <div class="small-message">
                                 <a href="#">author</a>
-                                <span>&nbsp;·&nbsp;刚刚&nbsp;&nbsp;·XXX次点击</span>
+                                <span>&nbsp;·&nbsp;
+                                    @if(isset($comments[0]))
+                                        @if(time() == strtotime($comments[count($comments) - 1]->created_at))
+                                            刚刚
+                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/1000 < 60 )
+                                            {{strtotime($comments[count($comments) - 1]->created_at)/1000}}&nbsp;秒前
+                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/60000 <= 60)
+                                            {{strtotime($comments[count($comments) - 1]->created_at)/60000}}&nbsp;分钟前
+                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/3600000 <= 60)
+                                            {{strtotime($comments[count($comments) - 1]->created_at)/3600000}}&nbsp;小时前
+                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/86400000 <= 24)
+                                            {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;小时前
+                                        @endif
+                                        {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
+                                    @endif
+                                    &nbsp;&nbsp;·XXX次点击</span>
                             </div>
                         </div>
 
@@ -149,21 +164,22 @@
                             </form>
                         </div>
                     @else
-                        <div id="comment" class="cell" data-id="md">
+                        <div id="comment" class="cell" data-id="rich">
                             <form action="{{url("reply")}}" id="reply_form" method="post" enctype="multipart/form-data">
                                 {{csrf_field()}}
                                 <div id="editor">
-                                    <textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%"></textarea>
+                                    {{--<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%"></textarea>--}}
                                 </div>
                                 <input name="post_id" type="hidden" value="{{$page->id}}">
                                 <input name="editor_type" type="hidden" id="editor_type" value="1">
                                 <input name="location" type="hidden" id="location">
+                                <input name="reply" type="hidden" id="reply">
                             </form>
                                 <button class="reply-button" onclick="submit();">回复</button>
-                                <button id="btn-mess" class="reply-button" style="float: right;" onclick="change(this);">
+                                {{--<button id="btn-mess" class="reply-button" style="float: right;" onclick="change(this);">
                                     <i class="iconfont icon-qiehuan"></i>
                                     富文本编辑
-                                </button>
+                                </button>--}}
                         </div>
 
                         <div id="comment" style="display: none" data-id="rich">
@@ -191,11 +207,12 @@
 
         var summernote;
 
+
         function replyOne(obj,name) {
             $comment_id = $("#comment");
             var replyContent = $comment_id.attr("data-id") == "md" ? $("#reply") : summernote;
             var oldContent = $comment_id.attr("data-id") == "md" ? replyContent.val() : summernote.summernote("code").replace(/<\/?[^>]+(>|$)/g, "");
-            var prefix = $comment_id.attr("data-id") == "md" ? "@"+name+" " : '<a herf="{{url("")}}">'+"@"+name+'</a>'+" ";
+            var prefix = $comment_id.attr("data-id") == "md" ? "@"+name+" " : '<a href={{url("profile")}}/'+name+'>'+"@"+name+" "+'</a>';
             var newContent = "";
 
             if(oldContent.length > 0){
@@ -229,7 +246,10 @@
 
 
         }
-        
+
+        initSummernote();
+        $('.dropdown-toggle').dropdown();
+
         //切换回复框格式
         function change(obj) {
             //console.log($(obj).parent().attr("data-id"));
@@ -242,8 +262,6 @@
                 id.attr("data-id","rich");
                 $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
                 $("#editor_type").val(2);
-                $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%;display: none">'+
-                        '</textarea>');
 
             }else if(id.attr("data-id") == "rich"){
                 summernote.summernote("destroy");

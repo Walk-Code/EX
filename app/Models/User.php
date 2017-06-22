@@ -58,5 +58,12 @@ class User extends Authenticatable
             return 0;
         }
     }
+
+    public function pages()
+    {
+        return $this->hasMany('App\Models\Pages',"uuid","uuid");
+    }
+    
+    
     
 }

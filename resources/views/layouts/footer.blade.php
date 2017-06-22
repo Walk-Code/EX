@@ -1,15 +1,20 @@
 {{--<script src="{{ asset('/js/app.js') }}"></script>--}}
 <script src="{{ asset('/EX/bootstrap/js/bootstrap.min.js') }}"></script>
-<div class="ex-footer">
-    <div class="container">
-        <div class="col-sm-5" style="padding: 40px">
-            <a>test</a>
-            其他版块
+<footer>
+    <div id="footer" class="ex-footer footer">
+        <div class="ex-footer-left">
+            <div>
+                测试一大段文字测试一大段文字测试一大段文字测试一大段文字测试一大段文字
+            </div>
+            <div>
+                这是一个很长篇的说明这是一个很长篇的说明这是一个很长篇的说明这是一个很长篇的说明
+            </div>
         </div>
-        <div class="col-sm-6">
-            其他版块
+        <div class="ex-footer-right">
+            <div>
+                Logo
+                <img src="https://ooo.0o0.ooo/2017/06/20/59490cfd68693.jpg" width="80px" style="border-radius: 80px"/>
+            </div>
         </div>
     </div>
-
-
-</div>
+</footer>

@@ -19,6 +19,12 @@ class Comments extends Model
         return $this->belongsTo('App\Models\User','uuid','uuid');
     }
 
+    public function page()
+    {
+        return $this->belongsTo('App\Models\Pages',"post_id",'id');
+    }
+    
+
     public function addComment($comments,$post_id,$uuid,$location=0,User $user)
     {
         preg_match_all('/@\S*/',$comments,$usernameArr);

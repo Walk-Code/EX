@@ -44,7 +44,7 @@
                                             <a class="node" href="#">android</a>
                                             &nbsp;·&nbsp;
                                             <strong>
-                                                <a href="#">{{$page->author}}</a>
+                                                <a href="{{url('profile/'.$page->author)}}">{{$page->author}}</a>
                                             </strong>
                                             @if(!empty($page->comments->last()))
                                             &nbsp;·&nbsp;刚刚&nbsp;·&nbsp;最后回复来之
