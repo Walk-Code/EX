@@ -1,0 +1,55 @@
+<div class="main-sidebar">
+    <!-- Inner sidebar -->
+    <div class="sidebar">
+        <!-- user panel (Optional) -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="{{asset('/AdminLTE-2.3.11/dist/img/avatar04.png')}}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>User Name</p>
+
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div><!-- /.user-panel -->
+
+        <!-- Search Form (Optional) -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+        </form><!-- /.sidebar-form -->
+
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <!-- Optionally, you can add icons to the links -->
+            <li class="treeview @if(in_array("business",explode("/",session("left-bar")))) active @endif" >
+                <a href="{{url('/admin/business')}}"><span>机构</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li>
+                        <a href="{{url('/admin/business')}}">机构</a>
+                        <a href="{{url('/admin/card')}}">创建卡类型</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview @if(in_array("activity",explode("/",session("left-bar")))) active @endif">
+                <a href="#"><span>活动</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/admin/activity')}}">活动列表</a></li>
+                    <li><a href="{{url('/admin/activity/order')}}">订单列表</a></li>
+                </ul>
+            </li>
+            {{--<li class="treeview @if(in_array("bargain",explode("/",session("left-bar")))) active @endif">
+                <a href="#"><span>砍价活动</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/admin/bargain')}}">砍价列表</a></li>
+                    --}}{{--<li><a href="{{url('/admin/activity/order')}}">订单列表</a></li>--}}{{--
+                </ul>
+            </li>--}}
+        </ul><!-- /.sidebar-menu -->
+
+    </div><!-- /.sidebar -->
+</div><!-- /.main-sidebar -->

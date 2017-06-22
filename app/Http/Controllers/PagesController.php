@@ -68,7 +68,6 @@ class PagesController extends BaseController
      */
     public function replyOne(Request $request)
     {
-        //dd($request);
         $post_id = $request->post_id;
         $editor_type = $request->editor_type;
         $replyContent = $request->reply;
@@ -82,7 +81,6 @@ class PagesController extends BaseController
         }else{
             return redirect("/t/".$post_id)->withErrors("评论失败");
         }
-
 
     }
 

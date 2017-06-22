@@ -6,7 +6,7 @@
 
 <div class="main">
     <!-- left-bar-->
-    <div class="left-bar">
+    <div class="left-bar" style="background-color: #fff">
         <div class="cell" style="height: 33px;font-size: 13px">
             <span class="fb"><a href="/">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;创建新话题</span>
         </div>
@@ -18,22 +18,22 @@
         <form action="{{url('new')}}" method="post" id="new">
             {{csrf_field()}}
             <div class="cell">
-                <textarea class="title-textarea no_padding" rows="1" maxlength="120" name="title" placeholder="请输入标题"></textarea>
+                <textarea class="title-textarea no_padding" rows="1" maxlength="120" id="title" name="title" placeholder="请输入标题"></textarea>
             </div>
 
             <div class="cell">
                 <div class="float-right">20000</div>
                 <span style="display: flex">正文</span>
             </div>
-            <div class="cell" style="text-align: left" id="topicContent">
+            <div class="cell" style="text-align: left;;line-height: 175%" id="topicContent">
                 <div id="editor">
                 </div>
             </div>
             <div class="cell" style="text-align: right" data-id="rich">
-                <button type="button" id="btn-mess" class="reply-button" style="float: left" onclick="change(this);">
+               {{-- <button type="button" id="btn-mess" class="reply-button" style="float: left" onclick="change(this);">
                     <i class="iconfont icon-qiehuan"></i>
                     富文本编辑
-                </button>
+                </button>--}}
                 <button type="button" class="reply-button" onclick="send();">
                     <i class="iconfont icon-fasong"></i>
                     &nbsp;&nbsp;
@@ -46,7 +46,7 @@
     </div>
     <div class="sep20-flex-width"></div>
     <!-- right-bar-->
-    <div class="right-bar">
+    <div class="right-bar" style="background-color: #fff">
         注意事项版块
     </div>
     <input id="token" type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -55,33 +55,37 @@
 
 <script type="text/javascript" src="{{ asset('/EX/plugins/summernote/summernote.min.js') }}"></script>
 
-
 <script type="text/javascript">
 
     initSummernote();
     $('.dropdown-toggle').dropdown();
 
     function send() {
+         if($("#title").val() == ''){
+             alert("标题必须填写");
+             return;
+         }
+
          $("#content").val( summernote.summernote("code"));
          $("#new").submit();
      }
 
-    //切换回复框格式
+   /* //切换回复框格式
     function change(obj) {
         console.log($(obj).parent().attr("data-id"));
         $id = $(obj).parent();
 
         if($id.attr("data-id") == "md"){
             $("#editor").empty();
-            initSummernote(0);
+            initSummernote();
             $id.attr("data-id","rich");
-            summernote.summernote("destory");
             $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>markdown');
             $("#editor_type").val(2);
 
         }else if($id.attr("data-id") == "rich"){
             summernote.summernote("destroy");
-            $("#topicContent").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 110px;width: 100%">'+
+            $("#editor").empty();
+            $("#editor").append('<textarea name="reply" class="reply-comment" id="reply" style="height: 500px;width: 100%">'+
                     '</textarea>');
             $id.attr("data-id","md");
             $("#btn-mess").html('<i class="iconfont icon-qiehuan"></i>富文本编辑');
@@ -89,14 +93,19 @@
 
         }
 
-
-    }
+    }*/
 
     function initSummernote(type) {
         summernote = $('#editor').summernote({
-            height: 500,                 // set editor height
-            width: "100%",                 // set editor height
-            minHeight: null,             // set minimum height of editor
+            height: 500,
+            codemirror: {
+                mode: 'text/html',
+                htmlMode: true,
+                lineNumbers: true,
+                theme: 'monokai'
+            },
+            width: "100%",
+            minHeight: null,
             maxHeight: null,
             focus: true,
             lang:'zh-CN',

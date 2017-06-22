@@ -16,7 +16,7 @@
                 <div class="cell-itme">
                     <div style="width: 32px;text-align: left">
                         <a href="#">
-                            <img src="//v2ex.assets.uxengine.net/avatar/d3a1/ff18/92937_mini.png?m=1422369016" class="avatar" border="0" align="default">
+                            <img src="//v2ex.assets.uxengine.net/avatar/d3a1/ff18/92937_mini.png?m=1422369016" border="0" align="default">
                         </a>
                     </div>
                     <div style="width: auto;text-align: center">
@@ -39,7 +39,7 @@
                         </a>
                         <div class="sep5"></div>
                         <!--content -->
-                        <div class="notification-payload">{!! $notification->comment->comment !!}</div>
+                        <div class="notification-payload">{!! empty($notification->comment) ? "无" : $notification->comment->comment !!}</div>
                     </div>
                 </div>
         </div>
@@ -56,5 +56,4 @@
         注意事项版块
     </div>
 </div>
-
 @endsection
