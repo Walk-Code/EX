@@ -78,7 +78,7 @@
                 @endif
                 {{count(Auth::user()->hasManyNotification)}}&nbsp;条未读消息
             </a>
-            <div style="float: right">
+            <div style="float: right;display: flex;">
                 <a href="#" class="assets">
                     2&nbsp;<img src="https://ooo.0o0.ooo/2017/05/17/591bfa8220346.png" alt="G" align="absmiddle" border="0" style="padding-bottom: 2px;">
                     2&nbsp;<img src="https://ooo.0o0.ooo/2017/05/17/591bfa821e8fd.png" alt="S" align="absmiddle" border="0" style="padding-bottom: 2px;">

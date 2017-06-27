@@ -23,7 +23,6 @@
                                 @endif
                             </div>
                         </div>
-                        <input type="hidden" value="{{$path}}" name="path">
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -65,4 +64,5 @@
         </div>
     </div>
 </div>
+<div style="height: 100px"></div>
 @endsection
