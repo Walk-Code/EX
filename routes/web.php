@@ -18,7 +18,8 @@ Route::get('home', function () {
 
 Auth::routes();
 
-//Route::get('/', 'HomeController@index');
+//Route::get('/', 'HomeController@index');middleware('web')
+
 Route::post('/login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show');
@@ -46,7 +47,7 @@ Route::post('/admin/register', 'AdminAuth\RegisterController@register');
 
 # --------------- admin ----------------
 
-Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
+Route::group(['prefix'=>'admin','middlewareGroups'=>['web','admin']],function (){
 
     Route::get('/', function () {
         return Auth::guard("admin")->user();
