@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\AdminAuth;
 
 use App\Events\LoginEvent;
 use App\Http\Controllers\Controller;
@@ -31,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = "/";
+    protected $redirectTo = "/admin";
 
     /**
      * Create a new controller instance.
@@ -40,13 +40,25 @@ class LoginController extends Controller
      */
     public function __construct(Request $request)
     {
-        $this->middleware("guest")->except("logout");
+        $this->middleware("guest")->except("/admin/logout");
+    }
+    
+    protected function guard(){
+        return Auth::guard("admin");
+    }
+    
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect('/admin');
     }
 
     public function showLoginForm(Request $request)
     {
-        $request->session()->flash("url.intended",url()->previous());
-        return view('auth.login');
+        $request->session()->flash("url.admin.intended",url()->previous());
+        return view('admin.auth.login');
     }
 
     public function postLogin(Request $request)
@@ -62,9 +74,10 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             //login success
-            event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
-
+            //event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
             return $this->sendLoginResponse($request);
+        }else{
+            Log::info("登录失败");
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -72,8 +85,8 @@ class LoginController extends Controller
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
         
-        return redirect("login")->withInput($request->only("name", "remember"))->withErrors([
-            "failed" => "用户名或密码不正确",
+        return redirect("/admin/login")->withInput($request->only("username", "remember"))->withErrors([
+            'email' => '无效的用户名或密码'
         ]);
 
 
@@ -91,7 +104,7 @@ class LoginController extends Controller
 
     public function username()
     {
-        return 'name';
+        return 'username';
     }
 
     protected function sendLoginResponse(Request $request){
@@ -99,7 +112,7 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
         return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended(empty($request->session()->get("url.intended")) ? $this->redirectTo : $request->session()->get("url.intended"));
+            ?: redirect()->intended(empty($request->session()->get("url.admin.intended")) ? $this->redirectTo : $request->session()->get("url.admin.intended"));
     }
 
 

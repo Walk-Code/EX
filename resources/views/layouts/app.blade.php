@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ config('app.locale') }}">
-<head>
+<head style="">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,9 +43,9 @@
 <body>
     <div id="app">
         @include('layouts.header')
-        <div class="wrapper">
+        <div class="wrapper" style="min-height: calc(100vh - 70px)">
         @yield('content')
-        <div style="height: 50px"></div>
+       {{-- <div style="height: 50px"></div>--}}
         </div>
         @include('layouts.footer')
     </div>

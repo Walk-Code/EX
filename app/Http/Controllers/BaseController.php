@@ -10,12 +10,18 @@ namespace App\Http\Controllers;
 
 
 use GuzzleHttp\Client;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class BaseController extends Controller
 {
+
+    protected function formatValidationErrors(Validator $validator)
+    {
+
+    }
 
     /**
      * @param $url
