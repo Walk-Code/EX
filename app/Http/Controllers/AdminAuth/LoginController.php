@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\AdminAuth;
 
-use App\Events\LoginEvent;
+use App\Exceptions\AuthenticatesLogout;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
-use Jenssegers\Agent\Agent;
 
 class LoginController extends Controller
 {
@@ -24,7 +22,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers,AuthenticatesLogout{
+        AuthenticatesLogout::logout insteadof AuthenticatesUsers;
+    }
 
     /**
      * Where to redirect users after login.
@@ -40,11 +40,12 @@ class LoginController extends Controller
      */
     public function __construct(Request $request)
     {
-        $this->middleware("admin")->except("/admin/logout");
+        $this->middleware("guest.admin")->except("/admin/logout");
     }
-    
-    protected function guard(){
-        return Auth::guard("admin");
+
+    protected function guard()
+    {
+        return Auth::guard('admin');
     }
     
     public function logout(Request $request)
