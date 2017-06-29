@@ -12,7 +12,7 @@
 */
 
 Route::get('home', function () {
-    return view('welcome');
+    return view('hello');
 });
 
 Auth::routes();
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth'],function (){
 });
 
 
-Route::post('/admin/login','AdminAuth\LoginController@postLogin')->name("postLogin");
+Route::post('/admin/login','AdminAuth\LoginController@postLogin');
 Route::get('/admin/login','AdminAuth\LoginController@showLoginForm');
 Route::get('/admin/register', 'AdminAuth\RegisterController@showRegistrationForm');
 Route::post('/admin/register', 'AdminAuth\RegisterController@register');
@@ -55,4 +55,5 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
     Route::get('/session',function(){
         return session()->flush();
     });
+
 });

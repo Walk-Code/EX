@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Events\LoginEvent;
+use App\Exceptions\AuthenticatesLogout;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers,AuthenticatesLogout{
+        AuthenticatesLogout::logout insteadof AuthenticatesUsers;
+    }
 
     /**
      * Where to redirect users after login.
