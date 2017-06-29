@@ -17,12 +17,12 @@ class RedirectIfAdminAuthenticated
      */
     public function handle($request, Closure $next,$guard = 'admin')
     {
-        Log::info("admin");
+        Log::info("admin   ".Auth::guard($guard)->check());
         $request->session()->forget("left-bar");
-
-        if (!Auth::guard($guard)->user()) {
-            return redirect('/admin/login');
-        }
+        ## 死循环重定向
+      /*  if (!Auth::guard('admin')->check()) {
+            return redirect('/admin');
+        }*/
 
         $request->session()->flash("left-bar",$request->getRequestUri());
 

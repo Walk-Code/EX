@@ -40,7 +40,7 @@ class LoginController extends Controller
      */
     public function __construct(Request $request)
     {
-        $this->middleware("guest")->except("/admin/logout");
+        $this->middleware("admin")->except("/admin/logout");
     }
     
     protected function guard(){
