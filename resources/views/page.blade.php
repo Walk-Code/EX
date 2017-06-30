@@ -156,7 +156,6 @@
                     @if(!Auth::check())
                         <div class="no-login-model">
                             <form action="{{url('login')}}" method="get">
-                                <input type="hidden" name="path" value="{{rawurlencode($path)}}"/>
                                 <button>
                                     <i class="iconfont icon-suotou"></i>
                                     登录

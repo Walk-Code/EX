@@ -17,9 +17,9 @@ class RedirectIfNotAdminAuthenticated
      */
     public function handle($request, Closure $next,$guard = 'admin')
     {
-        Log::info("admin   ".Auth::guard($guard)->check() == true);
+        //Log::info("admin   ".Auth::guard($guard)->check() == true);
         $request->session()->forget("left-bar");
-        ## 死循环重定向
+
         if (\auth()->guard($guard)->guest()) {
             if($request->ajax() || $request->wantsJson()){
                 return response('Unauthorized',401);

@@ -29,7 +29,7 @@ class PagesController extends BaseController
     public function show(Request $request,$id)
     {
         $comments = Pages::find($id)->comments;
-        return view('page',['page' => Pages::find($id),'comments'=>$comments,'path'=>$request->getPathInfo()]);
+        return view('page',['page' => Pages::find($id),'comments'=>$comments]);
     }
 
     public function edit(Pages $pages)
