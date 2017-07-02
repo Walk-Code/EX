@@ -23,9 +23,9 @@ Route::post('/login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show');
 //Verify the mailbox
-
-Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
-Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
+Route::get('/verify/email',function (){
+    return view('auth.verifyEmail');
+});
 
 # --------------- user ----------------
 Route::group(['middleware' => 'auth'],function (){
