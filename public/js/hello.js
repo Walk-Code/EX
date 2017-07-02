@@ -63,15 +63,15 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackMissingModule() { throw new Error("Cannot find module \"D:\\Demo\\Protect\\test\\EX\\resources\\assets\\js\\app.js\""); }());
-(function webpackMissingModule() { throw new Error("Cannot find module \"D:\\Demo\\Protect\\test\\EX\\resources\\assets\\sass\\app.scss\""); }());
+(function webpackMissingModule() { throw new Error("Cannot find module \"D:\\Demo\\Protect\\test\\EX\\resources\\assets\\js\\hello.js\""); }());
 
 
 /***/ })

@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('uuid');
             $table->string('status');
+            $table->integer("verified");
+            $table->string("verification_token");
             $table->rememberToken();
             $table->timestamps();
         });

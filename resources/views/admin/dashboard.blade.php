@@ -16,18 +16,19 @@
 <!-- Theme style -->
 <link href="{{ asset("/AdminLTE-2.3.11/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
 <!-- animate.css-->
-<link href="{{ asset("/ContactPlanet/css/animate/animate.css")}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("/EX/plugins/animate/animate.css") }}" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="{{asset('/AdminLTE-2.3.11/plugins/nprogress/nprogress.css')}}"/>
-    <script src="{{ asset('/AdminLTE-2.3.11/plugins/nprogress/nprogress.js') }}"></script>
-<script src="{{asset('/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<link rel="stylesheet" href="{{ asset('/AdminLTE-2.3.11/plugins/nprogress/nprogress.css')}}"/>
+<script src="{{ asset('/AdminLTE-2.3.11/plugins/nprogress/nprogress.js') }}"></script>
+<script src="{{ asset('/AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
 
-<script src="{{asset('/AdminLTE-2.3.11/plugins/jQueryUI/jquery-ui.min.js')}}"></script>
-<script src="{{asset('/AdminLTE-2.3.11/plugins/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+<link href="{{asset('/AdminLTE-2.3.11/plugins/daterangepicker/daterangepicker.css')}}" rel="stylesheet" type="text/css" />
 
-<link href="{{ asset("/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css")}}" rel="stylesheet" type="text/css" />
-<link href="{{ asset("/ContactPlanet/css/css.css")}}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('/AdminLTE-2.3.11/plugins/jQueryUI/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('/AdminLTE-2.3.11/plugins/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
+<link href="{{ asset("/AdminLTE-2.3.11/dist/css/skins/_all-skins.min.css") }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("/EX/admin.css") }}" rel="stylesheet" type="text/css"/>
 <!-- [endif]-->
 </head>
 <body class="hold-transition skin-yellow">
@@ -58,6 +59,13 @@
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
+        <div style="padding: 20px 30px; background-color: cornflowerblue; z-index: 999999; font-size: 16px; font-weight: 600;">
+            <a class="pull-right" href="#" data-toggle="tooltip" data-placement="left" title="" style="color: rgb(255, 255, 255); font-size: 20px;" data-original-title="Never show me this again!">×</a>
+            <a href="https://themequarry.com" style="color: rgba(255, 255, 255, 0.9); display: inline-block; margin-right: 10px; text-decoration: none;">
+                测试
+            </a>
+            <a class="btn btn-default btn-sm" href="https://themequarry.com" style="margin-top: -5px; border: 0px; box-shadow: none; color: rgb(243, 156, 18); font-weight: 600; background: rgb(255, 255, 255);">Let's Do It!</a></div>
+
         @if(session('success'))
             <script>
                 var notify = $.notify('{{session('success')}}',
@@ -84,6 +92,22 @@
             </script>
         @endif
 
+        @if(!empty($key) || !empty($timer))
+            @if(isset($count))
+                <script>
+                    var notify = $.notify('{{$count}}',
+                        //options
+                        {
+                            allow_dismiss: false,
+                            type: 'info',
+                            delay: 1000,
+                            timer:1000
+                        }
+                    );
+                </script>
+            @endif
+        @endif
+
         <!-- Main content -->
         @if(isset($header))
         <div class="content-header">
@@ -104,7 +128,7 @@
     </div><!-- /.content-wrapper -->
 
     <!-- Footer -->
-    @include('layouts.footer')
+    @include('layouts.admin.footer')
     @yield('jscontent')
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->

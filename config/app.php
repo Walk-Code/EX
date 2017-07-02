@@ -181,7 +181,9 @@ return [
         //Jenssegers
         Jenssegers\Agent\AgentServiceProvider::class,//获取用户的os
         //Markdown
-        GrahamCampbell\Markdown\MarkdownServiceProvider::class
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        //registered validator
+        Jrean\UserVerification\UserVerificationServiceProvider::class,
 
     ],
 
@@ -233,7 +235,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Ip'  => 'Zhuzhichao\IpLocationZh\Ip',//根据IP adress 查找location
-        'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown'
+        'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown',
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
 
     ],
 

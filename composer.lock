@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f7102c54f4694cd26478eb662ee5073",
-    "content-hash": "cdae6feec2c6112a24481f95a55e35f0",
+    "hash": "a4edbf69a0b4953cc8e6127e0831c601",
+    "content-hash": "38d6f12546ad165a45c06e40b8f29373",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -582,6 +582,59 @@
                 "useragent"
             ],
             "time": "2017-03-12 09:58:22"
+        },
+        {
+            "name": "jrean/laravel-user-verification",
+            "version": "v4.1.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jrean/laravel-user-verification.git",
+                "reference": "1f2715fe3fba13811c89a7353b50175f33709008"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/jrean/laravel-user-verification/1f2715fe3fba13811c89a7353b50175f33709008.zip",
+                "reference": "1f2715fe3fba13811c89a7353b50175f33709008",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.4.*",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.12",
+                "fzaninotto/faker": "^1.6",
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.5",
+                "satooshi/php-coveralls": "^1.0",
+                "sllh/php-cs-fixer-styleci-bridge": "^2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jrean\\UserVerification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jean Ragouin",
+                    "email": "go@askjong.com"
+                }
+            ],
+            "description": "User Email Verification For Laravel 5.*",
+            "keywords": [
+                "email activation",
+                "email verification",
+                "framework",
+                "laravel",
+                "user activation",
+                "user verification"
+            ],
+            "time": "2017-06-29 13:07:05"
         },
         {
             "name": "laravel/framework",
