@@ -22,9 +22,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\LoginEvent' => [
             'App\Listeners\LoginListener',
         ],
-        'Jrean\UserVerification\Events\UserVerified' => [
+       /* 'Jrean\UserVerification\Events\UserVerified' => [
             'App\Listeners\UserVerifiedListener'
-        ],
+        ],*/
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\LogSuccessfulLogout',
         ],
