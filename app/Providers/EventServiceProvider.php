@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Listeners\UserVerifiedListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -20,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\LoginEvent' => [
             'App\Listeners\LoginListener',
+        ],
+        'Jrean\UserVerification\Events\UserVerified' => [
+            'App\Listeners\UserVerifiedListener'
         ],
         'Illuminate\Auth\Events\Logout' => [
             'App\Listeners\LogSuccessfulLogout',
@@ -48,4 +52,14 @@ class EventServiceProvider extends ServiceProvider
 
         //
     }
+
+    public function register()
+    {
+        $this->app->bind(UserVerifiedListener::class, function () {
+            return new UserVerifiedListener(
+                $this->app->make('auth')
+            );
+        });
+    }
+    
 }

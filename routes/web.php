@@ -22,6 +22,10 @@ Auth::routes();
 Route::post('/login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show');
+//Verify the mailbox
+
+Route::get('email-verification/error', 'Auth\RegisterController@getVerificationError')->name('email-verification.error');
+Route::get('email-verification/check/{token}', 'Auth\RegisterController@getVerification')->name('email-verification.check');
 
 # --------------- user ----------------
 Route::group(['middleware' => 'auth'],function (){
@@ -48,9 +52,14 @@ Route::post('/admin/register', 'AdminAuth\RegisterController@register');
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
 
-    Route::get('/',function(){
-        return Auth::guard('admin')->user();
-    });
+    Route::get('/','Admin\HomeController@index');
+
+    # 用户
+    Route::post("/user",'Admin\UserController@index');
+    Route::get("/user",'Admin\UserController@index');
+
+    Route::get("/user/w/{name}",'Admin\UserController@watch');
+    Route::post("/user/w/{name}",'Admin\UserController@watch');
 
     Route::get('/session',function(){
         return session()->flush();

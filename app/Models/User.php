@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as AuthUser;
+use Illuminate\Contracts\Auth\Authenticatable;
 
-class User extends Authenticatable
+class User extends AuthUser implements Authenticatable
 {
     use Notifiable;
 
@@ -63,7 +64,5 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Pages',"uuid","uuid");
     }
-    
-    
-    
+
 }
