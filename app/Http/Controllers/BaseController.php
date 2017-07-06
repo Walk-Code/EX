@@ -23,6 +23,11 @@ class BaseController extends Controller
 
     }
 
+    public function __construct()
+    {
+        
+    }
+    
     /**
      * @param $url
      * @param $params

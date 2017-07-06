@@ -5,17 +5,32 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">邮箱验证</div>
-                    <div class="panel-body">
-                        <p>邮件已发送到您的邮箱
-                            <span style="font-size: 1em">
-                            <a href="#" style="color: #00a0e9" class="mail" id="mail">
-                                xx@sina.com
+                    @if(isset($user))
+                        <div class="panel-heading">邮箱验证</div>
+                        <div class="panel-body">
+                            <p>邮件已发送到您的邮箱
+                                <span style="font-size: 1em">
+                                <a href="#" style="color: #00a0e9" class="mail" id="mail">
+                                    {{ $user->email  }}
+                                </a>
+                                </span>
+                            </p>
+                            <p>请点击邮箱中的验证链接完成验证</p>
+                        </div>
+                    @else
+                        <div class="panel-heading">错误信息</div>
+                        <div class="panel-body">
+                            <p>
+                                <span style="font-weight: 400">无访问权限</span>
+                            </p>
+                            <p>请按正确的步骤访问</p>
+                            <a href="{{url('/')}}">
+                                <button type="button" class="btn btn-info">
+                                    返回
+                                </button>
                             </a>
-                            </span>
-                        </p>
-                        <p>请点击邮箱中的验证链接完成验证</p>
-                    </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -52,14 +67,9 @@
             var url = $(this).text().split('@')[1];
             //$(this).prop("href",);
             for (key in hash) {
-               /* if (hash.hasOwnProperty(key)) {
-                    console.log(key + " = " + hash[key]);
-                }*/
-                console.log(key.toString() == url.toString());
-                if(key.toString() == url.toString()){
-                    console.log(hash[key]);
+                if(key.toString() == url.trim()){
+                    $(this).attr("href",hash[key])
                 }
-
             }
 
         });

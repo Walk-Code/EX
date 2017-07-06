@@ -14,7 +14,7 @@
 {{--<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />--}}
 <link href="{{ asset("/AdminLTE-2.3.11/dist/css/ionicons.min.css")}}" type="text/css" />
 <!-- Theme style -->
-<link href="{{ asset("/AdminLTE-2.3.11/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("/AdminLTE-2.3.11/dist/css/AdminLTE.css")}}" rel="stylesheet" type="text/css" />
 <!-- animate.css-->
 <link href="{{ asset("/EX/plugins/animate/animate.css") }}" rel="stylesheet" type="text/css" />
 
