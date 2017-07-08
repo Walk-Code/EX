@@ -6,6 +6,7 @@ use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\Stroe;
 use App\Models\User;
+use App\Models\UserOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +29,24 @@ class PagesController extends BaseController
 
     public function show(Request $request,$id)
     {
+        $openation = new UserOperation();
+        $data = $request->all();
+        $data["position"] = $request->getRequestUri() == "::1" ? "183.31.30.40" : $request->getRequestUri();//兼容本地测试
+        $data["ip_address"] = $request->getClientIp();
+        $data["times"] = time();
+        $data['user_id'] = Auth::guard()->check() ? Auth::user()->id : 0;
+        $openation->addorUpdate($data);
+
         $comments = Pages::find($id)->comments;
-        return view('page',['page' => Pages::find($id),'comments'=>$comments]);
+        $page = Pages::find($id);
+        $page->firendTime = $this->timeElapsedString($page->created_at);
+
+        foreach($comments as $comment){
+            $comment->firendTime = $this->timeElapsedString($comment->created_at);
+        }
+
+        return view('page',['page' => $page,'comments'=>$comments]);
+
     }
 
     public function edit(Pages $pages)

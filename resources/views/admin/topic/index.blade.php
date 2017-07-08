@@ -18,7 +18,7 @@
             <div class="ex-inner">
                 <h3>53<sup style="font-size: 20px"></sup></h3>
 
-                <p>举报话题</p>
+                <p>报告数目</p>
             </div>
             <div class="icon">
                 <i class="ion ion-stats-bars"></i>

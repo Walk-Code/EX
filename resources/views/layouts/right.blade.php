@@ -59,12 +59,12 @@
                 <tr>
                     <td width="32">
                         <a href="#">
-                            <img src="/static/img/flat_compose.png?v=7d21f0767aeba06f1dec21485cf5d2f1" width="32" border="0">
+                            <img src="#" width="32" border="0">
                         </a>
                     </td>
                     <td width="10"></td>
                     <td width="auto" valign="middle" align="left">
-                        <a href="{{url('new')}}">创建新主题</a>
+                        <a href="{{url('new')}}" style="font-weight: 400;">创建新主题</a>
                     </td>
                 </tr>
                 </tbody>
@@ -73,10 +73,10 @@
         <!-- 金币模块 -->
         <div class="inner">
             <a href="{{url('notification')}}" class="message">
-                @if(count(Auth::user()->hasManyNotification) > 0)
-                    <img src="{{asset('EX/images/start.png')}}" class="star">
+                @if(count(Auth::user()->hasManyNotification->where("is_read",0)) > 0)
+                    <img src="{{ asset('EX/images/start.png') }}" class="star">
                 @endif
-                {{count(Auth::user()->hasManyNotification)}}&nbsp;条未读消息
+                {{ count(Auth::user()->hasManyNotification->where("is_read",0)) }}&nbsp;条未读消息
             </a>
             <div style="float: right;display: flex;">
                 <a href="#" class="assets">
@@ -105,7 +105,7 @@
     </div>
     <div class="sep20"></div>
 
-    <div class="box">
+    <div class="box" style="border-radius: 0">
         <div class="cell"></div>
     </div>
 </div>

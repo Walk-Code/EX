@@ -43,12 +43,21 @@
                     </li>
                 </ul>
             </li>
+
             <li class="treeview @if(in_array("activity",explode("/",session("left-bar")))) active @endif">
                 <a href="#"><span>系统管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{url('/admin/activity')}}">Ip列表</a></li>
                 </ul>
             </li>
+
+            <li class="treeview @if(in_array("model",explode("/",session("left-bar")))) active @endif">
+                <a href="#"><span>版块设置</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="#"></a></li>
+                </ul>
+            </li>
+
             {{--<li class="treeview @if(in_array("bargain",explode("/",session("left-bar")))) active @endif">
                 <a href="#"><span>砍价活动</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">

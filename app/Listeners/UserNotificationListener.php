@@ -26,7 +26,7 @@ class UserNotificationListener
      */
     public function handle(UserNotificationEvent $event)
     {
-        Log::info("处理用户提醒事件");
+        //Log::info("处理用户提醒事件");
         $user = $event->getUser();
         $post_id = $event->getPostId();
         $comment = $event->getCommentId();

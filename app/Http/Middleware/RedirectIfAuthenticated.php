@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        Log::info($request->getRequestUri());
+        //Log::info($request->getRequestUri());
         if (Auth::guard($guard)->check()) {
             return redirect('/');
             //return redirect()->b;
