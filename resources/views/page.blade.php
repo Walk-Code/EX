@@ -3,7 +3,7 @@
 
     <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
-    <link type="text/css" href="{{asset('EX/font/reply/iconfont.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{asset('1')}}" rel="stylesheet"/>
     <div class="container">
 
         <!-- main -->
@@ -45,7 +45,7 @@
                                         @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/3600000 <= 60)
                                             {{strtotime($comments[count($comments) - 1]->created_at)/3600000}}&nbsp;小时前
                                         @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/86400000 <= 24)
-                                            {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;小时前
+                                            {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;天前
                                         @endif
                                         {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
                                     @endif
@@ -120,7 +120,22 @@
                                            <a href="#">{{$comment->user->name}}</a>
                                         </strong>
                                         &nbsp;&nbsp;
-                                        <span>刚刚</span>
+                                        <span>
+                                            @if(isset($comments[0]))
+                                                @if(time() == strtotime($comments[count($comments) - 1]->created_at))
+                                                    刚刚
+                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/1000 < 60 )
+                                                    {{strtotime($comments[count($comments) - 1]->created_at)/1000}}&nbsp;秒前
+                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/60000 <= 60)
+                                                    {{strtotime($comments[count($comments) - 1]->created_at)/60000}}&nbsp;分钟前
+                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/3600000 <= 60)
+                                                    {{strtotime($comments[count($comments) - 1]->created_at)/3600000}}&nbsp;小时前
+                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/86400000 <= 24)
+                                                    {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;小时前
+                                                @endif
+                                                {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
+                                            @endif
+                                        </span>
                                         <div class="sep5"></div>
                                         <!-- 回复内容-->
                                         <div class="reply-content">

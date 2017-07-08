@@ -8,9 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'EX') }}</title>
+    <title>{{ config('app.name', '1') }}</title>
 
-    <link href="{{ asset('/EX/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('1') }}" rel="stylesheet">
 
     <script src="{{ asset('/EX/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
     <script src="{{ asset('/EX/plugins/jQueryUI/jquery-ui.min.js')}}"></script>

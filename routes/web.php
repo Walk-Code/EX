@@ -65,4 +65,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         return session()->flush();
     });
 
+    Route::get("/topic",'Admin\TopicController@index');
+    Route::post("/topic",'Admin\TopicController@index');
+
 });

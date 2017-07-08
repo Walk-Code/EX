@@ -26,7 +26,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="treeview @if(in_array("business",explode("/",session("left-bar")))) active @endif" >
+            <li class="treeview @if(in_array("user",explode("/",session("left-bar")))) active @endif" >
                 <a href="#"><span>用户管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li>
@@ -35,12 +35,11 @@
                 </ul>
             </li>
 
-            <li class="treeview @if(in_array("business",explode("/",session("left-bar")))) active @endif" >
+            <li class="treeview @if(in_array("topic",explode("/",session("left-bar")))) active @endif" >
                 <a href="{{url('/admin/business')}}"><span>话题管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="{{url('/admin/business')}}">机构</a>
-                        <a href="{{url('/admin/card')}}">创建卡类型</a>
+                        <a href="{{url('/admin/topic')}}">话题</a>
                     </li>
                 </ul>
             </li>

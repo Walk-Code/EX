@@ -34,7 +34,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/verify/email';
     //...
     public $redirectIfVerified = '/';
 
@@ -136,7 +136,8 @@ class RegisterController extends Controller
         // 给用户发邮件，邮件内容就是上文提到的 resources/views/emails/user-verification.blade.php 模板里的内容
         UserVerification::send($user, '请验证您的邮箱');
 
-        return redirect($this->redirectPath());
+        //return redirect($this->redirectPath());
+        return view("auth.verifyEmail",["user" => $user]);
 
     }
 
