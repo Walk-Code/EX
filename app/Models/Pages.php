@@ -45,6 +45,7 @@ class Pages extends Model
         }
 
         $post->uuid = Auth::user()->uuid;
+        $post->times = time();
 
         if($post->save()){
             return $post;

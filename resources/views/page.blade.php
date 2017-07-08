@@ -3,7 +3,6 @@
 
     <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
-    <link type="text/css" href="{{asset('1')}}" rel="stylesheet"/>
     <div class="container">
 
         <!-- main -->
@@ -33,23 +32,14 @@
                                 <span class="votes-box">&nbsp;&nbsp;<i class="iconfont icon-down"></i>&nbsp;&nbsp;2&nbsp;&nbsp;</span>
                             </a>
                             <div class="small-message">
-                                <a href="#">author</a>
-                                <span>&nbsp;·&nbsp;
-                                    @if(isset($comments[0]))
-                                        @if(time() == strtotime($comments[count($comments) - 1]->created_at))
-                                            刚刚
-                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/1000 < 60 )
-                                            {{strtotime($comments[count($comments) - 1]->created_at)/1000}}&nbsp;秒前
-                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/60000 <= 60)
-                                            {{strtotime($comments[count($comments) - 1]->created_at)/60000}}&nbsp;分钟前
-                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/3600000 <= 60)
-                                            {{strtotime($comments[count($comments) - 1]->created_at)/3600000}}&nbsp;小时前
-                                        @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/86400000 <= 24)
-                                            {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;天前
-                                        @endif
-                                        {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
+                                <a href="{{ url('/profile/'.$page->user->name) }}">{{ $page->user->name }}</a>
+                                <span>&nbsp;·
+                                    @if(explode(" ",$page->firendTime)[1] == "年" && explode(" ",$page->firendTime)[0] >3)
+                                        {{ $page->created_at }}
+                                    @else
+                                        {{ $page->firendTime }}
                                     @endif
-                                    &nbsp;&nbsp;·XXX次点击</span>
+                                    &nbsp;·&nbsp;XXX次点击</span>
                             </div>
                         </div>
 
@@ -58,7 +48,7 @@
                     <div class="cell">
                         <div class="topic_content">
                             <div class="mark_body">
-                                {!! $page->content !!}}
+                                {!! $page->content !!}
                             </div>
                         </div>
                     </div>
@@ -122,18 +112,11 @@
                                         &nbsp;&nbsp;
                                         <span>
                                             @if(isset($comments[0]))
-                                                @if(time() == strtotime($comments[count($comments) - 1]->created_at))
-                                                    刚刚
-                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/1000 < 60 )
-                                                    {{strtotime($comments[count($comments) - 1]->created_at)/1000}}&nbsp;秒前
-                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/60000 <= 60)
-                                                    {{strtotime($comments[count($comments) - 1]->created_at)/60000}}&nbsp;分钟前
-                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/3600000 <= 60)
-                                                    {{strtotime($comments[count($comments) - 1]->created_at)/3600000}}&nbsp;小时前
-                                                @elseif(time() - strtotime($comments[count($comments) - 1]->created_at)/86400000 <= 24)
-                                                    {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at)/3600000)}}&nbsp;小时前
+                                                @if(explode(" ",$comment->firendTime)[1] == "年" && explode(" ",$comment->firendTime)[0] >3)
+                                                    {{ $comment->created_at }}
+                                                @else
+                                                    {{ $comment->firendTime }}
                                                 @endif
-                                                {{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
                                             @endif
                                         </span>
                                         <div class="sep5"></div>

@@ -54,16 +54,22 @@ class UserNotification extends Model
 
     }
 
-    public function setReaded($userNotificationId)
+    /** 置为已读
+     * @param $user_id
+     * @return int
+     */
+    public function setReaded($user_id)
     {
-        $userNotification = UserNotification::find($userNotificationId);
+        $userNotifications = UserNotification::where("user_id",$user_id)->where("is_read",0)->get();
 
-        if($userNotification){
-            $userNotification->is_read = 1;
-            $userNotification->save();
-            return 1;
-        }else{
-            return 0;
+        foreach($userNotifications as $userNotification){
+            if($userNotification){
+                $userNotification->is_read = 1;
+                $userNotification->save();
+                return 1;
+            }else{
+                return 0;
+            }
         }
     }
 

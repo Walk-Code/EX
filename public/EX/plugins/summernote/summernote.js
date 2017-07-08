@@ -511,7 +511,7 @@
     };
 
     /**
-     * ex) br, col, embed, hr, img, input, ...
+     * 1) br, col, embed, hr, img, input, ...
      * @see http://www.w3.org/html/wg/drafts/html/master/syntax.html#void-elements
      */
     var isVoid = function (node) {
@@ -653,10 +653,10 @@
       if (len === 0) {
         return true;
       } else if (!isText(node) && len === 1 && node.innerHTML === blankHTML) {
-        // ex) <p><br></p>, <span><br></span>
+        // 1) <p><br></p>, <span><br></span>
         return true;
       } else if (list.all(node.childNodes, isText) && node.innerHTML === '') {
-        // ex) <p></p>, <span></span>
+        // 1) <p></p>, <span></span>
         return true;
       }
 
@@ -1218,7 +1218,7 @@
      * @return {Node} right node of boundaryPoint
      */
     var splitTree = function (root, point, options) {
-      // ex) [#text, <span>, <p>]
+      // 1) [#text, <span>, <p>]
       var ancestors = listAncestor(point.node, func.eq(root));
 
       if (!ancestors.length) {
@@ -4377,7 +4377,7 @@
     /**
      * insert Table
      *
-     * @param {String} dimension of table (ex : "5x5")
+     * @param {String} dimension of table (1 : "5x5")
      */
     this.insertTable = this.wrapCommand(function (dim) {
       var dimension = dim.split('x');

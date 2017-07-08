@@ -32,9 +32,10 @@ class Comments extends Model
         $comment->comment = $comments;
         $comment->post_id = $post_id;
         $comment->uuid = $uuid;
+        $comment->times = time();
         $comment->save();
 
-        Log::info($comment);
+        //Log::info($comment);
         if($comment){
             foreach($usernameArr[0] as $username){
                 if($userModel = $user->findUserByName(trim(substr($username,1)))){
