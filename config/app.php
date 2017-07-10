@@ -184,6 +184,8 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         //registered validator
         Jrean\UserVerification\UserVerificationServiceProvider::class,
+        //Monitor
+        EricMakesStuff\ServerMonitor\ServerMonitorServiceProvider::class,
 
     ],
 
