@@ -420,3 +420,11 @@ body {
 .footer{
 
 }
+.time{
+    float: right;
+    margin: 5px 0;
+}
+
+.font-600{
+    font-weight: 600
+}

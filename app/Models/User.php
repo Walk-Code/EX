@@ -44,9 +44,14 @@ class User extends AuthUser implements Authenticatable
         return $this->hasMany('App\Models\UserNotification','user_id','id');
     }
 
-    public function store()
+    public function storeTopic()
     {
         return $this->hasMany('App\Models\Stroe',"user_id","id")->where("type",0);
+    }
+
+    public function storeUser()
+    {
+        return $this->hasMany('App\Models\Stroe',"user_id","id")->where("type",1);
     }
 
     public function isStore($user_id,$post_id)
@@ -60,6 +65,31 @@ class User extends AuthUser implements Authenticatable
         }
     }
 
+    public function isAttention($user_id,$attention_user_id)
+    {
+        $store = Stroe::where("user_id",$user_id)->where("attention_user_id",$attention_user_id)->first();
+
+        if($store){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+    
+    
+    public function isBlock($user_id,$attention_user_id)
+    {
+        $store = BlockList::where("user_id",$user_id)->where("attention_user_id",$attention_user_id)->first();
+
+        if($store){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    
+    
     public function pages()
     {
         return $this->hasMany('App\Models\Pages',"uuid","uuid");

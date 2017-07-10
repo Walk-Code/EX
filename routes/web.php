@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth'],function (){
     Route::get('/s/{id}','PagesController@store');
     Route::get('/us/{id}','PagesController@unstore');
 
+    Route::post('/profile/website','UserController@addWebSide');
+    Route::get('/block/{name}','UserController@block');
+    Route::get('/unblock/{name}','UserController@unBlock');
     Route::resource('/profile','UserController');
 });
 
@@ -66,7 +69,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         return session()->flush();
     });
 
-    Route::get("/topic",'Admin\TopicController@index');
+    Route::get("/topic",'Admin\TopicController@index')->middleware("ip");
     Route::post("/topic",'Admin\TopicController@index');
     Route::get("/ip",'Admin\IpController@index');
     Route::post("/ip",'Admin\IpController@index');
