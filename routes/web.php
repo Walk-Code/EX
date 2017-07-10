@@ -21,11 +21,9 @@ Auth::routes();
 
 Route::post('/login','Auth\LoginController@postLogin');
 Route::get('/','PagesController@index');
-Route::get('t/{id}','PagesController@show');
+Route::get('t/{id}','PagesController@show')->middleware("ip");
 //Verify the mailbox
-Route::get('/verify/email',function (){
-    return view('auth.verifyEmail');
-});
+Route::get('/verify/email','BaseViewController@verifyEmail');
 
 # --------------- user ----------------
 Route::group(['middleware' => 'auth'],function (){
@@ -39,8 +37,14 @@ Route::group(['middleware' => 'auth'],function (){
     Route::get('/s/{id}','PagesController@store');
     Route::get('/us/{id}','PagesController@unstore');
 
+    Route::post('/profile/website','UserController@addWebSide');
+    Route::get('/block/{name}','UserController@block');
+    Route::get('/unblock/{name}','UserController@unBlock');
     Route::resource('/profile','UserController');
 });
+
+# --------------- error ----------------
+Route::get("/error/ip",'BaseViewController@notAllowIpAccess');
 
 
 Route::post('/admin/login','AdminAuth\LoginController@postLogin');
@@ -65,7 +69,11 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         return session()->flush();
     });
 
-    Route::get("/topic",'Admin\TopicController@index');
+    Route::get("/topic",'Admin\TopicController@index')->middleware("ip");
     Route::post("/topic",'Admin\TopicController@index');
+    Route::get("/ip",'Admin\IpController@index');
+    Route::post("/ip",'Admin\IpController@index');
+    Route::post("/ip/create",'Admin\IpController@store');
+    Route::get("/ip/delete/{id}",'Admin\IpController@destroy');
 
 });

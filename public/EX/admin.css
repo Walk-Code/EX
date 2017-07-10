@@ -13,3 +13,8 @@
 .bg-white{
     background-color: #FFF;
 }
+.column-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

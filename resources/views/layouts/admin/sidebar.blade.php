@@ -47,7 +47,7 @@
             <li class="treeview @if(in_array("activity",explode("/",session("left-bar")))) active @endif">
                 <a href="#"><span>系统管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="{{url('/admin/activity')}}">Ip列表</a></li>
+                    <li><a href="{{url('/admin/ip')}}">Ip列表</a></li>
                 </ul>
             </li>
 

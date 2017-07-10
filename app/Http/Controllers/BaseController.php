@@ -124,7 +124,6 @@ class BaseController extends Controller
 
         return $string ? implode(', ', $string) . ' 前' : '剛剛';
 
-
     }
     
 }
