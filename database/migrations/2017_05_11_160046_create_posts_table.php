@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->longText('content');
             $table->integer('tag_id');
-            $table->integer('uuid');
+            $table->string('uuid');
             $table->timestamps();
         });
     }
