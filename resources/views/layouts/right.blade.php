@@ -7,12 +7,12 @@
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tbody>
                 <td width="48" valign="top">
-                    <a href="#"><img src="//v2ex.assets.uxengine.net/avatar/24c2/278e/71189_large.png?m=1442725074" class="avatar" border="0" align="default" style="max-width: 48px; max-height: 48px;"></a>
+                    <a href="#"><img src="{{ Auth::user()->head_img }}" class="avatar" border="0" align="default" style="max-width: 48px; max-height: 48px;"></a>
                 </td>
                 <td width="10" valign="top"></td>
                 <td width="auto" align="left">
                                 <span class="bigger">
-                                    <a href="#">walk_code</a>
+                                    <a href="#">{{ Auth::user()->name }}</a>
                                 </span>
                 </td>
                 </tbody>
@@ -30,14 +30,14 @@
                     </td>
                     <td width="34%" align="center" style="border-left: 1px solid rgba(100, 100, 100, 0.4); border-right: 1px solid rgba(100, 100, 100, 0.4);">
                         <a href="#" class="dark" style="display: block">
-                            <span class="bigger">43</span>
+                            <span class="bigger">{{ count(Auth::user()->storeTopic) }}</span>
                             <div class="sep3"></div>
                             <span class="">收藏主题</span>
                         </a>
                     </td>
                     <td width="33%" align="center">
                         <a href="#" class="dark" style="display: block">
-                            <span class="bigger">3</span>
+                            <span class="bigger">{{ count(Auth::user()->storeUser) }}</span>
                             <div class="sep3"></div>
                             <span class="">特别关注</span>
                         </a>

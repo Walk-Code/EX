@@ -186,7 +186,7 @@ return [
         Jrean\UserVerification\UserVerificationServiceProvider::class,
         //Monitor
         EricMakesStuff\ServerMonitor\ServerMonitorServiceProvider::class,
-
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*

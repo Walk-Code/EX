@@ -93,11 +93,11 @@
                 <div class="profile-footer">
                     <div style="width: 50%">
                         @if($user->isAttention(Auth::user()->id,$user->id))
-                            <a href="#" type="button" class="btn btn-info">
+                            <a href="{{ url('/unattention/'.$user->name) }}" type="button" class="btn btn-info">
                                 已关注
                             </a>
                         @else
-                            <a href="#" type="button" class="btn btn-info">
+                            <a href="{{ url('/attention/'.$user->name) }}" type="button" class="btn btn-info">
                                 关注
                             </a>
                         @endif

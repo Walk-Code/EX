@@ -29,9 +29,15 @@ class StoreNotificationListener
     {
         $uesr = $event->getUserId();
         $post_id = $event->getPostId();
+        $attention_user_id = $event->getAttentionUserId();
 
         $userNotifity = new UserNotification();
-        $userNotifity->addStroeNotification($uesr,$post_id);
+
+        if($post_id){
+            $userNotifity->addStroeNotification($uesr,$post_id,1,0);
+        }elseif($attention_user_id){
+            $userNotifity->addStroeNotification($uesr,$post_id,2,$attention_user_id);
+        }
     }
 
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlockList;
 use App\Models\Comments;
 use App\Models\Pages;
+use App\Models\Stroe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,11 +159,47 @@ class UserController extends BaseController
 
         }else{
 
-            return redirect()->back()->with("success","取消失败");
+            return redirect()->back()->with("fail","取消失败");
 
         }
     }
 
+    public function attention($name,Request $request)
+    {
+        $data = $request->all();
+        $data["ip_address"] = $request->getClientIp();
+        $data["user_id"] = Auth::user()->id;
+        $data["attention_user_id"] = User::where("name",$name)->first()->id;
+        $store = new Stroe();
 
-    
+        if($store->store($data,1)){
+
+            return redirect()->back()->with("success","关注成功");
+
+        }else{
+
+            return redirect()->back()->with("fail","关注失败");
+
+        }
+    }
+
+    public function unattention($name,Request $request)
+    {
+        $data = $request->all();
+        $data["ip_address"] = $request->getClientIp();
+        $data["user_id"] = Auth::user()->id;
+        $data["attention_user_id"] = User::where("name",$name)->first()->id;
+        $store = new Stroe();
+
+        if($store->unstore($data,1)){
+
+            return redirect()->back()->with("success","取关成功");
+
+        }else{
+
+            return redirect()->back()->with("fail","取关失败");
+
+        }
+    }
+
 }
