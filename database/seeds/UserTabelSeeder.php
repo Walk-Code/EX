@@ -20,7 +20,7 @@ class UserTabelSeeder extends Seeder
                 'email' => $faker->freeEmail(),
                 'head_img' => $faker->imageUrl(52,52),
                 'password' => bcrypt($faker->lastName()),
-                'uuid' => $uuids = $faker->uuid;
+                'uuid' => $uuids = $faker->uuid,
                 'created_at' => $faker->dateTime(date('Y-m-d H:i:s'),'PRC'),
                 'updated_at' => $faker->dateTime(date('Y-m-d H:i:s'),'PRC')
             ]);
