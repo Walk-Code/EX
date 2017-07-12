@@ -73,23 +73,37 @@ class UserNotification extends Model
         }
     }
 
-    /** 保存话题通知
+    /** 保存话题通知 关注通知
      * @param $user_id
      * @param $post_id
      */
-    public function addStroeNotification($user_id, $post_id)
+    public function addStroeNotification($user_id, $post_id, $type = 1,$attention_user_id)
     {
-        $userNotification = UserNotification::where("user_id",$user_id)->where("post_id",$post_id)
-                                            ->where("type",1)
-                                            ->first();
+        if($type == 1){
+            $userNotification = UserNotification::where("user_id",$user_id)->where("post_id",$post_id)
+                                                ->where("type",$type)
+                                                ->first();
+
+        }else{
+            $userNotification = UserNotification::where("user_id",$user_id)->where("attention_user_id",$post_id)
+                                                ->where("type",$type)
+                                                ->first();
+
+        }
 
         if(!$userNotification){
             $userNotification = new UserNotification();
         }
 
         $userNotification->user_id = $user_id;
-        $userNotification->post_id = $post_id;
-        $userNotification->type= 1;
+
+        if($type == 1){
+            $userNotification->post_id = $post_id;
+        }else{
+            $userNotification->attention_user_id = $attention_user_id;
+        }
+
+        $userNotification->type= $type;
 
         if($userNotification->save()){
             return 1;

@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'],function (){
     Route::post('/profile/website','UserController@addWebSide');
     Route::get('/block/{name}','UserController@block');
     Route::get('/unblock/{name}','UserController@unBlock');
+    Route::get('/attention/{name}','UserController@attention');
+    Route::get('/unattention/{name}','UserController@unattention');
     Route::resource('/profile','UserController');
 });
 
@@ -75,5 +77,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
     Route::post("/ip",'Admin\IpController@index');
     Route::post("/ip/create",'Admin\IpController@store');
     Route::get("/ip/delete/{id}",'Admin\IpController@destroy');
+# ---------------- log ---------------------
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 });

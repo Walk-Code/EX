@@ -49,6 +49,9 @@
                 <ul class="treeview-menu">
                     <li><a href="{{url('/admin/ip')}}">Ip列表</a></li>
                 </ul>
+                <ul class="treeview-menu">
+                    <li><a href="{{url('/admin/logs')}}">错误日志</a></li>
+                </ul>
             </li>
 
             <li class="treeview @if(in_array("model",explode("/",session("left-bar")))) active @endif">

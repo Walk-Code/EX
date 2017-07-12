@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1a6635d057c1dd306ec9c8c2e819d824",
-    "content-hash": "254b25c671bdb634d683efc5431a34c4",
+    "hash": "04dff5aa8afb874612ab14ff89af6282",
+    "content-hash": "46495cf1be565c70ab1660cfb95d1d9a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1613,6 +1613,54 @@
                 "uuid"
             ],
             "time": "2017-03-26 20:37:53"
+        },
+        {
+            "name": "rap2hpoutre/laravel-log-viewer",
+            "version": "v0.10.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rap2hpoutre/laravel-log-viewer.git",
+                "reference": "1bab6d8668321600e36c075adb8fb4553974cbfd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/rap2hpoutre/laravel-log-viewer/1bab6d8668321600e36c075adb8fb4553974cbfd.zip",
+                "reference": "1bab6d8668321600e36c075adb8fb4553974cbfd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.2.*|5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/controllers"
+                ],
+                "psr-0": {
+                    "Rap2hpoutre\\LaravelLogViewer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "rap2hpoutre",
+                    "email": "raphaelht@gmail.com"
+                }
+            ],
+            "description": "A Laravel log reader",
+            "keywords": [
+                "laravel",
+                "log",
+                "log-reader",
+                "log-viewer",
+                "logging",
+                "lumen"
+            ],
+            "time": "2017-06-19 14:13:12"
         },
         {
             "name": "spatie/laravel-pjax",
