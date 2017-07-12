@@ -12,7 +12,7 @@ class PagesTabelSeeder extends Seeder
      */
     public function run()
     {
-       /* $faker = \Faker\Factory::create();
+       $faker = \Faker\Factory::create();
 
         for($i = 0 ; $i < 50; $i++){
             DB::table("posts")->insert([
@@ -23,7 +23,7 @@ class PagesTabelSeeder extends Seeder
                 'created_at' => $faker->dateTime(date('Y-m-d H:i:s'),'PRC'),
                 'updated_at' => $faker->dateTime(date('Y-m-d H:i:s'),'PRC')
             ]);
-        }*/
+        }
 
     }
 }
