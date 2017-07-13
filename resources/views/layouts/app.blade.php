@@ -37,10 +37,15 @@
         min-height: 100%;
         margin: 0;
     }*/
-
+    #particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 
 <body>
+    <div id="particles"></div>
     <div id="app">
         @include('layouts.header')
         <div class="wrapper" style="min-height: calc(100vh - 70px)">
@@ -53,6 +58,7 @@
     <!-- progress bar-->
 
     <script src="{{asset('/EX/plugins/pjax/jquery.pjax.js')}}"></script>
+    <script src="{{ asset('/EX/plugins/particles/particles.min.js') }}"></script>
     <script>
         /*$("#menu").on("click",function () {
             $(this).parent().addClass("open");
@@ -72,6 +78,7 @@
             });
 
         });*/
+        particlesJS.load('particles', '{{ asset("/EX/plugins/particles/particles.json") }}');
     </script>
 
 </body>
