@@ -16,11 +16,11 @@ class CreatedTableUserNotification extends Migration
         Schema::create("user_notifity",function (Blueprint $table){
             $table->increments("id");
             $table->integer("user_id");
-            $table->integer("is_read");
-            $table->integer("post_id");
-            $table->integer("location");
-            $table->integer("attention_user_id");
-            $table->integer("type");
+            $table->integer("is_read")->nullable();
+            $table->integer("post_id")->nullable();
+            $table->integer("location")->nullable();
+            $table->integer("attention_user_id")->nullable();
+            $table->integer("type")->nullable();
             $table->timestamps();
         });
     }

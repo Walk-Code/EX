@@ -30,10 +30,10 @@
     <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>触点服务后台</b>&nbsp;&nbsp;wx</a>
+            <a href="#"><b>EX</b>&nbsp;&nbsp;admin</a>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
-            <p class="login-box-msg">快点登录管理吧~</p>
+            <p class="login-box-msg">登录后台</p>
             <form action="{{url('/admin/login')}}"  enctype="multipart/form-data"  autocomplete="off" method="post">
                 {{ csrf_field() }}
                 <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
@@ -70,7 +70,7 @@
             </form>
 
 
-            <a href="#">朕忘记密码了呜呜</a><br>
+            {{--<a href="#">朕忘记密码了呜呜</a><br>--}}
             <!-- <a href="register.html" class="text-center">Register a new membership</a> -->
 
         </div><!-- /.login-box-body -->
