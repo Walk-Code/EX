@@ -15,12 +15,12 @@ class CreateTableAdmin extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
+            $table->string('username')->nullable();
             $table->string('email')->unique();
-            $table->string('head_img');
-            $table->string('password');
-            $table->string('uuid');
-            $table->integer('status');
+            $table->string('head_img')->nullable();
+            $table->string('password')->nullable();
+            $table->string('uuid')->nullable();
+            $table->integer('status')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
