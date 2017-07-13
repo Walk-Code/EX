@@ -17,20 +17,20 @@
                                 <img src="{{$page->user->head_img}}" class="avatar" border="0" align="default">
                             </a>
                         </div>
-                        <a href="#">EX</a>
+                        <a href="{{ url("/") }}">EX</a>
                         <span>&nbsp;>&nbsp;</span>
                         <a href="#">test</a>
                         <div class="sep10"></div>
                         <h1>{{$page->title}}</h1>
                         <!-- 顶过或降 -->
                         <div>
-                            <a href="javascript:" onclick="upVoteTopic();">
+                            {{--<a href="javascript:" onclick="upVoteTopic();">
                                 <span class="votes-box">&nbsp;&nbsp;<i class="iconfont icon-iconfontxiangshang01"></i>&nbsp;&nbsp;0&nbsp;&nbsp;</span>
                             </a>
                             &nbsp;&nbsp;
                             <a href="javascript:" onclick="downVoteTopic()">
                                 <span class="votes-box">&nbsp;&nbsp;<i class="iconfont icon-down"></i>&nbsp;&nbsp;2&nbsp;&nbsp;</span>
-                            </a>
+                            </a>--}}
                             <div class="small-message">
                                 <a href="{{ url('/profile/'.$page->user->name) }}">{{ $page->user->name }}</a>
                                 <span>&nbsp;·
@@ -39,7 +39,7 @@
                                     @else
                                         {{ $page->firendTime }}
                                     @endif
-                                    &nbsp;·&nbsp;XXX次点击</span>
+                                    &nbsp;{{--·&nbsp;XXX次点击--}}</span>
                             </div>
                         </div>
 
@@ -61,9 +61,9 @@
                         @else
                         <a class="ex-topic-order" href="{{url('s')."/".$page->id}}">加入收藏</a>&nbsp;
                         @endif
-                        <a class="ex-topic-order">Weibo</a>&nbsp;
+                        {{--<a class="ex-topic-order">Weibo</a>&nbsp;
                         <a class="ex-topic-order">忽略主题</a>&nbsp;
-                        <a class="ex-topic-order">感谢</a>
+                        <a class="ex-topic-order">感谢</a>--}}
                     </div>
                     @endif
                 </div>
@@ -73,9 +73,10 @@
                 <div class="box">
                     <div class="cell">
                         <div style="float: right">
+                            <!-- TODO 添加标签 -->
+                            {{--<a class="ex-topic-order" href="#">test tags</a>&nbsp;
                             <a class="ex-topic-order" href="#">test tags</a>&nbsp;
-                            <a class="ex-topic-order" href="#">test tags</a>&nbsp;
-                            <a class="ex-topic-order" href="#">test tags</a>
+                            <a class="ex-topic-order" href="#">test tags</a>--}}
                         </div>
                         <span style="font-size: 13px">
                             {{$comments[count($comments) - 1]->user->name}}回复&nbsp;&nbsp;|&nbsp;&nbsp;直到&nbsp;{{date("Y-m-d H:i:s P",strtotime($comments[count($comments) - 1]->created_at))}}
@@ -111,13 +112,14 @@
                                         </strong>
                                         &nbsp;&nbsp;
                                         <span>
-                                            @if(isset($comments[0]))
+                                            {{--@if(isset($comments[0]))
                                                 @if(explode(" ",$comment->firendTime)[1] == "年" && explode(" ",$comment->firendTime)[0] >3)
                                                     {{ $comment->created_at }}
                                                 @else
                                                     {{ $comment->firendTime }}
                                                 @endif
-                                            @endif
+                                            @endif--}}
+                                                {{ $comment->firendTime }}
                                         </span>
                                         <div class="sep5"></div>
                                         <!-- 回复内容-->
