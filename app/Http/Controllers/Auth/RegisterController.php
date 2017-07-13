@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use forxer\Gravatar\Gravatar;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -89,7 +90,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'uuid' => $this->getUUid()
+            'uuid' => $this->getUUid(),
+            'head_img' => Gravatar::image($data['email'])
         ]);
     }
 
