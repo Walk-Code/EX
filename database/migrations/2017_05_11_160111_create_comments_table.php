@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->longText('comment');
             $table->integer('post_id');
             $table->string('uuid');
+            $table->string("times");
             $table->timestamps();
         });
     }

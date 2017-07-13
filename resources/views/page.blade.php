@@ -90,7 +90,7 @@
                             <tbody>
                                 <tr>
                                     <td width="48" valign="top" align="center">
-                                        <img src="http://lorempixel.com/52/52/?99772" border="0" align="default">
+                                        <img src="{{ $comment->user->head_img }}" border="0" align="default">
                                     </td>
                                     <td width="10"></td>
                                     <td width="auto" valign="top" align="left">

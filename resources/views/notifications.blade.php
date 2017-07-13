@@ -16,7 +16,7 @@
                 <div class="cell-itme">
                     <div style="width: 32px;text-align: left">
                         <a href="#">
-                            <img src="//v2ex.assets.uxengine.net/avatar/d3a1/ff18/92937_mini.png?m=1422369016" border="0" align="default">
+                            <img src="{{ $notification->user->head_img }}" border="0" align="default">
                         </a>
                     </div>
                     <div style="width: auto;text-align: center">
