@@ -91,7 +91,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'uuid' => $this->getUUid(),
-            'head_img' => empty(Gravatar::image($data['email'])) ? "https://s.gravatar.com/avatar/67e4361cd5a0803c9259b6ec97aece67?s=80" : Gravatar::image($data['email'])
+            'head_img' => Gravatar::image($data['email'])
         ]);
     }
 

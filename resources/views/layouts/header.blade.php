@@ -49,7 +49,7 @@
                         </ul>
                     </li>--}}
                     <li><a href="{{url('/')}}">首页</a></li>
-                    <li><a href="{{url('profile')}}">{{ Auth::user()->name }}</a></li>
+                    <li><a href="{{url('profile/'.Auth::user()->name)}}">{{ Auth::user()->name }}</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
