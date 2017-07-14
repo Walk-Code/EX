@@ -378,6 +378,11 @@ a.ex-topic-order:hover {
     height: 45px;
 }
 
+.notification-avatar {
+    width: 35px;
+    height: 35px;
+}
+
 .mark_body img {
     width: 500px;
     height: auto;

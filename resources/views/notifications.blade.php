@@ -17,7 +17,7 @@
                             <div style="width: 32px;text-align: left">
                                 <a href="#">
                                     <img src="{{ $notification->user->head_img }}" border="0" align="default"
-                                         class="avatar">
+                                         class="notification-avatar">
                                 </a>
                             </div>
                             <div class="sep20-w"></div>
