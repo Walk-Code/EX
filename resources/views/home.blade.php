@@ -21,6 +21,7 @@
                 <div class="panel panel-default">
                     <!-- tags -->
                     <div class="panel-heading">标签栏</div>
+                    @if(Auth::user())
                     @if(count(Auth::user()->hasManyNotification->where("is_read",0)) > 0)
                         <div class="panel-heading">
                             <a href="{{url('notification')}}" class="message">
@@ -28,6 +29,7 @@
                                 {{ count(Auth::user()->hasManyNotification->where("is_read",0)) }}&nbsp;条未读消息
                             </a>
                         </div>
+                    @endif
                     @endif
                     <div class="panel-body no_padding">
                         @foreach($pages as $page)
