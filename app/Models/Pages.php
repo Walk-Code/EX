@@ -34,13 +34,13 @@ class Pages extends Model
             $post = new Pages();
         }
 
-        $post->title = $data['title'];
+        $post->title = htmlspecialchars($data['title']);
 
         if (isset($data['reply'])) {
             //md
             $post->content = Markdown::convertToHtml($data['reply']);
         } else {
-            $post->content = $data['content'];
+            $post->content = htmlspecialchars($data['content']);
         }
 
         $post->uuid = Auth::user()->uuid;
