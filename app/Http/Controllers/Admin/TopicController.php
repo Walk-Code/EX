@@ -18,39 +18,39 @@ class TopicController extends Controller
     {
         $key = "";
         $timer = "";
-        $currentTopicCount = Pages::whereBetween("created_at",[date("Y-m-d")." 00:00:00",date("Y-m-d")." 23:59:59"])->count();
+        $currentTopicCount = Pages::whereBetween("created_at", [date("Y-m-d") . " 00:00:00", date("Y-m-d") . " 23:59:59"])->count();
 
 
-        if($request->has('key') && !$request->has('timer')){
+        if ($request->has('key') && !$request->has('timer')) {
 
             $key = $request->key;
-            $Pages = Pages::whereHas("user",function ($q) use ($key){
-                $q->where("name","like","%".$key."%");
-            })->orWhere("title","like","%".$key."%")->orderBy("created_at","desc")->paginate(30);
+            $Pages = Pages::whereHas("user", function ($q) use ($key) {
+                $q->where("name", "like", "%" . $key . "%");
+            })->orWhere("title", "like", "%" . $key . "%")->orderBy("created_at", "desc")->paginate(30);
 
-        }elseif(!$request->has("key") && $request->has("timer")){
+        } elseif (!$request->has("key") && $request->has("timer")) {
 
             $timer = $request->timer;
 
-            $Pages = Pages::whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                         ->paginate(30);
+            $Pages = Pages::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->paginate(30);
 
-        }elseif($request->has(["key","timer"])){
+        } elseif ($request->has(["key", "timer"])) {
 
             $key = $request->key;
             $timer = $request->timer;
-            $Pages = Pages::whereHas("user",function ($q) use ($key){
-                $q->where("name","like","%".$key."%");
-            })->whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                           ->Where("title","like","%".$key."%")
-                           ->paginate(30);
-        }else{
+            $Pages = Pages::whereHas("user", function ($q) use ($key) {
+                $q->where("name", "like", "%" . $key . "%");
+            })->whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->Where("title", "like", "%" . $key . "%")
+                ->paginate(30);
+        } else {
 
-            $Pages = Pages::orderBy("created_at","desc")->paginate(30);
+            $Pages = Pages::orderBy("created_at", "desc")->paginate(30);
 
         }
 
-        return view("admin.topic.index",["pages" => $Pages,"key" => $key,"timer" => $timer,"count" => "共找到".$Pages->total()."条","currentDateTopic"=>$currentTopicCount]);
+        return view("admin.topic.index", ["pages" => $Pages, "key" => $key, "timer" => $timer, "count" => "共找到" . $Pages->total() . "条", "currentDateTopic" => $currentTopicCount]);
 
     }
 
@@ -67,7 +67,7 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,7 +78,7 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -89,7 +89,7 @@ class TopicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -100,8 +100,8 @@ class TopicController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -112,7 +112,7 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

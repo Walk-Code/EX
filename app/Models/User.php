@@ -16,7 +16,7 @@ class User extends AuthUser implements Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','uuid','head_img'
+        'name', 'email', 'password', 'uuid', 'head_img'
     ];
 
     /**
@@ -30,69 +30,69 @@ class User extends AuthUser implements Authenticatable
 
     public function findUserByName($name)
     {
-        $user = User::where('name',$name)->first();
+        $user = User::where('name', $name)->first();
 
-        if($user){
+        if ($user) {
             return $user;
-        }else{
+        } else {
             return 0;
         }
     }
 
     public function hasManyNotification()
     {
-        return $this->hasMany('App\Models\UserNotification','user_id','id');
+        return $this->hasMany('App\Models\UserNotification', 'user_id', 'id');
     }
 
     public function storeTopic()
     {
-        return $this->hasMany('App\Models\Stroe',"user_id","id")->where("type",0);
+        return $this->hasMany('App\Models\Stroe', "user_id", "id")->where("type", 0);
     }
 
     public function storeUser()
     {
-        return $this->hasMany('App\Models\Stroe',"user_id","id")->where("type",1);
+        return $this->hasMany('App\Models\Stroe', "user_id", "id")->where("type", 1);
     }
 
-    public function isStore($user_id,$post_id)
+    public function isStore($user_id, $post_id)
     {
-        $store = Stroe::where("user_id",$user_id)->where("post_id",$post_id)->first();
+        $store = Stroe::where("user_id", $user_id)->where("post_id", $post_id)->first();
 
-        if($store){
+        if ($store) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
 
-    public function isAttention($user_id,$attention_user_id)
+    public function isAttention($user_id, $attention_user_id)
     {
-        $store = Stroe::where("user_id",$user_id)->where("attention_user_id",$attention_user_id)->first();
+        $store = Stroe::where("user_id", $user_id)->where("attention_user_id", $attention_user_id)->first();
 
-        if($store){
+        if ($store) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
 
     }
-    
-    
-    public function isBlock($user_id,$attention_user_id)
-    {
-        $store = BlockList::where("user_id",$user_id)->where("attention_user_id",$attention_user_id)->first();
 
-        if($store){
+
+    public function isBlock($user_id, $attention_user_id)
+    {
+        $store = BlockList::where("user_id", $user_id)->where("attention_user_id", $attention_user_id)->first();
+
+        if ($store) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
-    
-    
+
+
     public function pages()
     {
-        return $this->hasMany('App\Models\Pages',"uuid","uuid");
+        return $this->hasMany('App\Models\Pages', "uuid", "uuid");
     }
 
 }

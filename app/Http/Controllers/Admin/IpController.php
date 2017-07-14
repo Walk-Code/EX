@@ -18,34 +18,34 @@ class IpController extends Controller
         $key = "";
         $timer = "";
 
-        $currentIpCount = BlockList::whereBetween("created_at",[date("Y-m-d")." 00:00:00",date("Y-m-d")." 23:59:59"])->count();
+        $currentIpCount = BlockList::whereBetween("created_at", [date("Y-m-d") . " 00:00:00", date("Y-m-d") . " 23:59:59"])->count();
 
-        if($request->has('key') && !$request->has('timer')){
+        if ($request->has('key') && !$request->has('timer')) {
 
             $key = $request->key;
-            $BlockLists = BlockList::where("ip_address","like","%".$key."%")->orderBy("created_at","desc")->paginate(30);
+            $BlockLists = BlockList::where("ip_address", "like", "%" . $key . "%")->orderBy("created_at", "desc")->paginate(30);
 
-        }elseif(!$request->has("key") && $request->has("timer")){
+        } elseif (!$request->has("key") && $request->has("timer")) {
 
             $timer = $request->timer;
 
-            $BlockLists = BlockList::whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                                    ->paginate(30);
+            $BlockLists = BlockList::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->paginate(30);
 
-        }elseif($request->has(["key","timer"])){
+        } elseif ($request->has(["key", "timer"])) {
 
             $key = $request->key;
             $timer = $request->timer;
-            $BlockLists = BlockList::whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                                    ->where("ip_address","like","%".$key."%")
-                                    ->paginate(30);
-        }else{
+            $BlockLists = BlockList::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->where("ip_address", "like", "%" . $key . "%")
+                ->paginate(30);
+        } else {
 
-            $BlockLists = BlockList::orderBy("created_at","desc")->paginate(30);
+            $BlockLists = BlockList::orderBy("created_at", "desc")->paginate(30);
 
         }
 
-        return view("admin.ip.index",["blockLists" => $BlockLists,"key" => $key,"timer" => $timer,"count" => "共找到".$BlockLists->total()."条","currentIpCount" =>$currentIpCount]);
+        return view("admin.ip.index", ["blockLists" => $BlockLists, "key" => $key, "timer" => $timer, "count" => "共找到" . $BlockLists->total() . "条", "currentIpCount" => $currentIpCount]);
 
 
     }
@@ -63,18 +63,18 @@ class IpController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $blockList = new BlockList();
 
-        if($blockList->blockIp($request->all())){
+        if ($blockList->blockIp($request->all())) {
 
             return redirect("/admin/ip")->with(["success" => "添加成功"]);
 
-        }else{
+        } else {
 
             return redirect("/admin/ip")->with(["fail" => "添加失败"]);
 
@@ -84,7 +84,7 @@ class IpController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -95,7 +95,7 @@ class IpController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -106,8 +106,8 @@ class IpController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -118,18 +118,18 @@ class IpController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $ip = BlockList::find($id);
 
-        if($ip->delete()){
+        if ($ip->delete()) {
 
             return redirect("/admin/ip")->with(["success" => "删除成功"]);
 
-        }else{
+        } else {
 
             return redirect("/admin/ip")->with(["success" => "删除失败"]);
 

@@ -60,7 +60,7 @@
                         <span>
                         0
                         </span>
-                        <div class="sep5"></div>
+                            <div class="sep5"></div>
 
                             节点收藏
                         </a>
@@ -71,9 +71,9 @@
                         <span>
                             {{ count($user->storeTopic) }}
                         </span>
-                        <div class="sep5"></div>
+                            <div class="sep5"></div>
 
-                        收藏主题
+                            收藏主题
                         </a>
                     </div>
 
@@ -82,42 +82,42 @@
                         <span>
                             {{ count($user->storeUser) }}
                         </span>
-                        <div class="sep5"></div>
+                            <div class="sep5"></div>
 
-                        特别关注
+                            特别关注
                         </a>
                     </div>
                 </div>
                 <div class="sep20"></div>
                 @if(!(Auth::user()->id == $user->id))
-                <div class="profile-footer">
-                    <div style="width: 50%">
-                        @if($user->isAttention(Auth::user()->id,$user->id))
-                            <a href="{{ url('/unattention/'.$user->name) }}" type="button" class="btn btn-info">
-                                已关注
-                            </a>
-                        @else
-                            <a href="{{ url('/attention/'.$user->name) }}" type="button" class="btn btn-info">
-                                关注
-                            </a>
-                        @endif
+                    <div class="profile-footer">
+                        <div style="width: 50%">
+                            @if($user->isAttention(Auth::user()->id,$user->id))
+                                <a href="{{ url('/unattention/'.$user->name) }}" type="button" class="btn btn-info">
+                                    已关注
+                                </a>
+                            @else
+                                <a href="{{ url('/attention/'.$user->name) }}" type="button" class="btn btn-info">
+                                    关注
+                                </a>
+                            @endif
+                        </div>
+                        <div style="width: 50%">
+                            @if($user->isBlock(Auth::user()->id,$user->id))
+                                <a href="{{ url('/unblock/'.$user->name) }}" type="button" class="btn btn-danger">
+                                    已block
+                                </a>
+                            @else
+                                <a href="{{ url('/block/'.$user->name) }}" type="button" class="btn btn-danger">
+                                    block
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                    <div style="width: 50%">
-                        @if($user->isBlock(Auth::user()->id,$user->id))
-                            <a href="{{ url('/unblock/'.$user->name) }}" type="button" class="btn btn-danger">
-                                已block
-                            </a>
-                        @else
-                            <a href="{{ url('/block/'.$user->name) }}" type="button" class="btn btn-danger">
-                                block
-                            </a>
-                        @endif
-                    </div>
-                </div>
                 @endif
             </div>
             <div class="sep20"></div>
-            <div class="profile-box">
+            <div class="profile-box m-profile-box">
 
             </div>
         </div>
@@ -125,20 +125,20 @@
         <div class="left-bar">
             <div class="box">
                 <div class="header" style="text-align: left">
-                    <div><a href="#">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;最近的话题</div>
+                    <div><a href="#">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span class="small-title">最近的話題</span></div>
                 </div>
                 <!-- 最近话题-->
                 @foreach($pages as $page)
-                <div class="recent-topic">
-                    <a href="#">
-                    <div class="cell">
-                        <div class="cell-itme" style="justify-content: space-between;">
-                            <strong>{{$page->title}}</strong>&nbsp;&nbsp;
-                            <span>{{$page->firendTime}}</span>
-                        </div>
+                    <div class="recent-topic">
+                        <a href="#">
+                            <div class="cell">
+                                <div class="cell-itme" style="justify-content: space-between;">
+                                    <strong style="text-align: left">{{$page->title}}</strong>&nbsp;&nbsp;
+                                    <span>{{$page->firendTime}}</span>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    </a>
-                </div>
                 @endforeach
                 @if(count(Auth::user()->pages) > 10)
                     <div class="cell">
@@ -153,7 +153,7 @@
             <div class="sep20"></div>
             <div class="box">
                 <div class="header" style="text-align: left">
-                    <div><a href="#">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;最近的回复</div>
+                    <div><a href="#">EX</a>&nbsp;&nbsp;>&nbsp;&nbsp;<span class="small-title">最近的回复</span></div>
                 </div>
                 <!-- 最近话题-->
                 @foreach($comments as $comment)
@@ -192,7 +192,7 @@
                     <div class="modal-body">
                         <form action="{{ url("/profile/website") }}" method="post" id="form">
                             {{ csrf_field() }}
-                            <input  type="hidden"  name="name" value="{{ $user->name }}"/>
+                            <input type="hidden" name="name" value="{{ $user->name }}"/>
                             <div class="form-group">
                                 <div style="display: flex">
                                     <input type="text" name="website" class="form-control" placeholder="多个网址地址用,隔开">
@@ -215,7 +215,7 @@
         function addWebSide() {
             $(".modal").modal();
         }
-        
-        
+
+
     </script>
 @endsection

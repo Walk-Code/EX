@@ -27,19 +27,23 @@
         </div>
     </div>
 
-    <div class="box-body bg-white" >
+    <div class="box-body bg-white">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
                 <div class="row" style="display: flex;">
-                    <form class="cp-left" action="{{url('/admin/topic')}}" method="post" style="padding: 0px 0px 10px 31px;width: 50%">
+                    <form class="cp-left" action="{{url('/admin/topic')}}" method="post"
+                          style="padding: 0px 0px 10px 31px;width: 50%">
                         {{csrf_field()}}
                         <div class="dataTables_length" id="example1_length">
-                            <input type="search" class="form-control"  aria-controls="search" name="key"  placeholder="搜索用户名/话题" @if(!empty($key)) value="{{$key}}" @endif>
-                            <button type="submit" class="btn btn-default" ><i class="fa  fa-search"></i></button>
+                            <input type="search" class="form-control" aria-controls="search" name="key"
+                                   placeholder="搜索用户名/话题" @if(!empty($key)) value="{{$key}}" @endif>
+                            <button type="submit" class="btn btn-default"><i class="fa  fa-search"></i></button>
                         </div>
                         <div class="dataTables_length" id="example1_length" style="display: flex;margin-top: 5px">
-                            <input type="search" class="form-control datepicker" style="width: 500px;"  aria-controls="search" name="timer"  placeholder="搜索时间区间" @if(!empty($timer)) value="{{$timer}}" @endif>
-                            <button type="submit" class="btn btn-default" ><i class="fa  fa-search"></i></button>
+                            <input type="search" class="form-control datepicker" style="width: 500px;"
+                                   aria-controls="search" name="timer" placeholder="搜索时间区间"
+                                   @if(!empty($timer)) value="{{$timer}}" @endif>
+                            <button type="submit" class="btn btn-default"><i class="fa  fa-search"></i></button>
                         </div>
                     </form>
 
@@ -49,9 +53,10 @@
         </div>
 
         <div class="">
-            <table class="table table-bordered table-striped datatable no-margin" role="grid" aria-describedby="example1_info" style="text-align: center">
+            <table class="table table-bordered table-striped datatable no-margin" role="grid"
+                   aria-describedby="example1_info" style="text-align: center">
                 <thead>
-                <tr role="row" >
+                <tr role="row">
                     <td style="blottery-top-left-radius: 4px">标题</td>
                     <td>创建者</td>
                     <td>收藏数</td>
@@ -70,8 +75,10 @@
                         <td>{{ $page->created_at }}</td>
                         <td>
                             <div class="center">
-                                <a class="btn btn-primary button_style" href="{{ url('/admin/page/w/'.rawurlencode($page->name)) }}">查看</a>
-                                <a class="btn btn-primary button_style" href="{{ url('/admin/page/w/'.rawurlencode($page->name)) }}">隐藏</a>
+                                <a class="btn btn-primary button_style"
+                                   href="{{ url('/admin/page/w/'.rawurlencode($page->name)) }}">查看</a>
+                                <a class="btn btn-primary button_style"
+                                   href="{{ url('/admin/page/w/'.rawurlencode($page->name)) }}">隐藏</a>
 
                             </div>
                         </td>
@@ -104,11 +111,11 @@
             }
         });
 
-        $('input[name="timer"]').on('apply.daterangepicker', function(ev, picker) {
+        $('input[name="timer"]').on('apply.daterangepicker', function (ev, picker) {
             $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
         });
 
-        $('input[name="timer"]').on('cancel.daterangepicker', function(ev, picker) {
+        $('input[name="timer"]').on('cancel.daterangepicker', function (ev, picker) {
             $(this).val('');
         });
 

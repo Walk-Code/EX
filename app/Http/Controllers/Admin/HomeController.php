@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $users = User::get();
         $pages = Pages::get();
-        foreach ($pages as $k=>$page) {
+        foreach ($pages as $k => $page) {
             $page->uuid = $users[$k]->uuid;
             $page->save();
         }

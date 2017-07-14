@@ -38,7 +38,7 @@ class LoginEvent
      *
      * @return void
      */
-    public function __construct($user,$agent,$ip,$timestamp)
+    public function __construct($user, $agent, $ip, $timestamp)
     {
         $this->user = $user;
         $this->agent = $agent;

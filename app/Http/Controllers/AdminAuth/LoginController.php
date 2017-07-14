@@ -22,7 +22,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers,AuthenticatesLogout{
+    use AuthenticatesUsers, AuthenticatesLogout {
         AuthenticatesLogout::logout insteadof AuthenticatesUsers;
     }
 
@@ -47,7 +47,7 @@ class LoginController extends Controller
     {
         return Auth::guard('admin');
     }
-    
+
     public function logout(Request $request)
     {
         $this->guard()->logout();
@@ -58,7 +58,7 @@ class LoginController extends Controller
 
     public function showLoginForm(Request $request)
     {
-        $request->session()->flash("url.admin.intended",url()->previous());
+        $request->session()->flash("url.admin.intended", url()->previous());
         return view('admin.auth.login');
     }
 
@@ -77,7 +77,7 @@ class LoginController extends Controller
             //login success
             //event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
             return $this->sendLoginResponse($request);
-        }else{
+        } else {
             Log::info("登录失败");
         }
 
@@ -85,30 +85,32 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-        
+
         return redirect("/admin/login")->withInput($request->only("username", "remember"))->withErrors([
             'email' => '无效的用户名或密码'
         ]);
 
 
     }
-   /* //从请求获取所需的授权凭据
-    protected function credentials(Request $request)
-    {
-        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? "email" : "username";
 
-        return [
-            $field => $request->get($this->username()),
-            "password" => $request->password,
-        ];
-    }*/
+    /* //从请求获取所需的授权凭据
+     protected function credentials(Request $request)
+     {
+         $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? "email" : "username";
+
+         return [
+             $field => $request->get($this->username()),
+             "password" => $request->password,
+         ];
+     }*/
 
     public function username()
     {
         return 'username';
     }
 
-    protected function sendLoginResponse(Request $request){
+    protected function sendLoginResponse(Request $request)
+    {
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);

@@ -14,7 +14,8 @@
                                 <label for="failed" class="col-md-4 control-label">邮箱</label>
 
                                 <div class="col-md-6">
-                                    <input id="failed" type="failed" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="failed" type="failed" class="form-control" name="name"
+                                           value="{{ old('name') }}" required autofocus>
 
                                     @if ($errors->has('failed'))
                                         <span class="help-block">
@@ -41,7 +42,8 @@
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我
+                                            <input type="checkbox"
+                                                   name="remember" {{ old('remember') ? 'checked' : '' }}> 记住我
                                         </label>
                                     </div>
                                 </div>

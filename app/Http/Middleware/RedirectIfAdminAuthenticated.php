@@ -9,8 +9,8 @@ class RedirectIfAdminAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -21,7 +21,7 @@ class RedirectIfAdminAuthenticated
             return redirect('/admin');
         }
 
-        $request->session()->flash("left-bar",$request->getRequestUri());
+        $request->session()->flash("left-bar", $request->getRequestUri());
 
         return $next($request);
     }

@@ -19,32 +19,32 @@ class UserController extends Controller
         $key = "";
         $timer = "";
 
-        if($request->has('key') && !$request->has('timer')){
+        if ($request->has('key') && !$request->has('timer')) {
 
             $key = $request->key;
-            $users = User::where("name","like","%".$key."%")->orderBy("created_at","desc")->paginate(30);
+            $users = User::where("name", "like", "%" . $key . "%")->orderBy("created_at", "desc")->paginate(30);
 
-        }elseif(!$request->has("key") && $request->has("timer")){
+        } elseif (!$request->has("key") && $request->has("timer")) {
 
             $timer = $request->timer;
 
-            $users = User::whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                         ->paginate(30);
+            $users = User::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->paginate(30);
 
-        }elseif($request->has(["key","timer"])){
+        } elseif ($request->has(["key", "timer"])) {
 
             $key = $request->key;
             $timer = $request->timer;
-            $users = User::whereBetween("created_at",[explode(" - ",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                         ->where("name","like","%".$key."%")
-                         ->paginate(30);
-        }else{
+            $users = User::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->where("name", "like", "%" . $key . "%")
+                ->paginate(30);
+        } else {
 
-            $users = User::orderBy("created_at","desc")->paginate(30);
+            $users = User::orderBy("created_at", "desc")->paginate(30);
 
         }
 
-        return view("admin.user.index",["users" => $users,"key" => $key,"timer" => $timer,"count" => "共找到".$users->total()."条","verifyMail" => User::where("verified",0)->count()]);
+        return view("admin.user.index", ["users" => $users, "key" => $key, "timer" => $timer, "count" => "共找到" . $users->total() . "条", "verifyMail" => User::where("verified", 0)->count()]);
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -71,7 +71,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -82,7 +82,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -93,8 +93,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -105,7 +105,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -114,21 +114,21 @@ class UserController extends Controller
     }
 
 
-    public function watch(Request $request,$name)
+    public function watch(Request $request, $name)
     {
         $timer = "";
-        if($request->has("timer")){
+        if ($request->has("timer")) {
 
             $timer = $request->timer;
-            $loginLogs = LoginLog::where("user_id",User::where("name",rawurldecode($name))->pluck("id")[0])
-                                ->whereBetween("created_at",[explode(" -",$timer)[0]." 00:00:00",explode(" - ",$timer)[1]." 23:59:59"])
-                                ->paginate(30);
+            $loginLogs = LoginLog::where("user_id", User::where("name", rawurldecode($name))->pluck("id")[0])
+                ->whereBetween("created_at", [explode(" -", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                ->paginate(30);
 
-        }else{
-            $loginLogs = LoginLog::where("user_id",User::where("name",$name)->pluck("id")[0])->paginate(30);
+        } else {
+            $loginLogs = LoginLog::where("user_id", User::where("name", $name)->pluck("id")[0])->paginate(30);
         }
 
-        return view("admin.user.loginLog",["loginLogs" => $loginLogs,"count" => "共查到".$loginLogs->total()."条记录","name" => $name,"timer" => $timer]);
+        return view("admin.user.loginLog", ["loginLogs" => $loginLogs, "count" => "共查到" . $loginLogs->total() . "条记录", "name" => $name, "timer" => $timer]);
 
     }
 

@@ -4,7 +4,7 @@
     <div id="footer" class="ex-footer footer">
         <div class="ex-footer-left">
             <div>
-                测试一大段文字测试一大段文字测试一大段文字测试一大段文字测试一大段文字
+                每天一小步
             </div>
             <div>
                 这是一个很长篇的说明这是一个很长篇的说明这是一个很长篇的说明这是一个很长篇的说明
@@ -16,5 +16,8 @@
                 <img src="https://ooo.0o0.ooo/2017/06/20/59490cfd68693.jpg" width="80px" style="border-radius: 80px"/>
             </div>
         </div>
+    </div>
+    <div id="m-footer">
+        <div><span><strong>EX</strong></span></div>
     </div>
 </footer>
