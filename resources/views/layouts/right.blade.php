@@ -13,7 +13,7 @@
                     <td width="10" valign="top"></td>
                     <td width="auto" align="left">
                     <span class="bigger">
-                        <a href="#">{{ Auth::user()->name }}</a>
+                        <a href="{{ url('profile/'.Auth::user()->name) }}">{{ Auth::user()->name }}</a>
                     </span>
                     </td>
                     </tbody>
