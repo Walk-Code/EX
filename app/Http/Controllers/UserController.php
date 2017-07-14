@@ -105,7 +105,7 @@ class UserController extends BaseController
         $user = User::where("name", $request->name)->first();
 
         if ($user) {
-            $user->website = $request->website;
+            $user->website = htmlspecialchars($request->website);
 
             if ($user->save()) {
 
