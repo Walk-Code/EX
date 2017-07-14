@@ -62,13 +62,13 @@
         };
 
 
-        $("#mail").each(function() {
+        $("#mail").each(function () {
 
             var url = $(this).text().split('@')[1];
             //$(this).prop("href",);
             for (key in hash) {
-                if(key.toString() == url.trim()){
-                    $(this).attr("href",hash[key])
+                if (key.toString() == url.trim()) {
+                    $(this).attr("href", hash[key])
                 }
             }
 

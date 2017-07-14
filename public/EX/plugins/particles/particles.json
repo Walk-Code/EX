@@ -26,7 +26,7 @@
       }
     },
     "opacity": {
-      "value": 0.5,
+      "value": 0.1,
       "random": false,
       "anim": {
         "enable": false,
@@ -72,10 +72,10 @@
     "events": {
       "onhover": {
         "enable": false,
-        "mode": "repulse"
+        "mode": "grab"
       },
       "onclick": {
-        "enable": true,
+        "enable": false,
         "mode": "push"
       },
       "resize": true
@@ -88,10 +88,10 @@
         }
       },
       "bubble": {
-        "distance": 800,
-        "size": 80,
+        "distance": 400,
+        "size": 40,
         "duration": 2,
-        "opacity": 0.8,
+        "opacity": 8,
         "speed": 3
       },
       "repulse": {

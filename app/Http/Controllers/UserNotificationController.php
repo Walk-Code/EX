@@ -13,6 +13,11 @@ class UserNotificationController extends BaseController
         $userNotification = new UserNotification();
         $userNotification->setReaded(Auth::user()->id);
         $userNotifications = Auth::user()->hasManyNotification()->paginate(30);
-        return view('notifications',['userNotifications'=>$userNotifications]);
+
+        foreach ($userNotifications as $userNotification) {
+            $userNotification->friendTime = $this->timeElapsedString($userNotification->created_at);
+        }
+
+        return view('notifications', ['userNotifications' => $userNotifications]);
     }
 }

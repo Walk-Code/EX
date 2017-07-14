@@ -25,9 +25,9 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        
+
     }
-    
+
     /**
      * @param $url
      * @param $params
@@ -38,18 +38,18 @@ class BaseController extends Controller
     {
         $postData = "";
 
-        foreach($params as $k=>$param){
-            $postData .= $k."=".$param."&";
+        foreach ($params as $k => $param) {
+            $postData .= $k . "=" . $param . "&";
         }
 
-        $postData = rtrim($postData,"&");
+        $postData = rtrim($postData, "&");
 
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,$url);
-        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-        curl_setopt($ch,CURLOPT_HEADER,false);
-        curl_setopt($ch,CURLOPT_POST,true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,$postData);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
         $output = curl_exec($ch);
         curl_close($ch);
@@ -57,44 +57,44 @@ class BaseController extends Controller
 
     }
 
-    public static function httpGet($url,$params)
+    public static function httpGet($url, $params)
     {
 
     }
 
-    public function GzHttpPost($fileName,$fileMime,$filePath)
+    public function GzHttpPost($fileName, $fileMime, $filePath)
     {
         $client = new Client();
 
-        $response = $client->request("post","https://sm.ms/api/upload",[
-            'multipart' =>[
+        $response = $client->request("post", "https://sm.ms/api/upload", [
+            'multipart' => [
                 [
                     'name' => 'smfile',
                     'filename' => $fileName,
                     'Mime-Type' => $fileMime,
-                    'contents' => fopen($filePath,'r'),
+                    'contents' => fopen($filePath, 'r'),
                 ],
 
             ]
         ]);
 
         $data = $response->getBody();
-        return json_decode($data,true)['data']['url'];
+        return json_decode($data, true)['data']['url'];
 
     }
-    
+
     /**
-     * 
+     *
      * User model
      */
     public function userNotify()
     {
-      /*  if($user = Auth::user()){
-            return view("layouts.right",['']);
-        }*/
+        /*  if($user = Auth::user()){
+              return view("layouts.right",['']);
+          }*/
     }
 
-    public function timeElapsedString($datetime,$full = false)
+    public function timeElapsedString($datetime, $full = false)
     {
         $now = new \DateTime();
         $ago = new \DateTime($datetime);
@@ -114,7 +114,7 @@ class BaseController extends Controller
         );
         foreach ($string as $k => &$v) {
             if ($diff->$k) {
-                $v = $diff->$k . ' ' . $v ;//. ($diff->$k > 1 ? 's' : '')
+                $v = $diff->$k . ' ' . $v;//. ($diff->$k > 1 ? 's' : '')
             } else {
                 unset($string[$k]);
             }
@@ -125,5 +125,5 @@ class BaseController extends Controller
         return $string ? implode(', ', $string) . ' 前' : '剛剛';
 
     }
-    
+
 }

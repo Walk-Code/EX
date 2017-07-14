@@ -17,8 +17,9 @@
         <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                            class="fa fa-search"></i></button>
               </span>
             </div>
         </form><!-- /.sidebar-form -->
@@ -26,7 +27,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <!-- Optionally, you can add icons to the links -->
-            <li class="treeview @if(in_array("user",explode("/",session("left-bar")))) active @endif" >
+            <li class="treeview @if(in_array("user",explode("/",session("left-bar")))) active @endif">
                 <a href="#"><span>用户管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li>
@@ -35,7 +36,7 @@
                 </ul>
             </li>
 
-            <li class="treeview @if(in_array("topic",explode("/",session("left-bar")))) active @endif" >
+            <li class="treeview @if(in_array("topic",explode("/",session("left-bar")))) active @endif">
                 <a href="{{url('/admin/business')}}"><span>话题管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li>

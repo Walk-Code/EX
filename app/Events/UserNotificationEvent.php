@@ -34,12 +34,13 @@ class UserNotificationEvent
      * @var 回复的楼数
      */
     protected $location;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user,$post_id,$comment_id,$location)
+    public function __construct($user, $post_id, $comment_id, $location)
     {
         Log::info("触发用户提醒");
         $this->user = $user;

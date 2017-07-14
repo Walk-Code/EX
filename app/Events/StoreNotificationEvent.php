@@ -35,13 +35,12 @@ class StoreNotificationEvent
     protected $post_id;
 
 
-
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user_id,$post_id = 0,$attention_user_id = 0)
+    public function __construct($user_id, $post_id = 0, $attention_user_id = 0)
     {
         $this->user_id = $user_id;
         $this->post_id = $post_id;

@@ -19,11 +19,11 @@ class BlockList extends Model
      */
     public function blockUser(array $data, $type = 2)
     {
-        $block = BlockList::where("type",$type)->where("user_id",$data["user_id"])
-                          ->where("attention_user_id",$data["attention_user_id"])
-                          ->first();
+        $block = BlockList::where("type", $type)->where("user_id", $data["user_id"])
+            ->where("attention_user_id", $data["attention_user_id"])
+            ->first();
 
-        if(!$block){
+        if (!$block) {
             $block = new BlockList();
         }
 
@@ -33,36 +33,34 @@ class BlockList extends Model
         $block->user_id = $data["user_id"];
         $block->attention_user_id = $data["attention_user_id"];
 
-        if($block->save()){
+        if ($block->save()) {
             return $block;
-        }else{
+        } else {
             return 0;
         }
 
     }
 
-    public function unBlockUser(array $data,$type = 2)
+    public function unBlockUser(array $data, $type = 2)
     {
-        $block = BlockList::where("type",$type)->where("user_id",$data["user_id"])
-                          ->where("attention_user_id",$data["attention_user_id"])
-                          ->first();
+        $block = BlockList::where("type", $type)->where("user_id", $data["user_id"])
+            ->where("attention_user_id", $data["attention_user_id"])
+            ->first();
 
-        if($block){
+        if ($block) {
 
-            if($block->delete()){
+            if ($block->delete()) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
 
-        }else{
+        } else {
             return 0;
         }
 
 
     }
-
-
 
 
     /** block ip
@@ -72,10 +70,10 @@ class BlockList extends Model
      */
     public function blockIp(array $data, $type = 1)
     {
-        $block = BlockList::where("type",$type)->where("ip_address",$data["ip_address"])
-                          ->first();
+        $block = BlockList::where("type", $type)->where("ip_address", $data["ip_address"])
+            ->first();
 
-        if(!$block){
+        if (!$block) {
             $block = new BlockList();
         }
 
@@ -84,7 +82,7 @@ class BlockList extends Model
         $block->time = time();
 
         $insertData = [];
-        foreach(explode(",",$data["ip_address"]) as $item){
+        foreach (explode(",", $data["ip_address"]) as $item) {
             $insertData[] = [
                 "type" => $type,
                 "ip_address" => $item,
@@ -94,21 +92,21 @@ class BlockList extends Model
             ];
         }
 
-        if(DB::Table("block_list")->insert($insertData)){
+        if (DB::Table("block_list")->insert($insertData)) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
 
     }
 
-    public function isInBlickList($ip,$type = 1)
+    public function isInBlickList($ip, $type = 1)
     {
-        $ip = BlockList::where("type",$type)->where("ip_address",$ip)->distinct()->first();
+        $ip = BlockList::where("type", $type)->where("ip_address", $ip)->distinct()->first();
 
-        if($ip){
+        if ($ip) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
 

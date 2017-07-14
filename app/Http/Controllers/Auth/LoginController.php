@@ -25,7 +25,7 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers,AuthenticatesLogout{
+    use AuthenticatesUsers, AuthenticatesLogout {
         AuthenticatesLogout::logout insteadof AuthenticatesUsers;
     }
 
@@ -48,7 +48,7 @@ class LoginController extends Controller
 
     public function showLoginForm(Request $request)
     {
-        $request->session()->flash("url.intended",url()->previous());
+        $request->session()->flash("url.intended", url()->previous());
         return view('auth.login');
     }
 
@@ -65,7 +65,7 @@ class LoginController extends Controller
 
         if ($this->attemptLogin($request)) {
             //login success
-            event(new LoginEvent($this->guard()->user(), new Agent(),$request->getClientIp(), time()));
+            event(new LoginEvent($this->guard()->user(), new Agent(), $request->getClientIp(), time()));
 
             return $this->sendLoginResponse($request);
         }
@@ -74,29 +74,29 @@ class LoginController extends Controller
         // to login and redirect the user back to the login form. Of course, when this
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
-        
+
         return redirect("login")->withInput($request->only("name", "remember"))->withErrors([
             "failed" => "用户名或密码不正确",
         ]);
 
 
     }
-   /* //从请求获取所需的授权凭据
-    protected function credentials(Request $request)
-    {
-        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? "email" : "username";
 
-        return [
-            $field => $request->get($this->username()),
-            "password" => $request->password,
-        ];
-    }*/
+    /* //从请求获取所需的授权凭据
+     protected function credentials(Request $request)
+     {
+         $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL) ? "email" : "username";
+
+         return [
+             $field => $request->get($this->username()),
+             "password" => $request->password,
+         ];
+     }*/
 
     public function username()
     {
         return 'name';
     }
-    
 
 
 }

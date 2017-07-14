@@ -15,19 +15,19 @@ class PagesController extends BaseController
 
     public function index()
     {
-        $pages = Pages::orderBy('updated_at','desc')->paginate(15);
-        foreach($pages as $k=>$page){
+        $pages = Pages::orderBy('updated_at', 'desc')->paginate(15);
+        foreach ($pages as $k => $page) {
             $pages[$k]['author'] = $page->user->name;
             $pages[$k]['image'] = $page->user->head_img;
+            $pages[$k]['friendTime'] = " · " . (empty($page->comments->last()) ? "" : $this->timeElapsedString($page->comments->last()->created_at));
         }
         unset($pages->user);
         //return $pages;
-        return view('home',['pages'=>$pages]);
+        return view('home', ['pages' => $pages]);
     }
 
 
-
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
         $openation = new UserOperation();
         $data = $request->all();
@@ -41,11 +41,11 @@ class PagesController extends BaseController
         $page = Pages::find($id);
         $page->firendTime = $this->timeElapsedString($page->created_at);
 
-        foreach($comments as $comment){
+        foreach ($comments as $comment) {
             $comment->firendTime = $this->timeElapsedString($comment->created_at);
         }
 
-        return view('page',['page' => $page,'comments'=>$comments]);
+        return view('page', ['page' => $page, 'comments' => $comments]);
 
     }
 
@@ -71,14 +71,14 @@ class PagesController extends BaseController
     public function newT(Request $request)
     {
         $post = new Pages();
-        if($post->create($request->all())){
-            return redirect()->to("/")->with("success","创建成功");
-        }else{
-            return redirect()->to("/")->with("success","创建失败");
+        if ($post->create($request->all())) {
+            return redirect()->to("/")->with("success", "创建成功");
+        } else {
+            return redirect()->to("/")->with("success", "创建失败");
         }
 
     }
-    
+
     /**回复某人
      * @param Request $request
      * @return $this|\Illuminate\Http\RedirectResponse
@@ -92,11 +92,11 @@ class PagesController extends BaseController
 
 
         $comment = new Comments();
-        if($comment->addComment($replyContent,$post_id,Auth::user()->uuid,$location,new User())){
-            return redirect("/t/".$post_id)->with("评论失败");
+        if ($comment->addComment($replyContent, $post_id, Auth::user()->uuid, $location, new User())) {
+            return redirect("/t/" . $post_id)->with("评论失败");
 
-        }else{
-            return redirect("/t/".$post_id)->withErrors("评论失败");
+        } else {
+            return redirect("/t/" . $post_id)->withErrors("评论失败");
         }
 
     }
@@ -105,12 +105,12 @@ class PagesController extends BaseController
     //summernote upload img
     public function ajaxImageUpload(Request $request)
     {
-        if($request->hasFile("file")){
+        if ($request->hasFile("file")) {
             $image = $request->file("file");
-            $output = $this->GzHttpPost($image->getClientOriginalName(),$image->getMimeType(),$image->getPathname());
+            $output = $this->GzHttpPost($image->getClientOriginalName(), $image->getMimeType(), $image->getPathname());
             return $output;
 
-        }else{
+        } else {
             return 0;
         }
     }
@@ -123,12 +123,12 @@ class PagesController extends BaseController
     public function store($id, Request $request)
     {
         $stroe = new Stroe();
-        $data = array("user_id"=>Auth::user()->id,"post_id"=>$id,"ip_address"=>$request->getClientIp());
+        $data = array("user_id" => Auth::user()->id, "post_id" => $id, "ip_address" => $request->getClientIp());
 
-        if($stroe->store($data)){
-            return redirect()->back()->with("success","收藏成功");
-        }else{
-            return redirect()->back()->with("fail","操作失败");
+        if ($stroe->store($data)) {
+            return redirect()->back()->with("success", "收藏成功");
+        } else {
+            return redirect()->back()->with("fail", "操作失败");
         }
     }
 
@@ -140,14 +140,14 @@ class PagesController extends BaseController
     public function unstore($id, Request $request)
     {
         $stroe = new Stroe();
-        $data = array("user_id"=>Auth::user()->id,"post_id"=>$id,"id_address"=>$request->getClientIp());
+        $data = array("user_id" => Auth::user()->id, "post_id" => $id, "id_address" => $request->getClientIp());
 
-        if($stroe->unstore($data)){
-            return redirect()->back()->with("success","取消收藏成功");
-        }else{
-            return redirect()->back()->with("success","操作失败");
+        if ($stroe->unstore($data)) {
+            return redirect()->back()->with("success", "取消收藏成功");
+        } else {
+            return redirect()->back()->with("success", "操作失败");
         }
-        
+
     }
-    
+
 }

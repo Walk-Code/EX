@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="{{asset('/EX/plugins/nprogress/nprogress.css')}}"/>
     <script src="{{ asset('/EX/plugins/nprogress/nprogress.js') }}"></script>
 
-    <link href="{{ asset("/EX/plugins/summernote/summernote.css") }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("/EX/plugins/summernote/summernote.css") }}" rel="stylesheet" type="text/css"/>
 
     <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('/EX/ex.css') }}" rel="stylesheet">
@@ -33,53 +33,58 @@
     </script>
 </head>
 <style type="text/css">
-   /* html, body {
-        min-height: 100%;
-        margin: 0;
-    }*/
+    /* html, body {
+         min-height: 100%;
+         margin: 0;
+     }*/
     #particles {
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 100%;
     }
+
+    .wrapper {
+        min-height: calc(100vh - 70px)
+    }
+
 </style>
 
 <body>
-    <div id="particles"></div>
-    <div id="app">
-        @include('layouts.header')
-        <div class="wrapper" style="min-height: calc(100vh - 70px)">
+<div id="particles"></div>
+<div id="app">
+    @include('layouts.header')
+    <div class="wrapper">
         @yield('content')
-       {{-- <div style="height: 50px"></div>--}}
-        </div>
-        @include('layouts.footer')
+        {{-- <div style="height: 50px"></div>--}}
     </div>
-    <!-- Scripts -->
-    <!-- progress bar-->
+    @include('layouts.footer')
+</div>
+<!-- Scripts -->
+<!-- progress bar-->
 
-    <script src="{{asset('/EX/plugins/pjax/jquery.pjax.js')}}"></script>
-    <script src="{{ asset('/EX/plugins/particles/particles.min.js') }}"></script>
-    <script>
-        /*$("#menu").on("click",function () {
-            $(this).parent().addClass("open");
-            $(this).prop("aria-expanded",true);
-        });
+<script src="{{asset('/EX/plugins/pjax/jquery.pjax.js')}}"></script>
+<script src="{{ asset('/EX/plugins/particles/particles.min.js') }}"></script>
+<script>
+    /*$("#menu").on("click",function () {
+     $(this).parent().addClass("open");
+     $(this).prop("aria-expanded",true);
+     });
 
-        $(document).ready(function() {
-            $(document).pjax('a', 'body');
+     $(document).ready(function() {
+     $(document).pjax('a', 'body');
 
-            $(document).on('pjax:start', function() {
-                NProgress.start();
-            });
+     $(document).on('pjax:start', function() {
+     NProgress.start();
+     });
 
-            $(document).on('pjax:end', function() {
-                NProgress.done();
-                //self.siteBootUp(); TODO BUG
-            });
+     $(document).on('pjax:end', function() {
+     NProgress.done();
+     //self.siteBootUp(); TODO BUG
+     });
 
-        });*/
-        particlesJS.load('particles', '{{ asset("/EX/plugins/particles/particles.json") }}');
-    </script>
+     });*/
+    particlesJS.load('particles', '{{ asset("/EX/plugins/particles/particles.json") }}');
+</script>
 
 </body>
 
