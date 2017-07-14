@@ -29,7 +29,7 @@ class Comments extends Model
     {
         preg_match_all('/@\S*/', $comments, $usernameArr);
         $comment = new Comments();
-        $comment->comment = $comments;
+        $comment->comment = htmlentities($comments);
         $comment->post_id = $post_id;
         $comment->uuid = $uuid;
         $comment->times = time();
