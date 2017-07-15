@@ -37,7 +37,13 @@
                                     @endif
                                 </div>
                             </div>
+                            <!-- 验证码模块 -->
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    {!! Geetest::render() !!}
+                                </div>
 
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <div class="checkbox">

@@ -20,6 +20,7 @@ Auth::routes();
 //Route::get('/', 'HomeController@index');middleware('web')
 
 Route::post('/login','Auth\LoginController@postLogin');
+Route::get('auth/geetest','Auth\LoginController@getGeetest');
 Route::get('/','PagesController@index');
 Route::get('t/{id}','PagesController@show')->middleware("ip");
 //Verify the mailbox
