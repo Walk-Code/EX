@@ -18,10 +18,6 @@ use Illuminate\Support\Facades\Log;
 class BaseController extends Controller
 {
 
-    protected function formatValidationErrors(Validator $validator)
-    {
-
-    }
 
     public function __construct()
     {

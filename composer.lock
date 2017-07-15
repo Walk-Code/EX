@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66215983c43fac0258a0588a30537fb6",
-    "content-hash": "ee2a09978847fedac70e288598ab979a",
+    "hash": "98b59b4b14118cd0392ba0eac0af7c51",
+    "content-hash": "7dbfeeebc390dc4d190c82ed98fee22c",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -244,6 +244,57 @@
                 "gravatar"
             ],
             "time": "2016-02-26 21:12:47"
+        },
+        {
+            "name": "germey/geetest",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Germey/LaravelGeetest.git",
+                "reference": "6e04ba95e5d1071a1212669a0dfd0732c6f107d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/Germey/LaravelGeetest/6e04ba95e5d1071a1212669a0dfd0732c6f107d7.zip",
+                "reference": "6e04ba95e5d1071a1212669a0dfd0732c6f107d7",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Germey\\Geetest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Germey",
+                    "email": "cqc@cuiqingcai.com"
+                }
+            ],
+            "description": "Geetest Package for Laravel5",
+            "keywords": [
+                "Germey",
+                "geetest",
+                "laravel"
+            ],
+            "time": "2017-06-30 17:49:05"
         },
         {
             "name": "graham-campbell/markdown",

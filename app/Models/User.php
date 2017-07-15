@@ -10,6 +10,10 @@ class User extends AuthUser implements Authenticatable
 {
     use Notifiable;
 
+    /** geetest
+     * @var array
+     */
+    protected $guarded = ['geetest_challenge', 'geetest_validate', 'geetest_seccode'];
     /**
      * The attributes that are mass assignable.
      *

@@ -70,6 +70,8 @@ class PagesController extends BaseController
      */
     public function newT(Request $request)
     {
+
+
         $post = new Pages();
         if ($post->create($request->all())) {
             return redirect()->to("/")->with("success", "创建成功");
