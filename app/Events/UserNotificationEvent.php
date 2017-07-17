@@ -42,7 +42,7 @@ class UserNotificationEvent
      */
     public function __construct($user, $post_id, $comment_id, $location)
     {
-        Log::info("触发用户提醒");
+        //Log::info("触发用户提醒");
         $this->user = $user;
         $this->post_id = $post_id;
         $this->comment_id = $comment_id;

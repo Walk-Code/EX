@@ -174,7 +174,6 @@
                                 </div>
                                 <input name="post_id" type="hidden" value="{{$page->id}}">
                                 <input name="editor_type" type="hidden" id="editor_type" value="1">
-                                <input name="location" type="hidden" id="location">
                                 <input name="reply" type="hidden" id="reply">
                             </form>
                             <button class="reply-button" onclick="submit();">回复</button>

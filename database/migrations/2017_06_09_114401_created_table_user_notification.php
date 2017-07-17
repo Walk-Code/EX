@@ -20,6 +20,7 @@ class CreatedTableUserNotification extends Migration
             $table->integer("post_id")->nullable();
             $table->integer("location")->nullable();
             $table->integer("attention_user_id")->nullable();
+            $table->integer("comment_id")->nullable();
             $table->integer("type")->nullable();
             $table->timestamps();
         });
