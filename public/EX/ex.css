@@ -507,6 +507,10 @@ body {
     color: #000;
 }
 
+.m-tag {
+    display: none;
+}
+
 /**
   * 手机端
  */
@@ -585,4 +589,7 @@ body {
         margin-left: 10px;
     }
 
+    .m-tag {
+        display: block;
+    }
 }
