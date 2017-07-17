@@ -28,7 +28,7 @@
                                 <a href="{{url('/profile/'.$notification->user->name)}}">
                                     <strong>{{$notification->user->name}}</strong>
                                 </a>&nbsp;在
-                                <a href="{{url('/t/'.$notification->post_id)}}" class="font-600">
+                                <a href="{{url('/t/'.$notification->post_id.'/#'.$notification->comment_id)}}" class="font-600">
                                     {{$notification->post->title}}
                                 </a>
                                 &nbsp;回复你
