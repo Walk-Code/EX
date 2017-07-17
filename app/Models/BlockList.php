@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BlockList extends Model
@@ -111,5 +112,27 @@ class BlockList extends Model
         }
 
     }
+
+    public function getBlockListUUid($type = 2)
+    {
+        $uuid = [];
+
+        if (Auth::user()) {
+            $user_ids = BlockList::where("type", $type)->where("user_id", Auth::user()->id)->pluck("attention_user_id");
+
+            foreach ($user_ids as $id) {
+
+                if ($user = User::find($id)) {
+                    $uuid [] = $user->uuid;
+                }
+
+            }
+
+        }
+
+        return $uuid;
+
+    }
+
 
 }

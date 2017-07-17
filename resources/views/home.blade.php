@@ -23,7 +23,7 @@
                     <div class="panel-heading">标签栏</div>
                     @if(Auth::user())
                     @if(count(Auth::user()->hasManyNotification->where("is_read",0)) > 0)
-                        <div class="panel-heading">
+                        <div class="panel-heading m-tag">
                             <a href="{{url('notification')}}" class="message">
                                 <img src="{{ asset('EX/images/start.png') }}" class="star">
                                 {{ count(Auth::user()->hasManyNotification->where("is_read",0)) }}&nbsp;条未读消息

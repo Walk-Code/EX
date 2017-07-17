@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlockList;
 use App\Models\Comments;
 use App\Models\Pages;
 use App\Models\Stroe;
@@ -16,7 +17,10 @@ class PagesController extends BaseController
 
     public function index()
     {
-        $pages = Pages::orderBy('updated_at', 'desc')->paginate(15);
+        $bluckList = new BlockList();
+        $bluckListUUid = $bluckList->getBlockListUUid();
+
+        $pages = Pages::whereNotIn('uuid',$bluckListUUid)->orderBy('updated_at', 'desc')->paginate(15);
         foreach ($pages as $k => $page) {
             $pages[$k]['author'] = $page->user->name;
             $pages[$k]['image'] = $page->user->head_img;
@@ -38,8 +42,8 @@ class PagesController extends BaseController
         $data['user_id'] = Auth::guard()->check() ? Auth::user()->id : 0;
         $openation->addorUpdate($data);
 
-        $comments = Pages::find($id)->comments;
         $page = Pages::find($id);
+        $comments = $page->comments;
         $page->firendTime = $this->timeElapsedString($page->created_at);
 
         foreach ($comments as $comment) {

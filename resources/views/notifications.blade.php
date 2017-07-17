@@ -28,13 +28,14 @@
                                 <a href="{{url('/profile/'.$notification->user->name)}}">
                                     <strong>{{$notification->user->name}}</strong>
                                 </a>&nbsp;在
-                                <a href="{{url('/t/'.$notification->post_id.'/#'.$notification->comment_id)}}" class="font-600">
-                                    {{$notification->post->title}}
+                                <a href="{{url('/t/'.$notification->post_id.(empty($notification->comment_id) ? "" : '#'.$notification->comment_id))}}"
+                                   class="font-600">
+                                    {{ $notification->post->title }}
                                 </a>
                                 &nbsp;回复你
                             @else
                                 <a href="{{url('/profile/'.$notification->attentionUser->name)}}">
-                                    你关注了<span class="font-600">{{$notification->attentionUser->name}}</span>
+                                    你关注了<span class="font-600">{{ $notification->attentionUser->name }}</span>
                                 </a>
                             @endif
                             <span class="notification-time">
