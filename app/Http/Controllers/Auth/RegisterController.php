@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use forxer\Gravatar\Gravatar;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -121,7 +122,7 @@ class RegisterController extends Controller
          UserVerification::send($user, '请验证您的邮箱');
 
          return $this->registered($request, $user) ?: redirect($this->redirectPath());*/
-        $validator = $this->validator($request->all());
+        $validator = $this->validator(Input::all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
@@ -129,7 +130,7 @@ class RegisterController extends Controller
             );
         }
 
-        $user = $this->create($request->all());
+        $user = $this->create(Input::all());
 
         // 生成用户的验证 token，并将用户的 verified 设置为 0
         UserVerification::generate($user);

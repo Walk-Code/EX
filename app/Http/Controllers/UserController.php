@@ -9,6 +9,8 @@ use App\Models\Stroe;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rules\In;
 
 class UserController extends BaseController
 {
@@ -105,7 +107,7 @@ class UserController extends BaseController
         $user = User::where("name", $request->name)->first();
 
         if ($user) {
-            $user->website = htmlspecialchars($request->website);
+            $user->website = Input::get("website");
 
             if ($user->save()) {
 
@@ -127,7 +129,7 @@ class UserController extends BaseController
 
     public function block($name, Request $request)
     {
-        $data = $request->all();
+        $data = Input::all();
         $data["attention_user_id"] = User::where("name", $name)->first()->id;
         $data["user_id"] = Auth::user()->id;
         $data["ip_address"] = $request->getClientIp();
@@ -147,7 +149,7 @@ class UserController extends BaseController
 
     public function unBlock($name, Request $request)
     {
-        $data = $request->all();
+        $data = Input::all();
         $data["attention_user_id"] = User::where("name", $name)->first()->id;
         $data["user_id"] = Auth::user()->id;
         $data["ip_address"] = $request->getClientIp();
@@ -166,7 +168,7 @@ class UserController extends BaseController
 
     public function attention($name, Request $request)
     {
-        $data = $request->all();
+        $data = Input::all();
         $data["ip_address"] = $request->getClientIp();
         $data["user_id"] = Auth::user()->id;
         $data["attention_user_id"] = User::where("name", $name)->first()->id;
@@ -185,7 +187,7 @@ class UserController extends BaseController
 
     public function unattention($name, Request $request)
     {
-        $data = $request->all();
+        $data = Input::all();
         $data["ip_address"] = $request->getClientIp();
         $data["user_id"] = Auth::user()->id;
         $data["attention_user_id"] = User::where("name", $name)->first()->id;

@@ -29,7 +29,7 @@ class Comments extends Model
     {
         preg_match_all('/@\S*/', $comments, $usernameArr);
         $comment = new Comments();
-        $comment->comment = htmlspecialchars($comments);
+        $comment->comment = $comments;
         $comment->post_id = $post_id;
         $comment->uuid = $uuid;
         $comment->times = time();
@@ -39,7 +39,7 @@ class Comments extends Model
         if ($comment) {
             foreach ($usernameArr[0] as $username) {
                 if ($userModel = $user->findUserByName(trim(substr($username, 1)))) {
-                    Log::info("触发用户提醒");
+                    //Log::info("触发用户提醒");
                     event(new UserNotificationEvent($userModel, $post_id, $comment->id, $location));
                 } else {
                     //TODO 收集消息发送失败记录
