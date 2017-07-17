@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\BlockList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 class IpController extends Controller
 {
@@ -70,7 +71,7 @@ class IpController extends Controller
     {
         $blockList = new BlockList();
 
-        if ($blockList->blockIp($request->all())) {
+        if ($blockList->blockIp(Input::all())) {
 
             return redirect("/admin/ip")->with(["success" => "添加成功"]);
 

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserOperation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class PagesController extends BaseController
 {
@@ -30,7 +31,7 @@ class PagesController extends BaseController
     public function show(Request $request, $id)
     {
         $openation = new UserOperation();
-        $data = $request->all();
+        $data = Input::all();
         $data["position"] = $request->getRequestUri() == "::1" ? "183.31.30.40" : $request->getRequestUri();//兼容本地测试
         $data["ip_address"] = $request->getClientIp();
         $data["times"] = time();
@@ -73,7 +74,7 @@ class PagesController extends BaseController
 
 
         $post = new Pages();
-        if ($post->create($request->all())) {
+        if ($post->create(Input::all())) {
             return redirect()->to("/")->with("success", "创建成功");
         } else {
             return redirect()->to("/")->with("success", "创建失败");
@@ -89,7 +90,7 @@ class PagesController extends BaseController
     {
         $post_id = $request->post_id;
         $editor_type = $request->editor_type;
-        $replyContent = $request->reply;
+        $replyContent = Input::get("reply");
         $location = $request->location;
 
 
