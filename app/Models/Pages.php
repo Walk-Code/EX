@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Jieba;
 use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ class Pages extends Model
             $post = new Pages();
         }
 
-        $post->title = htmlspecialchars($data['title']);
+        $post->title = $data['title'];
 
         if (isset($data['reply'])) {
             //md

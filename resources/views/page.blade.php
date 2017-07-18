@@ -4,8 +4,8 @@
     <link type="text/css" href="{{asset('EX/font/lock/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/swith/iconfont.css')}}" rel="stylesheet"/>
     <link type="text/css" href="{{asset('EX/font/reply/iconfont.css')}}" rel="stylesheet"/>
+    <link type="text/css" href="{{asset('EX/font/tag/iconfont.css')}}" rel="stylesheet"/>
     <div class="container">
-
         <!-- main -->
         <div class="row">
             <!-- topic main-->
@@ -74,10 +74,14 @@
                     <div class="box">
                         <div class="cell">
                             <div style="float: right">
-                                <!-- TODO 添加标签 -->
-                                {{--<a class="ex-topic-order" href="#">test tags</a>&nbsp;
-                                <a class="ex-topic-order" href="#">test tags</a>&nbsp;
-                                <a class="ex-topic-order" href="#">test tags</a>--}}
+                                @foreach($tages  as $key => $tage)
+                                    <a class="ex-topic-order" href="#">
+                                        <span>
+                                            <i class="iconfont icon-biaoqian" style="font-size: 12px"></i>
+                                            {{ $key }}
+                                        </span>
+                                    </a>&nbsp;
+                                @endforeach
                             </div>
                             <span style="font-size: 13px">
                             {{$comments[count($comments) - 1]->user->name}}

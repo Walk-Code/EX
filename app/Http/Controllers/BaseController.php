@@ -9,6 +9,8 @@
 namespace App\Http\Controllers;
 
 
+use Fukuball\Jieba\Finalseg;
+use Fukuball\Jieba\Jieba;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;

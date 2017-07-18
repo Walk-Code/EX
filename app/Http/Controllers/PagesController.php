@@ -8,9 +8,11 @@ use App\Models\Pages;
 use App\Models\Stroe;
 use App\Models\User;
 use App\Models\UserOperation;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Jieba;
 
 class PagesController extends BaseController
 {
@@ -20,7 +22,7 @@ class PagesController extends BaseController
         $bluckList = new BlockList();
         $bluckListUUid = $bluckList->getBlockListUUid();
 
-        $pages = Pages::whereNotIn('uuid',$bluckListUUid)->orderBy('updated_at', 'desc')->paginate(15);
+        $pages = Pages::whereNotIn('uuid', $bluckListUUid)->orderBy('updated_at', 'desc')->paginate(15);
         foreach ($pages as $k => $page) {
             $pages[$k]['author'] = $page->user->name;
             $pages[$k]['image'] = $page->user->head_img;
@@ -28,6 +30,7 @@ class PagesController extends BaseController
         }
         unset($pages->user);
         //return $pages;
+
         return view('home', ['pages' => $pages]);
     }
 
@@ -35,6 +38,8 @@ class PagesController extends BaseController
     public function show(Request $request, $id)
     {
         $openation = new UserOperation();
+        $jieba = new Jieba();
+
         $data = Input::all();
         $data["position"] = $request->getRequestUri() == "::1" ? "183.31.30.40" : $request->getRequestUri();//兼容本地测试
         $data["ip_address"] = $request->getClientIp();
@@ -46,11 +51,14 @@ class PagesController extends BaseController
         $comments = $page->comments;
         $page->firendTime = $this->timeElapsedString($page->created_at);
 
+        $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 10);
+
+
         foreach ($comments as $comment) {
             $comment->firendTime = $this->timeElapsedString($comment->created_at);
         }
 
-        return view('page', ['page' => $page, 'comments' => $comments]);
+        return view('page', ['page' => $page, 'comments' => $comments, "tages" => $tags]);
 
     }
 
@@ -75,8 +83,6 @@ class PagesController extends BaseController
      */
     public function newT(Request $request)
     {
-
-
         $post = new Pages();
         if ($post->create(Input::all())) {
             return redirect()->to("/")->with("success", "创建成功");

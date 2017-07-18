@@ -188,7 +188,8 @@ return [
         EricMakesStuff\ServerMonitor\ServerMonitorServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         //geetest
-        Germey\Geetest\GeetestServiceProvider::class
+        Germey\Geetest\GeetestServiceProvider::class,
+        Fukuball\Jieba\JiebaServiceProvider::class,
     ],
 
     /*
@@ -241,7 +242,8 @@ return [
         'Ip'  => 'Zhuzhichao\IpLocationZh\Ip',//根据IP adress 查找location
         'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown',
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
-        'Geetest' => Germey\Geetest\Geetest::class //验证码
+        'Geetest' => Germey\Geetest\Geetest::class, //验证码
+        'Jieba' => Fukuball\Jieba\Bootstrap::class,
 
     ],
 
