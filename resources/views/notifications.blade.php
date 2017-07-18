@@ -65,7 +65,7 @@
         <div class="sep20-flex-width"></div>
         <!-- right-bar-->
         <div class="right-bar">
-            注意事项版块
+
         </div>
     </div>
 @endsection

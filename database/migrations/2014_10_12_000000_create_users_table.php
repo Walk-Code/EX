@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('uuid');
             $table->string('status');
             $table->string("webside");
+            $table->integer("verified")->nullable();
+            $table->string("verification_token")->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
