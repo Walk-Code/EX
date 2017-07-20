@@ -44,7 +44,7 @@ class Kernel extends ConsoleKernel
                     $tag->create($data_item);
                 }
 
-            })->dailyAt("11:00");
+            })->dailyAt("11:20");
     }
 
     /**
