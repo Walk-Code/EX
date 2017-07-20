@@ -13,9 +13,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Jieba;
+use Symfony\Component\Debug\Exception\FatalErrorException;
 
 class PagesController extends BaseController
 {
+
+    public function __construct()
+    {
+        ini_set("memory_limit", "600");
+    }
 
     public function index()
     {
@@ -37,9 +43,8 @@ class PagesController extends BaseController
 
     public function show(Request $request, $id)
     {
-        ini_set("memory_limit","600");
+        $tags = "";
         $openation = new UserOperation();
-        $jieba = new Jieba();
 
         $data = Input::all();
         $data["position"] = $request->getRequestUri() == "::1" ? "183.31.30.40" : $request->getRequestUri();//兼容本地测试
@@ -52,7 +57,14 @@ class PagesController extends BaseController
         $comments = $page->comments;
         $page->firendTime = $this->timeElapsedString($page->created_at);
 
-        $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 10);
+        try {
+
+            $jieba = new Jieba();
+            $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 10);
+
+        } catch (FatalErrorException $exception) {
+            return "分词模块炸了，请稍后重试";
+        }
 
         foreach ($comments as $comment) {
             $comment->firendTime = $this->timeElapsedString($comment->created_at);
