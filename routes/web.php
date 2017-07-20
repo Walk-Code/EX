@@ -74,11 +74,11 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
 
     Route::get("/topic",'Admin\TopicController@index')->middleware("ip");
     Route::post("/topic",'Admin\TopicController@index');
-    Route::get("/ip",'Admin\IpController@index');
-    Route::post("/ip",'Admin\IpController@index');
-    Route::post("/ip/create",'Admin\IpController@store');
-    Route::get("/ip/delete/{id}",'Admin\IpController@destroy');
+    Route::get("/system/ip",'Admin\IpController@index');
+    Route::post("/system/ip",'Admin\IpController@index');
+    Route::post("/system/ip/create",'Admin\IpController@store');
+    Route::get("/system/ip/delete/{id}",'Admin\IpController@destroy');
 # ---------------- log ---------------------
-    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+    Route::get('/system/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
 });
