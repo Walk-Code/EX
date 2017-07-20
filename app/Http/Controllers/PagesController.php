@@ -13,15 +13,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Jieba;
-use Symfony\Component\Debug\Exception\FatalErrorException;
+use Psy\Exception\FatalErrorException;
 
 class PagesController extends BaseController
 {
-
-    public function __construct()
-    {
-        ini_set("memory_limit", "600");
-    }
 
     public function index()
     {
