@@ -37,6 +37,7 @@ class PagesController extends BaseController
 
     public function show(Request $request, $id)
     {
+        ini_set("memory_limit","1024M");
         $openation = new UserOperation();
         $jieba = new Jieba();
 
@@ -51,8 +52,7 @@ class PagesController extends BaseController
         $comments = $page->comments;
         $page->firendTime = $this->timeElapsedString($page->created_at);
 
-        $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 10);
-
+        $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 20,[true]);
 
         foreach ($comments as $comment) {
             $comment->firendTime = $this->timeElapsedString($comment->created_at);
