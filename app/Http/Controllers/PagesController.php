@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Jieba;
-use Psy\Exception\FatalErrorException;
+use Symfony\Component\Debug\Exception\FatalErrorException;
+
 
 class PagesController extends BaseController
 {
@@ -58,7 +59,9 @@ class PagesController extends BaseController
             $tags = $jieba->jiebaAnalyse()->extractTags($page->title, 10);
 
         } catch (FatalErrorException $exception) {
+
             return "分词模块炸了，请稍后重试";
+
         }
 
         foreach ($comments as $comment) {
