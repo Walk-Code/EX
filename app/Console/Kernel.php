@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
                     $data_item["times"] = time();
                     $tag->create($data_item);
                 }
-            Log::info("执行定时任务完成");
+            //Log::info("执行定时任务完成");
             })->dailyAt("11:34");
     }
 
