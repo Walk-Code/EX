@@ -61,7 +61,7 @@
                     <tr>
                         <td width="32">
                             <a href="#">
-                                <img src="#" width="32" border="0">
+                                <img src="{{ asset('/EX/images/create.png') }}" width="16" border="0">
                             </a>
                         </td>
                         <td width="10"></td>
