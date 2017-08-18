@@ -38,14 +38,16 @@ class UserNotification extends Model
      */
     public function addUserNotification($user_id, $post_id, $location, $comment_id)
     {
-        Log::info("插入数据");
+        //Log::info("插入数据");
         $userNotification = UserNotification::where("user_id", $user_id)->where("post_id", $post_id)
-            ->where("location", $location)->where("comment_id", $comment_id)
-            ->where("type", 0)
-            ->first();
+                                            ->where("location", $location)->where("comment_id", $comment_id)
+                                            ->where("type", 0)
+                                            ->first();
 
         if (!$userNotification) {
+
             $userNotification = new UserNotification();
+
         }
 
         $userNotification->user_id = $user_id;
@@ -69,12 +71,17 @@ class UserNotification extends Model
         $userNotifications = UserNotification::where("user_id", $user_id)->where("is_read", 0)->get();
 
         foreach ($userNotifications as $userNotification) {
+
             if ($userNotification) {
+
                 $userNotification->is_read = 1;
                 $userNotification->save();
                 return 1;
+
             } else {
+
                 return 0;
+
             }
         }
     }
@@ -87,34 +94,45 @@ class UserNotification extends Model
     {
         if ($type == 1) {
             $userNotification = UserNotification::where("user_id", $user_id)->where("post_id", $post_id)
-                ->where("type", $type)
-                ->first();
+                                                ->where("type", $type)
+                                                ->first();
 
         } else {
+
             $userNotification = UserNotification::where("user_id", $user_id)->where("attention_user_id", $post_id)
-                ->where("type", $type)
-                ->first();
+                                                ->where("type", $type)
+                                                ->first();
 
         }
 
         if (!$userNotification) {
+
             $userNotification = new UserNotification();
+
         }
 
         $userNotification->user_id = $user_id;
 
         if ($type == 1) {
+
             $userNotification->post_id = $post_id;
+
         } else {
+
             $userNotification->attention_user_id = $attention_user_id;
+
         }
 
         $userNotification->type = $type;
 
         if ($userNotification->save()) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
 
     }

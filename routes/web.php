@@ -26,6 +26,9 @@ Route::get('t/{id}','PagesController@show')->middleware("ip");
 //Verify the mailbox
 Route::get('/verify/email','BaseViewController@verifyEmail');
 
+# --------------- job -----------------
+Route::get('job','BaseController@test');
+
 # --------------- user ----------------
 Route::group(['middleware' => 'auth'],function (){
     Route::get('/new','PagesController@create');

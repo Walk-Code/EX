@@ -22,7 +22,9 @@ class Tage extends Model
         $tag = Tage::where("post_id", $data['post_id'])->first();
 
         if (!$tag) {
+
             $tag = new Tage();
+
         }
 
         $tag->post_id = $data['post_id'];
@@ -30,9 +32,13 @@ class Tage extends Model
         $tag->times = time();
 
         if ($tag->save()) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
 
     }

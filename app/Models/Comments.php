@@ -37,17 +37,24 @@ class Comments extends Model
 
         //Log::info($comment);
         if ($comment) {
+
             foreach ($usernameArr[0] as $username) {
+
                 if ($userModel = $user->findUserByName(trim(substr($username, 1)))) {
                     //Log::info("触发用户提醒");
                     event(new UserNotificationEvent($userModel, $post_id, $comment->id, $location));
+
                 } else {
                     //TODO 收集消息发送失败记录
                 }
             }
+
             return $comment;
+
         } else {
+
             return 0;
+
         }
 
     }

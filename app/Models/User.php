@@ -37,9 +37,13 @@ class User extends AuthUser implements Authenticatable
         $user = User::where('name', $name)->first();
 
         if ($user) {
+
             return $user;
+
         } else {
+
             return 0;
+
         }
     }
 
@@ -63,9 +67,13 @@ class User extends AuthUser implements Authenticatable
         $store = Stroe::where("user_id", $user_id)->where("post_id", $post_id)->first();
 
         if ($store) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
     }
 
@@ -74,9 +82,13 @@ class User extends AuthUser implements Authenticatable
         $store = Stroe::where("user_id", $user_id)->where("attention_user_id", $attention_user_id)->first();
 
         if ($store) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
 
     }
@@ -87,9 +99,13 @@ class User extends AuthUser implements Authenticatable
         $store = BlockList::where("user_id", $user_id)->where("attention_user_id", $attention_user_id)->first();
 
         if ($store) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
     }
 

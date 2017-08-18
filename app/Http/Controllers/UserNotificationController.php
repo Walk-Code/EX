@@ -15,7 +15,9 @@ class UserNotificationController extends BaseController
         $userNotifications = Auth::user()->hasManyNotification()->paginate(30);
 
         foreach ($userNotifications as $userNotification) {
+
             $userNotification->friendTime = $this->timeElapsedString($userNotification->created_at);
+
         }
 
         return view('notifications', ['userNotifications' => $userNotifications]);

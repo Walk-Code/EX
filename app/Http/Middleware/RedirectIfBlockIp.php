@@ -19,7 +19,9 @@ class RedirectIfBlockIp
         $blockList = new BlockList();
 
         if ($blockList->isInBlickList($request->getClientIp())) {
+
             return redirect("/error/ip");
+
         }
 
         return $next($request);

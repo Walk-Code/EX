@@ -44,6 +44,7 @@ class TopicController extends Controller
             })->whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
                 ->Where("title", "like", "%" . $key . "%")
                 ->paginate(30);
+
         } else {
 
             $Pages = Pages::orderBy("created_at", "desc")->paginate(30);

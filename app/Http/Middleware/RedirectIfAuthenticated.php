@@ -20,6 +20,7 @@ class RedirectIfAuthenticated
     {
         //Log::info($request->getRequestUri());
         if (Auth::guard($guard)->check()) {
+
             return redirect('/');
             //return redirect()->b;
         }
