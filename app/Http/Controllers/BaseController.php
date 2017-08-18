@@ -26,6 +26,16 @@ class BaseController extends Controller
 
     }
 
+    public function test()
+    {
+        $queueId = $this->dispatch(new \App\Jobs\MyJob('key_'.str_random(4),str_random(10)));
+        $memory_job = memory_get_usage();
+        $queueId2 = $this->dispatch(new \App\Jobs\MyJob2('key_'.str_random(5),str_random(12)));
+        $memory_job2 = memory_get_usage();
+        dd($queueId."---".$memory_job."   ".$queueId2."---".$memory_job2);
+    }
+
+
     /**
      * @param $url
      * @param $params
@@ -60,6 +70,12 @@ class BaseController extends Controller
 
     }
 
+    /**
+     * @param $fileName
+     * @param $fileMime
+     * @param $filePath
+     * @return mixed
+     */
     public function GzHttpPost($fileName, $fileMime, $filePath)
     {
         $client = new Client();
@@ -92,6 +108,11 @@ class BaseController extends Controller
           }*/
     }
 
+    /**
+     * @param $datetime
+     * @param bool $full
+     * @return string
+     */
     public function timeElapsedString($datetime, $full = false)
     {
         $now = new \DateTime();

@@ -18,7 +18,9 @@ class RedirectIfAdminAuthenticated
         $request->session()->forget("left-bar");
 
         if (auth()->guard('admin')->check()) {
+
             return redirect('/admin');
+            
         }
 
         $request->session()->flash("left-bar", $request->getRequestUri());

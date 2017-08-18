@@ -38,8 +38,8 @@ class IpController extends Controller
             $key = $request->key;
             $timer = $request->timer;
             $BlockLists = BlockList::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
-                ->where("ip_address", "like", "%" . $key . "%")
-                ->paginate(30);
+                                    ->where("ip_address", "like", "%" . $key . "%")
+                                    ->paginate(30);
         } else {
 
             $BlockLists = BlockList::orderBy("created_at", "desc")->paginate(30);

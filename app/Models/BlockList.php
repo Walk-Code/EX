@@ -25,7 +25,9 @@ class BlockList extends Model
             ->first();
 
         if (!$block) {
+
             $block = new BlockList();
+
         }
 
         $block->type = $type;
@@ -35,9 +37,13 @@ class BlockList extends Model
         $block->attention_user_id = $data["attention_user_id"];
 
         if ($block->save()) {
+
             return $block;
+
         } else {
+
             return 0;
+
         }
 
     }
@@ -51,13 +57,19 @@ class BlockList extends Model
         if ($block) {
 
             if ($block->delete()) {
+
                 return 1;
+
             } else {
+
                 return 0;
+
             }
 
         } else {
+
             return 0;
+
         }
 
 
@@ -75,7 +87,9 @@ class BlockList extends Model
             ->first();
 
         if (!$block) {
+
             $block = new BlockList();
+
         }
 
         $block->type = $type;
@@ -84,6 +98,7 @@ class BlockList extends Model
 
         $insertData = [];
         foreach (explode(",", $data["ip_address"]) as $item) {
+
             $insertData[] = [
                 "type" => $type,
                 "ip_address" => $item,
@@ -91,12 +106,17 @@ class BlockList extends Model
                 "created_at" => date("Y-m-d"),
                 "updated_at" => date("Y-m-d H:i:s")
             ];
+
         }
 
         if (DB::Table("block_list")->insert($insertData)) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
 
     }
@@ -106,9 +126,13 @@ class BlockList extends Model
         $ip = BlockList::where("type", $type)->where("ip_address", $ip)->distinct()->first();
 
         if ($ip) {
+
             return 1;
+
         } else {
+
             return 0;
+
         }
 
     }
@@ -123,7 +147,9 @@ class BlockList extends Model
             foreach ($user_ids as $id) {
 
                 if ($user = User::find($id)) {
+
                     $uuid [] = $user->uuid;
+
                 }
 
             }
@@ -133,6 +159,5 @@ class BlockList extends Model
         return $uuid;
 
     }
-
 
 }

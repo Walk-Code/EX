@@ -58,11 +58,15 @@ class UserController extends BaseController
         $comments = Comments::where("uuid", $user->uuid)->orderBy("created_at", "desc")->limit(10)->get();
 
         foreach ($comments as $comment) {
+
             $comment->firendTime = $this->timeElapsedString($comment->created_at);
+
         }
 
         foreach ($pages as $page) {
+
             $page->firendTime = $this->timeElapsedString($page->created_at);
+            
         }
 
         return view('profile', ["pages" => $pages, "comments" => $comments, "user" => $user]);

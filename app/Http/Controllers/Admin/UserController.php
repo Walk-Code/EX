@@ -29,15 +29,16 @@ class UserController extends Controller
             $timer = $request->timer;
 
             $users = User::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
-                ->paginate(30);
+                         ->paginate(30);
 
         } elseif ($request->has(["key", "timer"])) {
 
             $key = $request->key;
             $timer = $request->timer;
             $users = User::whereBetween("created_at", [explode(" - ", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
-                ->where("name", "like", "%" . $key . "%")
-                ->paginate(30);
+                         ->where("name", "like", "%" . $key . "%")
+                         ->paginate(30);
+
         } else {
 
             $users = User::orderBy("created_at", "desc")->paginate(30);
@@ -121,11 +122,13 @@ class UserController extends Controller
 
             $timer = $request->timer;
             $loginLogs = LoginLog::where("user_id", User::where("name", rawurldecode($name))->pluck("id")[0])
-                ->whereBetween("created_at", [explode(" -", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
-                ->paginate(30);
+                                 ->whereBetween("created_at", [explode(" -", $timer)[0] . " 00:00:00", explode(" - ", $timer)[1] . " 23:59:59"])
+                                 ->paginate(30);
 
         } else {
+
             $loginLogs = LoginLog::where("user_id", User::where("name", $name)->pluck("id")[0])->paginate(30);
+
         }
 
         return view("admin.user.loginLog", ["loginLogs" => $loginLogs, "count" => "共查到" . $loginLogs->total() . "条记录", "name" => $name, "timer" => $timer]);

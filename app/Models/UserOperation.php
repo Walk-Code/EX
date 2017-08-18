@@ -15,13 +15,16 @@ class UserOperation extends Model
             $userOperation = UserOperation::find($id);
 
         } else {
+
             $userOperation = UserOperation::where("ip_address", $data['ip_address'])
-                ->where("user_id", $data['user_id'])
-                ->where("times", $data["times"])
-                ->where("position", $data["position"])
-                ->first();
+                                          ->where("user_id", $data['user_id'])
+                                          ->where("times", $data["times"])
+                                          ->where("position", $data["position"])
+                                          ->first();
             if (!$userOperation) {
+
                 $userOperation = new UserOperation();
+
             }
 
         }
@@ -32,9 +35,13 @@ class UserOperation extends Model
         $userOperation->position = $data["position"];
 
         if ($userOperation->save()) {
+
             return $userOperation;
+
         } else {
+
             return 0;
+
         }
 
     }

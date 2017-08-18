@@ -40,20 +40,26 @@ class Pages extends Model
         if (isset($data['reply'])) {
             //md
             $post->content = Markdown::convertToHtml($data['reply']);
+
         } else {
+
             $post->content = htmlspecialchars($data['content']);
+
         }
 
         $post->uuid = Auth::user()->uuid;
         $post->times = time();
 
         if ($post->save()) {
+
             return $post;
+
         } else {
+
             return 0;
+
         }
 
     }
-
 
 }
