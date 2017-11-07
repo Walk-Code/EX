@@ -187,9 +187,13 @@ return [
         //Monitor
         EricMakesStuff\ServerMonitor\ServerMonitorServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
-        //geetest
+        //Geetest
         Germey\Geetest\GeetestServiceProvider::class,
         Fukuball\Jieba\JiebaServiceProvider::class,
+        //Dingo api
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
     ],
 
     /*
@@ -244,6 +248,7 @@ return [
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
         'Geetest' => Germey\Geetest\Geetest::class, //验证码
         'Jieba' => Fukuball\Jieba\Bootstrap::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class
 
     ],
 

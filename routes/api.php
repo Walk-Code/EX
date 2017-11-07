@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Dingo\Api\Routing\Router;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,14 @@ Route::get('/testw', function (Request $request) {
     return 123;
 });*/
 
-$api = app('Dingo\Api\Routing\Router');
-$api->version('v1',function () {
+$api = app(Router::class);
+$api->version('v1',function (Router $api) {
+    $api->group(['prefix' => 'auth','namespace' => 'App\Http\Controllers'], function (Router $api) {
+        $api->post('login','Api\V1\Controllers\AuthController@login');
 
-
+    });
+    $api->get('test',function () {
+       return 'Hello World';
+    });
 
 });
