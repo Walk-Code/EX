@@ -91,12 +91,12 @@ defaultOptions.navigation = {
 
 
 
-// Add the export related options
+// Add the lemon related options
 defaultOptions.exporting = {
 	//enabled: true,
 	//filename: 'chart',
 	type: 'image/png',
-	url: 'http://export.highcharts.com/',
+	url: 'http://lemon.highcharts.com/',
 	//width: undefined,
 	//scale: 2
 	buttons: {
@@ -262,7 +262,7 @@ extend(Chart.prototype, {
 		// generate the chart copy
 		chartCopy = new Highcharts.Chart(options, chart.callback);
 
-		// reflect axis extremes in the export
+		// reflect axis extremes in the lemon
 		each(['xAxis', 'yAxis'], function (axisType) {
 			each(chart[axisType], function (axis, i) {
 				var axisCopy = chartCopy[axisType][i],
@@ -413,7 +413,7 @@ extend(Chart.prototype, {
 	},
 
 	/**
-	 * Display a popup menu for choosing the export type
+	 * Display a popup menu for choosing the lemon type
 	 *
 	 * @param {String} className An identifier for the menu
 	 * @param {Array} items A collection with text and onclicks for the items
@@ -534,7 +534,7 @@ extend(Chart.prototype, {
 	},
 
 	/**
-	 * Add the export button to the chart
+	 * Add the lemon button to the chart
 	 */
 	addButton: function (options) {
 		var chart = this,
@@ -699,7 +699,7 @@ Chart.prototype.callbacks.push(function (chart) {
 			chart.addButton(buttons[n]);
 		}
 
-		// Destroy the export elements at chart destroy
+		// Destroy the lemon elements at chart destroy
 		addEvent(chart, 'destroy', chart.destroyExport);
 	}
 

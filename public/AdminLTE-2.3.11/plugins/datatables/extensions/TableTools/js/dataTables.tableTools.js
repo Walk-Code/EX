@@ -1309,7 +1309,7 @@ TableTools.prototype = {
 				.on( 'keyup.DTTT', function (e) {
 					// Trigger the click event on return key when focused.
 					// Note that for Flash buttons this has no effect since we
-					// can't programmatically trigger the Flash export
+					// can't programmatically trigger the Flash lemon
 					if ( e.keyCode === 13 ) {
 						e.stopPropagation();
 

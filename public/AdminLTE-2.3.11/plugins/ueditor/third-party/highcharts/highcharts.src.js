@@ -3282,7 +3282,7 @@ SVGRenderer.prototype = {
 						spanStyle = span.match(styleRegex)[1].replace(/(;| |^)color([ :])/, '$1fill$2');
 						attr(tspan, 'style', spanStyle);
 					}
-					if (hrefRegex.test(span) && !forExport) { // Not for export - #1529
+					if (hrefRegex.test(span) && !forExport) { // Not for lemon - #1529
 						attr(tspan, 'onclick', 'location.href=\"' + span.match(hrefRegex)[1] + '\"');
 						css(tspan, { cursor: 'pointer' });
 					}
@@ -3777,7 +3777,7 @@ SVGRenderer.prototype = {
 			if (imageSize) {
 				centerImage(obj, imageSize);
 			} else {
-				// Initialize image to be 0 size so export will still function if there's no cached sizes.
+				// Initialize image to be 0 size so lemon will still function if there's no cached sizes.
 				//
 				obj.attr({ width: 0, height: 0 });
 
@@ -4071,7 +4071,7 @@ SVGRenderer.prototype = {
 				fontSize: defaultChartStyle.fontSize
 			});
 
-		// Prevent wrapping from creating false offsetWidths in export in legacy IE (#1079, #1063)
+		// Prevent wrapping from creating false offsetWidths in lemon in legacy IE (#1079, #1063)
 		if (fakeSVG) {
 			wrapper.css({
 				position: ABSOLUTE
@@ -5848,7 +5848,7 @@ Tick.prototype = {
 							labelOptions.useHTML
 						)
 						.attr(attr)
-						// without position absolute, IE export sometimes is wrong
+						// without position absolute, IE lemon sometimes is wrong
 						.css(css)
 						.add(axis.labelGroup) :
 					null;
