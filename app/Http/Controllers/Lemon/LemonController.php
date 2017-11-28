@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Lemon;
 
 use App\Http\Controllers\Controller;
 use App\Models\Fileentry;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use ZipArchive;
 
 class LemonController extends Controller
 {
@@ -93,28 +96,54 @@ class LemonController extends Controller
         $entry = Fileentry::where('filename', $filename)->firstOrFail();
         $type = Input::get("type",0);//提交表单标识符
 
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path("app/".$filename));
-        $field = $templateProcessor->getVariables();//获取所有字段
+        $fields = $templateProcessor->getVariables();//获取所有字段
+        $pdf = "";
+        $field = [];
 
         if ($type) {
 
-            foreach ($field as $item) {
+            foreach ($fields as $item) {
                 $templateProcessor->setValue($item,Input::get($item));
+                $data["value"] = Input::get($item);
+                $data["filed"] = $item;
+                $field[] = $data;
             }
 
-            $templateProcessor->saveAs("temp.docx");
+            $file = substr($filename,0,-5);
+            $templateProcessor->saveAs($file.".docx");
 
-            header("Content-Disposition: attachment; filename='".$filename."'");
-            readfile("temp.docx");
-            unlink("temp.docx");
+            //输出pdf
+            shell_exec("libreoffice --headless --convert-to pdf ./".$file .".docx --outdir /home/vagrant/Code/public/PDF/");
+            $pdf = $file.".pdf";
+           /* header("Content-Disposition: attachment; filename='".$filename."'");
+            readfile("temp.docx");*/
+            unlink($file.".docx");
 
+        }else {
+            foreach ($fields as $item) {
+                $data["value"] = "";
+                $data["filed"] = $item;
+                $field[] = $data;
+            }
         }
 
-        return view("lemon.model",["field" => $field,"fileName" => $filename]);
+        return view("lemon.model",["field" => $field,"fileName" => $filename,"pdf" => $pdf]);
 
     }
 
+    public function show($filename)
+    {
+        $pdf = storage_path($filename.".pdf");
+        $response = new BinaryFileResponse($pdf);
+        $response->headers->set('Content-Disposition', 'inline; filename="' . $pdf . '"');
+        return $response;
+
+    }
+    
+    
+    
+    
     //结果处理
     public function JSON($code,$msg,$filename = "")
     {
@@ -125,5 +154,6 @@ class LemonController extends Controller
         return json_encode($result);
 
     }
+
 
 }

@@ -27,7 +27,7 @@
 
 <script>
 
-    layui.use(['upload','form'], function(){
+    layui.use(["upload","form"], function(){
         var upload = layui.upload;
 
         $.ajaxSetup({

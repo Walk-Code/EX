@@ -22,33 +22,43 @@
         {{ csrf_field() }}
         <input type="hidden" name="filename" value="{{ $fileName }}"/>
         <input type="hidden" name="type" value="1"/>
-        @foreach($field as $value)
+        @foreach($field as $key=>$value)
         <div class="layui-form-item lemon-center" style="margin-top: 10px">
-            <label class="layui-form-label">{{ $value }}</label>
+            <label class="layui-form-label">{{ $value["filed"] }}</label>
             <div class="layui-input-inline">
-                <input type="text" name="{{ $value }}" placeholder="请输入" autocomplete="off" class="layui-input ">
+                <input type="text" name="{{ $value["filed"] }}" placeholder="请输入" value="{{ $value["value"] }}" autocomplete="off" class="layui-input ">
             </div>
         </div>
         @endforeach
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="*" onclick="">立即提交</button>
+                @if(empty($pdf))
+                <button class="layui-btn" type="submit" onclick="">提交</button>
+                @else
+                <button class="layui-btn preview">预览</button>
+                @endif
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </form>
+    <input type="hidden" value="{{ asset("PDF")."/".$pdf }}" id="pdf" >
 </div>
 <script src="{{ asset('layui/layui.js') }}" ></script>
 <script src="{{ asset('/EX/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+<script src="{{ asset('Lemon/js/pdf/build/pdf.js') }}" ></script>
+<script src="{{ asset('Lemon/js/pdf/build/pdf.worker.js') }}" ></script>
 <script>
 
-    layui.use("layer", function () {
-        $("#template").submit(function () {
-            $("#template").submit();
 
-//            parent.layer.closeAll("iframe");
-        });
+    layui.use("form", function(){
+
+      $(document).on("click",".preview",function () {
+          var pdf = $("#pdf").val();
+          window.open("{{ asset("Lemon/js/pdf/web/viewer.html")."?file="}}"+pdf);
+      })
     });
+
+
 
 </script>
 </body>
