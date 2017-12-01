@@ -43,7 +43,6 @@ class LemonController extends Controller
         $entry->original_filename = $file->getClientOriginalName();
         $entry->filename = $file->getFilename().'.'.$extension;
 
-
         if ($fileen = $entry->save()) {
             $PHPWord = new \PhpOffice\PhpWord\PhpWord();
             $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(storage_path("app/".$entry->filename));
@@ -114,7 +113,7 @@ class LemonController extends Controller
             $templateProcessor->saveAs($file.".docx");
 
             //输出pdf
-            shell_exec("libreoffice --headless --convert-to pdf ./".$file .".docx --outdir /home/vagrant/Code/public/PDF/");
+            shell_exec("libreoffice --headless --convert-to pdf ./".$file .".docx --outdir /home/www/EX/public/PDF/");
             $pdf = $file.".pdf";
            /* header("Content-Disposition: attachment; filename='".$filename."'");
             readfile("temp.docx");*/
