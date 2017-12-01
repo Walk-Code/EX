@@ -19,7 +19,7 @@
 <div class="layui-container">
     <form class="layui-form" action="{{ url("/lemon/model",["filename" => $fileName]) }}" data-auto="" method="post" id="template">
         {{ csrf_field() }}
-        <input type="hidden" name="filename" value="{{ $fileName }}"/
+        <input type="hidden" name="filename" value="{{ $fileName }}"/>
         <input type="hidden" name="type" value="1"/>
         @foreach($field as $key=>$value)
         <div class="layui-form-item lemon-center" style="margin-top: 10px">
