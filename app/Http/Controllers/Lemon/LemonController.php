@@ -104,14 +104,14 @@ class LemonController extends Controller
             }
 
             $file = substr($filename, 0, -5);
-            $templateProcessor->saveAs($file . ".docx");
+            $templateProcessor->saveAs($file . "1.docx");
 
             //输出pdf
-            shell_exec("libreoffice --headless --convert-to pdf ./" . $file . ".docx --outdir /home/www/EX/public/PDF/");
+            shell_exec("libreoffice --headless --convert-to pdf ./" . $file . "1.docx --outdir /home/www/EX/public/PDF/");
             $pdf = $file . ".pdf";
             /* header("Content-Disposition: attachment; filename='".$filename."'");
              readfile("temp.docx");*/
-            unlink($file . ".docx");
+            unlink($file . "1.docx");
 
         } else {
             foreach ($fields as $item) {
