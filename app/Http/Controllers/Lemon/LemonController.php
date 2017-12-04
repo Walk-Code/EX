@@ -109,7 +109,7 @@ class LemonController extends Controller
 //            exec("libreoffice --headless --convert-to pdf ./". $file . ".docx --outdir /home/www/EX/public/PDF/",$outPut,$result);
             exec("libreoffice --headless --convert-to pdf ./". $file . ".docx --outdir /home/www/EX/public/PDF/",$outPut,$result);
 
-            return $outPut;
+            return $outPut."  ".$result;
             $pdf = $file . ".pdf";
              /*header("Content-Disposition: attachment; filename='".$filename."'");
                 readfile($file.".docx");*/
