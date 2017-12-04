@@ -14,8 +14,9 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class LemonController extends Controller
 {
     public function index() {
-        $entries = Fileentry::all();
-        return view("lemon.index", compact("entries"));
+        /*$entries = Fileentry::all();
+        return view("lemon.index", compact("entries"));*/
+        return phpinfo();
     }
 
 
@@ -105,9 +106,9 @@ class LemonController extends Controller
 
             $file = substr($filename, 0, -5);
             $templateProcessor->saveAs($file . ".docx");
-            //输出pdf
+            //输出
 //            return shell_exec("libreoffice --headless --convert-to pdf ./". $file . ".docx --outdir /home/www/EX/public/PDF/");
-            return shell_exec("sudo php -v");
+            return shell_exec("sudto php -v");
             $pdf = $file . ".pdf";
              /*header("Content-Disposition: attachment; filename='".$filename."'");
                 readfile($file.".docx");*/
