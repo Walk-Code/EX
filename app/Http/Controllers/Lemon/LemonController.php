@@ -14,9 +14,8 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class LemonController extends Controller
 {
     public function index() {
-        /*$entries = Fileentry::all();
-        return view("lemon.index", compact("entries"));*/
-        return phpinfo();
+        $entries = Fileentry::all();
+        return view("lemon.index", compact("entries"));
     }
 
 
