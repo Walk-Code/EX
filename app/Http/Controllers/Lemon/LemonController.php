@@ -107,7 +107,7 @@ class LemonController extends Controller
             $templateProcessor->saveAs($file . ".docx");
             //输出pdf
 //            return shell_exec("libreoffice --headless --convert-to pdf ./". $file . ".docx --outdir /home/www/EX/public/PDF/");
-            return shell_exec("sudo php -v");
+            return exec("php -v");
             $pdf = $file . ".pdf";
              /*header("Content-Disposition: attachment; filename='".$filename."'");
                 readfile($file.".docx");*/
