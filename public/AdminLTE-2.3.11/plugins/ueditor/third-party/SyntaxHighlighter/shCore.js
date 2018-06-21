@@ -2494,7 +2494,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 		var commands =  'alias apropos awk basename bash bc bg builtin bzip2 cal cat cd cfdisk chgrp chmod chown chroot' +
 						'cksum clear cmp comm command cp cron crontab csplit cut date dc dd ddrescue declare df ' +
 						'diff diff3 dig dir dircolors dirname dirs du echo egrep eject enable env ethtool eval ' +
-						'exec exit expand export expr false fdformat fdisk fg fgrep file find fmt fold format ' +
+						'exec exit expand lemon expr false fdformat fdisk fg fgrep file find fmt fold format ' +
 						'free fsck ftp gawk getopts grep groups gzip hash head history hostname id ifconfig ' +
 						'import install join kill less let ln local locate logname logout look lpc lpr lprint ' +
 						'lprintd lprintq lprm ls lsof make man mkdir mkfifo mkisofs mknod more mount mtools ' +
@@ -2894,7 +2894,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			'case catch cond div end fun if let not of or orelse '+
 			'query receive rem try when xor'+
 			// additional
-			' module export import define';
+			' module lemon import define';
 
 		this.regexList = [
 			{ regex: new RegExp("[A-Z][A-Za-z0-9_]+", 'g'), 			css: 'constants' },
@@ -3276,7 +3276,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'stop start split sort skip show set send select scroll resume restore ' +
 						'restart resolve resize reset rename remove register receive read push ' +
 						'pop ping out new move measure limit join invoke import group get format ' +
-						'foreach export expand exit enter enable disconnect disable debug cxnew ' +
+						'foreach lemon expand exit enter enable disconnect disable debug cxnew ' +
 						'copy convertto convertfrom convert connect complete compare clear ' +
 						'checkpoint aggregate add';
 

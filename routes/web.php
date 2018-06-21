@@ -19,6 +19,13 @@ Auth::routes();
 
 //Route::get('/', 'HomeController@index');middleware('web')
 
+Route::get('/lemon','Lemon\LemonController@index');
+Route::get('/lemon/get/{filename}','Lemon\LemonController@get');
+Route::post('/lemon/add',['as' => "addFile",'uses' => 'Lemon\LemonController@add']);
+Route::get('/lemon/model/{filename}',['as' => "model",'uses' => 'Lemon\LemonController@model']);
+Route::post('/lemon/model/{filename}',['as' => "model",'uses' => 'Lemon\LemonController@model']);
+Route::get('/lemon/show/{filename}',['as' => "show",'uses' => 'Lemon\LemonController@show']);
+
 Route::post('/login','Auth\LoginController@postLogin');
 Route::get('auth/geetest','Auth\LoginController@getGeetest');
 Route::get('/','PagesController@index');

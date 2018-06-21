@@ -1504,7 +1504,7 @@ function chunkFormatString(formatStr) {
 	return chunks;
 }
 
-    fc.Class = Class; // export
+    fc.Class = Class; // lemon
 
 // class that all other classes will inherit from
 function Class() { }
@@ -4000,7 +4000,7 @@ function compareSegs(seg1, seg2) {
 		(seg1.event.title || '').localeCompare(seg2.event.title); // tie? alphabetically by title
 }
 
-fc.compareSegs = compareSegs; // export
+fc.compareSegs = compareSegs; // lemon
 
 
 /* External-Dragging-Element Data
